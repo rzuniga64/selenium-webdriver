@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class MyFirstTest {
+public class FirefoxTest {
 
     @Test
     public void startWebDriver(){
@@ -21,7 +21,7 @@ public class MyFirstTest {
          *     - with geckodriver.exe on the path
          */
         String currentDir = System.getProperty("user.dir");
-        System.setProperty("webdriver.gecko.driver", currentDir + "\\src/main/resources/geckodriver.exe");
+        System.setProperty("webdriver.gecko.manager", currentDir + "\\src/main/resources/geckodriver.exe");
         WebDriver driver = new FirefoxDriver();
 
         driver.navigate().to("http://seleniumsimplified.com");
@@ -30,7 +30,7 @@ public class MyFirstTest {
                             driver.getTitle().startsWith("Selenium Simplified"));
 
         // For GeckoDriver 0.19 and Firefox 55.0.3, if I close then I get an error, so I decided to just quit instead
-        //driver.close();
+        //manager.close();
         driver.quit();
     }
 }

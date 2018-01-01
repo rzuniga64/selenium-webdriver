@@ -13,7 +13,7 @@ import java.io.File;
 import java.io.IOException;
 
 @RunWith(BlockJUnit4ClassRunner.class)
-public class MyFirstChromeTest extends TestCase {
+public class ChromeTest extends TestCase {
 
     private static ChromeDriverService service;
     private WebDriver driver;
