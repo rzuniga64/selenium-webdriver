@@ -18,7 +18,8 @@ public class MyFirstTest {
          *     - Firefox 48+
          *     - with geckodriver.exe on the path
          */
-        System.setProperty("webdriver.gecko.driver", "C://webdrivers/geckodriver.exe");
+        String currentDir = System.getProperty("user.dir");
+        System.setProperty("webdriver.gecko.driver", currentDir + "\\src/main/resources/geckodriver.exe");
         WebDriver driver = new FirefoxDriver();
 
         driver.navigate().to("http://seleniumsimplified.com");

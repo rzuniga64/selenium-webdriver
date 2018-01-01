@@ -18,10 +18,11 @@ public class MyFirstChromeTest extends TestCase {
 
     @BeforeClass
     public static void createAndStartService() {
+        String currentDir = System.getProperty("user.dir");
         service = new ChromeDriverService.Builder()
 
             // You need to download the ChromeDriver executable: https://sites.google.com/a/chromium.org/chromedriver/
-            .usingDriverExecutable(new File("C://webdrivers/chromedriver.exe"))
+            .usingDriverExecutable(new File(currentDir + "\\src/main/resources/chromedriver.exe"))
             .usingAnyFreePort()
             .build();
         try {
