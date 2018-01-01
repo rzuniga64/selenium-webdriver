@@ -107,13 +107,13 @@ I have added two tests into the code:
 * `MyFirstTest`
 * `MyFirstTestFF48`
 
-`MyFirstTest` has all the comments explaining all the multiple uses of Firefox and defaults to using the FirefoxDriver - in selenium 2 this will only work with Firefox 47 or below. With Selenium 3 you could run this if Marionette driver is on the path.
+`MyFirstTest` has all the comments explaining all the multiple uses of Firefox and defaults to using the FirefoxDriver - in selenium 2 this will only work with Firefox 47 or below. With Selenium 3 you could run this if Marionette manager is on the path.
 
 `MyFirstTestFF48` is a cut down test that uses the MarionetteDriver and assumes that wires.exe is on the path.
 
 ## Update 7th July 2016
 
-Firefox 47 was incompatible with Selenium 2.53.0 so we needed to use marionette driver.
+Firefox 47 was incompatible with Selenium 2.53.0 so we needed to use marionette manager.
 
 Firefox 47.1 is compatible with Selenium 2.53.1 allowing us to use the `FirefoxDriver` again.
 
@@ -123,13 +123,13 @@ The blog post below describes how to use a local version of Selenium with maven 
 
 ## Update 22nd June 2016
 
-Added information about using portable firefox driver and more comments.
+Added information about using portable firefox manager and more comments.
 
 ## Update 25th April 2016
 
 Firefox 46 changes the way that WebDriver has to interact with it. So the built in `FirefoxDriver` did not work. You need to install Firefox 45 from [Firefox Extended Support Release](https://www.mozilla.org/en-US/firefox/organizations/all/) to continue using `FirefoxDriver`.
 
-If you want to use Firefox 46 and later then you may need to use the [Marionette](https://developer.mozilla.org/en-US/docs/Mozilla/QA/Marionette/WebDriver) driver.
+If you want to use Firefox 46 and later then you may need to use the [Marionette](https://developer.mozilla.org/en-US/docs/Mozilla/QA/Marionette/WebDriver) manager.
 
 Follow the instructions on the Marionette page to download it. You do not need to add it to your path, you can control that through a system property - see the code in this project for more detail.
 
@@ -139,7 +139,7 @@ You can also use portable Firefox as described in this blog post
 
 All of this is explained in the source code, or in the blog posts:
 
-* http://seleniumsimplified.com/2016/04/how-to-use-the-firefox-marionette-driver/
+* http://seleniumsimplified.com/2016/04/how-to-use-the-firefox-marionette-manager/
 * http://seleniumsimplified.com/2016/06/using-portable-firefox-46-with-webdriver/
 
 

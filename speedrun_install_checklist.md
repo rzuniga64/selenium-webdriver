@@ -45,7 +45,7 @@ For instructions on how to install Java, Maven and IntelliJ; and check they are 
 * [`startUsingJavaJunit` project](https://github.com/eviltester/startUsingJavaJUnit)
 * [Java Install Checklist](https://github.com/eviltester/startUsingJavaJUnit/blob/master/speedrun_install_java_checklist.md)
 
-**Note: Currently recommend using `ChromeDriver` as your default driver and the current version of Chrome as your default browser. If you only setup one driver and browser, make it Chrome, it is a lot easier to start with.**
+**Note: Currently recommend using `ChromeDriver` as your default manager and the current version of Chrome as your default browser. If you only setup one manager and browser, make it Chrome, it is a lot easier to start with.**
 
 ---
 
@@ -128,7 +128,7 @@ For instructions on how to install Java, Maven and IntelliJ; and check they are 
     * `[ ]`download the zip file and unzip somewhere
 
 
-**Note: Currently recommend using `ChromeDriver` as your default driver and the current version of Chrome as your default browser. If you only setup one driver and browser, make it Chrome, it is a lot easier to start with.**
+**Note: Currently recommend using `ChromeDriver` as your default manager and the current version of Chrome as your default browser. If you only setup one manager and browser, make it Chrome, it is a lot easier to start with.**
 
 ---
 
