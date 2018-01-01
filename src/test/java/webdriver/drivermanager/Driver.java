@@ -5,6 +5,7 @@ import org.openqa.selenium.UnsupportedCommandException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -14,6 +15,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
@@ -29,25 +31,33 @@ import java.util.Set;
  *   well. At the point of writing this comment v 3.0.1 the legacyFirefoxDriver still works well, but only on v < 48 of
  *   Firefox. At the time of writing the current version of Firefox is 49.0.1
  *
- *   Since all browsers that most peopl will use now essentially need an 'external' driver. I am making Chrome the
- *   default. - 19th October 2016
+ *   Since all browsers that most people will use now essentially need an 'external' driver. I am making Chrome the
+ *   default.
+ *
+ *   The reason for this class is to limit the time it takes to start the browser. When the tests are run typically all
+ *   the tests classes are run. This class allows sharing of the driver between the tests so minimize start up and shutodwn
+ *   of the browser.
+ *
+ *   - 19th October 2016
  */
 public class Driver extends Thread{
 
-    public enum BrowserName{HTMLUNIT, FIREFOX, GOOGLECHROME, EDGE, IE, FIREFOXPORTABLE, FIREFOXMARIONETTE, SAUCELABS,
-        GRID, APPIUM}
+    public enum BrowserName{HTMLUNIT, FIREFOX, CHROME, GOOGLECHROME, EDGE, IE, FIREFOXPORTABLE, FIREFOXMARIONETTE, SAUCELABS, GRID,
+        APPIUM}
 
     public static final String BROWSER_PROPERTY_NAME = "selenium2basics.webdriver";
-    private static final String DEFAULT_BROWSER = "GOOGLECHROME";
+    private static final String DEFAULT_BROWSER = "CHROME";
     public static final long DEFAULT_TIMEOUT_SECONDS = 10;
 
     private static long browserStartTime = 0L;
     private static long savedTimecount = 0L;
     private static boolean avoidRecursiveCall=false;
+    private static ChromeDriverService service = null;
     private static WebDriver aDriver=null;
     private static BrowserName useThisDriver = null;
 
     public static BrowserName currentDriver;
+    public static String RESOURCE_DIR = "";
     public static String PROXYHOST = "localhost";
     public static String PROXYPORT = "8888";     // default port for browsermob: 8080, fiddler: 8888
     public static String PROXY = PROXYHOST+":"+PROXYPORT;
@@ -63,13 +73,12 @@ public class Driver extends Thread{
         }
     }
 
-    public static WebDriver get() {
+    public static WebDriver get(String browserPropertyName, String browser  ) {
 
         if(useThisDriver == null){
 
-            //String defaultBrowser = System.getProperty(BROWSER_PROPERTY_NAME, DEFAULT_BROWSER);
             // to allow setting the browser as a property or an environment variable
-            String defaultBrowser = EnvironmentPropertyReader.getPropertyOrEnv(BROWSER_PROPERTY_NAME, DEFAULT_BROWSER);
+            String defaultBrowser = EnvironmentPropertyReader.getPropertyOrEnv(browserPropertyName, browser);
 
             switch (defaultBrowser){
                 case "HTMLUNIT":
@@ -78,8 +87,8 @@ public class Driver extends Thread{
                 case "FIREFOX":
                     useThisDriver = BrowserName.FIREFOX;
                     break;
-                case "GOOGLECHROME":
-                    useThisDriver = BrowserName.GOOGLECHROME;
+                case "CHROME":
+                    useThisDriver = BrowserName.CHROME;
                     break;
                 case "EDGE":
                     useThisDriver = BrowserName.EDGE;
@@ -112,6 +121,7 @@ public class Driver extends Thread{
             long startBrowserTime = System.currentTimeMillis();
 
             // see the \docs\firefox47.pdf for a discussion on why we have Firefox and FirefoxPortable etc.
+            // various extensions to allow using of different types of browsers.
             switch (useThisDriver) {
 
                 case HTMLUNIT:
@@ -120,36 +130,86 @@ public class Driver extends Thread{
                     aDriver = new HtmlUnitDriver(true);  // enable javascript
                     currentDriver = BrowserName.HTMLUNIT;
                     break;
+
                 case FIREFOX:
+
+                    RESOURCE_DIR = System.getProperty("user.dir") + "\\src\\main\\resources\\";
+                    System.setProperty("webdriver.gecko.driver", RESOURCE_DIR + "geckodriver.exe");
                     //FirefoxProfile profile = new FirefoxProfile();
                    // profile.setEnableNativeEvents(true);
 
                     /*
                         Webdriver 3
-                        To use legacy Firefox driver we can set capability for Marionette to be false
-                        and it will use the legacy firefox driver
+                        To use legacy Firefox driver we can set capability for Marionette to be false and it will use
+                        the legacy firefox driver
 
                         FirefoxDriver.MARIONETTE == "marionette"
                      */
-                    DesiredCapabilities legacyCapabilities = DesiredCapabilities.firefox();
+                    //DesiredCapabilities legacyCapabilities = DesiredCapabilities.firefox();
                     //legacyCapabilities.setCapability("marionette", false);
-                    aDriver = new FirefoxDriver(legacyCapabilities);//profile);
+                    //aDriver = new FirefoxDriver(legacyCapabilities);//profile);
+
+                    aDriver = new FirefoxDriver();
 
                     /*
-                     NOTE: 20160729 this property doesn't seem to be honoured in the code yet
-                     so use the capability above.
-
+                     NOTE: 20160729 this property doesn't seem to be honoured in the code yet so use the capability above.
                      or I can run the test with a property
-
                     -Dwebdriver.firefox.marionette=false
 
                       I could set that in code with
-                        System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE, "false");
+                      System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE, "false");
                      */
 
-                    //
-
                     currentDriver = BrowserName.FIREFOX;
+                    break;
+
+                case CHROME:
+
+                    RESOURCE_DIR = System.getProperty("user.dir") + "\\src\\main\\resources\\";
+                    service = new ChromeDriverService.Builder()
+
+                            // You need to download the ChromeDriver executable: https://sites.google.com/a/chromium.org/chromedriver/
+                            .usingDriverExecutable(new File(RESOURCE_DIR + "chromedriver.exe"))
+                            .usingAnyFreePort()
+                            .build();
+                    try {
+                        service.start();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    aDriver = new RemoteWebDriver(service.getUrl(), DesiredCapabilities.chrome());
+                    currentDriver = BrowserName.CHROME;
+                    break;
+
+                case GOOGLECHROME:
+
+                    setDriverPropertyIfNecessary("webdriver.chrome.driver",
+                                                 "/../tools/chromedriver/chromedriver.exe",
+                                                 "C://webdrivers/chromedriver/chromedriver.exe");
+
+                    ChromeOptions options = new ChromeOptions();
+                    options.addArguments("disable-plugins");
+                    options.addArguments("disable-extensions");
+
+
+                    // with Chrome v35 it now reports an error on --ignore-certificate-errors
+                    // so call with args "test-type"
+                    // https://code.google.com/p/chromedriver/issues/detail?id=799
+                    options.addArguments("test-type");
+
+                    DesiredCapabilities chromeCapabilities = DesiredCapabilities.chrome();
+
+                    // http://stackoverflow.com/questions/26772793/org-openqa-selenium-unhandledalertexception-unexpected-alert-open
+                    //chromeCapabilities.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
+
+                    // convert theoptions to capabilities
+                    chromeCapabilities.setCapability(ChromeOptions.CAPABILITY, options);
+
+
+
+                    aDriver = new ChromeDriver(chromeCapabilities);
+                    currentDriver = BrowserName.CHROME;
                     break;
 
                 case FIREFOXPORTABLE:
@@ -199,34 +259,6 @@ public class Driver extends Thread{
 
                     aDriver = new EdgeDriver();
                     currentDriver = BrowserName.EDGE;
-                    break;
-
-                case GOOGLECHROME:
-
-                    setDriverPropertyIfNecessary("webdriver.chrome.driver","/../tools/chromedriver/chromedriver.exe","C://webdrivers/chromedriver/chromedriver.exe");
-
-                    ChromeOptions options = new ChromeOptions();
-                    options.addArguments("disable-plugins");
-                    options.addArguments("disable-extensions");
-
-
-                    // with Chrome v35 it now reports an error on --ignore-certificate-errors
-                    // so call with args "test-type"
-                    // https://code.google.com/p/chromedriver/issues/detail?id=799
-                    options.addArguments("test-type");
-
-                    DesiredCapabilities chromeCapabilities = DesiredCapabilities.chrome();
-
-                    // http://stackoverflow.com/questions/26772793/org-openqa-selenium-unhandledalertexception-unexpected-alert-open
-                    //chromeCapabilities.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
-
-                    // convert theoptions to capabilities
-                    chromeCapabilities.setCapability(ChromeOptions.CAPABILITY, options);
-
-
-
-                    aDriver = new ChromeDriver(chromeCapabilities);
-                    currentDriver = BrowserName.GOOGLECHROME;
                     break;
 
                 case SAUCELABS:
@@ -314,6 +346,8 @@ public class Driver extends Thread{
             long browserStartedTime = System.currentTimeMillis();
             browserStartTime = browserStartedTime - startBrowserTime;
 
+            // Java has a thing called shut down hook that when the JVM stops that code will run.
+            // all that does is called the quite method in this particular class.
             // we want to shutdown the shared brower when the tests finish
             Runtime.getRuntime().addShutdownHook(
                     new Thread(){
@@ -332,14 +366,13 @@ public class Driver extends Thread{
                 }
             }catch(Exception e){
                 if(avoidRecursiveCall){
-                    // something has gone wrong as we have been here already
                     throw new RuntimeException("something has gone wrong as we have been in Driver.get already");
                 }
 
                 quit();
                 aDriver=null;
                 avoidRecursiveCall = true;
-                return get();
+                return get(browserPropertyName, browser);
             }
 
             savedTimecount += browserStartTime;
@@ -381,7 +414,7 @@ public class Driver extends Thread{
             }
 
             if(gridBrowser.contains("chrome")){
-                return BrowserName.GOOGLECHROME;
+                return BrowserName.CHROME;
             }
 
             if(gridBrowser.contains("ie")){
@@ -442,18 +475,19 @@ public class Driver extends Thread{
     }
 
     public static WebDriver get(String aURL, boolean maximize){
-        get();
+
+        //get();
         aDriver.get(aURL);
         if(maximize){
             try{
                 aDriver.manage().window().maximize();
-            }catch(UnsupportedCommandException e){
-                System.out.println("Remote Driver does not support maximise");
-            }catch(WebDriverException e){
+            } catch(UnsupportedCommandException e){
+                System.out.println("Remote Driver does not support maximize");
+            } catch(WebDriverException e){
                 if(currentDriver == BrowserName.APPIUM){
-                    System.out.println("Appium does not support maximise");
+                    System.out.println("Appium does not support maximize");
                 }else{
-                    System.out.println("Unexpected exception on trying to maximise");
+                    System.out.println("Unexpected exception on trying to maximize");
                     System.out.println(e.getMessage());
                 }
             }
@@ -461,17 +495,22 @@ public class Driver extends Thread{
         return aDriver;
     }
 
+    /**
+     *  trying to maximise is currently failing for me on Windows 10 with ChromeDriver 2.24 and Chrome 61.0.3163.91
+     *  ?... 61.0.3163.100
+     *  set maximise default to false instead of true to run with this config
+     *  works fine with 2.32 and Chrome Chrome 61.0.3163.91+
+     *  - TODO - add this default as a configuration variable
+     */
     public static WebDriver get(String aURL){
         return get(aURL,true);
-        // trying to maximise is currently failing for me on Windows 10 with ChromeDriver 2.24 and Chrome 61.0.3163.91
-        // ?... 61.0.3163.100
-        // set maximise default to false instead of true to run with this config
-        // works fine with 2.32 and Chrome Chrome 61.0.3163.91+
-        // - TODO - add this default as a configuration variable
     }
 
+    /**
+     *  If we have a driver, then quit it.
+     */
     public static void quit(){
-        if(aDriver!=null){
+        if(aDriver != null){
             System.out.println("total time saved by reusing browsers " + savedTimecount + "ms");
             try{
                 aDriver.quit();
@@ -481,7 +520,13 @@ public class Driver extends Thread{
             }
 
         }
+        if(service != null){
+            try{
+                service.stop();
+                service = null;
+            }catch(Exception e){
+                // I don't care about errors at this point
+            }
+        }
     }
-
-
 }

@@ -1,6 +1,6 @@
 package webdriver.navigation;
 
-import webdriver.manager.DriverManager;
+import webdriver.drivermanager.Driver;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -15,16 +15,14 @@ public class NavigationExampleTest {
 
     @BeforeClass
     public static void createDriver(){
-        //driver = new FirefoxDriver();
-        driver = DriverManager.get();
+
+        driver = Driver.get("webdriver.gecko.driver","FIREFOX" );
     }
 
     @Test
     public void navigateWithNavigateTo(){
-        driver.navigate().to(
-                "http://www.compendiumdev.co.uk/selenium/search.php");
-        assertTrue(driver.getTitle().
-                startsWith("Selenium Simplified Search Engine"));
+        driver.navigate().to("http://www.compendiumdev.co.uk/selenium/search.php");
+        assertTrue(driver.getTitle().startsWith("Selenium Simplified Search Engine"));
     }
 
     @AfterClass

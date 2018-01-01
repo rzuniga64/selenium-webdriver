@@ -12,14 +12,20 @@ public class DriverManagerTest {
     WebDriver driver;
 
     @Test
-    public void createAFirefoxDriver(){
-        System.setProperty(DriverManager.SELENIUM2_BASICS_DRIVER,"firefox");
+    public void createAnHtmlUnitDriver(){
+        driver = Driver.get("selenium2basics.webdriver","HTMLUNIT" );
         assertBrowserTestRuns();
     }
 
     @Test
-    public void createAnHtmlUnitDriver(){
-        System.setProperty(DriverManager.SELENIUM2_BASICS_DRIVER,"htmlunit");
+    public void createAFirefoxDriver(){
+        driver = Driver.get("webdriver.gecko.driver","FIREFOX" );
+        assertBrowserTestRuns();
+    }
+
+    @Test
+    public void createAChromeDriver(){
+        driver = Driver.get("selenium2basics.webdriver","CHROME" );
         assertBrowserTestRuns();
     }
 
@@ -29,13 +35,7 @@ public class DriverManagerTest {
     }
 
     public void assertBrowserTestRuns(){
-        driver = DriverManager.get();
         driver.get("http://compendiumdev.co.uk/selenium/basic_web_page.html");
         assertThat(driver.getTitle(), is("Basic Web Page Title"));
-    }
-
-    @After
-    public void quitDriver(){
-        driver.quit();
     }
 }
