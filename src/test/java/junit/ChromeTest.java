@@ -24,7 +24,7 @@ public class ChromeTest extends TestCase {
         service = new ChromeDriverService.Builder()
 
             // You need to download the ChromeDriver executable: https://sites.google.com/a/chromium.org/chromedriver/
-            .usingDriverExecutable(new File(currentDir + "\\src/main/resources/chromedriver.exe"))
+            .usingDriverExecutable(new File(currentDir + "\\src\\main\\resources\\chromedriver.exe"))
             .usingAnyFreePort()
             .build();
         try {
