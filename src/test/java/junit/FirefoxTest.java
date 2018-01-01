@@ -20,8 +20,8 @@ public class FirefoxTest {
          *     - Firefox 48+
          *     - with geckodriver.exe on the path
          */
-        String currentDir = System.getProperty("user.dir");
-        System.setProperty("webdriver.gecko.manager", currentDir + "\\src/main/resources/geckodriver.exe");
+        String driverDir = System.getProperty("user.dir") + "\\src\\main\\resources\\geckodriver.exe";
+        System.setProperty("webdriver.gecko.driver", driverDir);
         WebDriver driver = new FirefoxDriver();
 
         driver.navigate().to("http://seleniumsimplified.com");
@@ -30,7 +30,7 @@ public class FirefoxTest {
                             driver.getTitle().startsWith("Selenium Simplified"));
 
         // For GeckoDriver 0.19 and Firefox 55.0.3, if I close then I get an error, so I decided to just quit instead
-        //manager.close();
+        //drivermanager.close();
         driver.quit();
     }
 }
