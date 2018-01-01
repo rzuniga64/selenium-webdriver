@@ -4,8 +4,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-//import static org.hamcrest.Matchers.both;
-//import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.both;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.core.IsNull.nullValue;
@@ -96,6 +96,6 @@ public class JUnitExercisesTest {
         //       It works in Java 1.7
         //       if you can, I suggest upgrading to Java 1.7
         //       This is an optional exercise, and is hamcrest related so I don't worry about it.
-        //assertThat("The Answer", both(containsString("The")).and(containsString("Answer")));
+        assertThat("The Answer", both(containsString("The")).and(containsString("Answer")));
     }
 }
