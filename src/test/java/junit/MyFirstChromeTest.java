@@ -1,3 +1,5 @@
+package junit;
+
 import junit.framework.TestCase;
 import org.junit.*;
 import org.junit.runner.RunWith;
