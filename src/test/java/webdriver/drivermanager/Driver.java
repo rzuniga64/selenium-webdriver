@@ -1,4 +1,4 @@
-package manager;
+package webdriver.drivermanager;
 
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.UnsupportedCommandException;
@@ -8,7 +8,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -22,51 +21,39 @@ import java.util.Properties;
 import java.util.Set;
 
 /**
- * A singleton style manager to maintain Drivers to prevent
- * test slowdown for creating a browser for each class with tests.
+ *  A singleton style drivermanager to maintain Drivers to prevent test slowdown for creating a browser for each class with
+ *  tests. Also counts time to start a browser and extrapolates from that how much time you have saved using such hacky
+ *  code.
  *
- * Also counts time to start a browser and extrapolates from that how much
- * time you have saved using such hacky code.
+ *   When I started the course, the default browser was Firefox. It was supported without any extra drivers and worked
+ *   well. At the point of writing this comment v 3.0.1 the legacyFirefoxDriver still works well, but only on v < 48 of
+ *   Firefox. At the time of writing the current version of Firefox is 49.0.1
+ *
+ *   Since all browsers that most peopl will use now essentially need an 'external' driver. I am making Chrome the
+ *   default. - 19th October 2016
  */
 public class Driver extends Thread{
 
-    private static WebDriver aDriver=null;
+    public enum BrowserName{HTMLUNIT, FIREFOX, GOOGLECHROME, EDGE, IE, FIREFOXPORTABLE, FIREFOXMARIONETTE, SAUCELABS,
+        GRID, APPIUM}
+
+    public static final String BROWSER_PROPERTY_NAME = "selenium2basics.webdriver";
+    private static final String DEFAULT_BROWSER = "GOOGLECHROME";
+    public static final long DEFAULT_TIMEOUT_SECONDS = 10;
+
     private static long browserStartTime = 0L;
     private static long savedTimecount = 0L;
-    public static final long DEFAULT_TIMEOUT_SECONDS = 10;
     private static boolean avoidRecursiveCall=false;
-    public static final String BROWSER_PROPERTY_NAME = "selenium2basics.webdriver";
-
-
-    /*
-        When I started the course, the default browser was Firefox.
-        It was supported without any extra drivers and worked well.
-
-        At the point of writing this comment v 3.0.1 the legacy
-        FirefoxDriver still works well, but only on v < 48 of Firefox.
-        At the time of writing the current version of Firefox is 49.0.1
-
-        Since all browsers that most peopl will use now essentially need an
-        'external' driver. I am making Chrome the default.
-
-        19th October 2016
-     */
-    //private static final  String DEFAULT_BROWSER = "FIREFOX";
-    private static final  String DEFAULT_BROWSER = "GOOGLECHROME";
-
-    public enum BrowserName{FIREFOX, GOOGLECHROME, SAUCELABS, IE, HTMLUNIT, GRID, FIREFOXPORTABLE, FIREFOXMARIONETTE, APPIUM, EDGE}
-
-    public static BrowserName currentDriver;
-
+    private static WebDriver aDriver=null;
     private static BrowserName useThisDriver = null;
 
-    // default for browsermob localhost:8080
-    // default for fiddler: localhost:8888
-    public static String PROXYHOST="localhost";
-    public static String PROXYPORT="8888";
-    public static String PROXY=PROXYHOST+":"+PROXYPORT;
+    public static BrowserName currentDriver;
+    public static String PROXYHOST = "localhost";
+    public static String PROXYPORT = "8888";     // default port for browsermob: 8080, fiddler: 8888
+    public static String PROXY = PROXYHOST+":"+PROXYPORT;
 
     public static void set(BrowserName aBrowser){
+
         useThisDriver = aBrowser;
 
         // close any existing driver
@@ -80,115 +67,65 @@ public class Driver extends Thread{
 
         if(useThisDriver == null){
 
-
             //String defaultBrowser = System.getProperty(BROWSER_PROPERTY_NAME, DEFAULT_BROWSER);
             // to allow setting the browser as a property or an environment variable
             String defaultBrowser = EnvironmentPropertyReader.getPropertyOrEnv(BROWSER_PROPERTY_NAME, DEFAULT_BROWSER);
 
-            /* Note:
-                    I generally use the Java 1.7 format that you can see below this chunk
-                    of code. where the switch statement uses a String.
-
-                    Java 1.6 does not support this, since people have tried to use this code
-                    on older versions of Java, and this is really the only Java 1.7 specific
-                    functionality that I use. I have converted this code to Java 1.6 with a
-                    series of if statements to replicate the switch statement.
-
-                    I could have used an enum, or refactored it to use objects
-                    but I wanted to keep the code simple.
-
-                    Hence the reason this code is different from what you might see in the
-                    lecture. But I have left this comment in to explain the situation.
-             */
-            if("FIREFOX".contentEquals(defaultBrowser))
-                useThisDriver = BrowserName.FIREFOX;
-
-            if("FIREFOXPORTABLE".contentEquals(defaultBrowser))
-                useThisDriver = BrowserName.FIREFOXPORTABLE;
-
-            // Firefox is for the inbuilt plugin driver, marionette is the newer .exe driver
-            // see the
-            // package com.seleniumsimplified.webdriver.drivers;
-            //  FirefoxMarionetteDriverTest.java for more details
-            if("FIREFOXMARIONETTE".contentEquals(defaultBrowser))
-                useThisDriver = BrowserName.FIREFOXMARIONETTE;
-
-            if("CHROME".contentEquals(defaultBrowser))
-                useThisDriver = BrowserName.GOOGLECHROME;
-
-            if("GOOGLECHROME".contentEquals(defaultBrowser))
-                useThisDriver = BrowserName.GOOGLECHROME;
-
-            if("IE".contentEquals(defaultBrowser))
-                useThisDriver = BrowserName.IE;
-
-            if("EDGE".contentEquals(defaultBrowser))
-                useThisDriver = BrowserName.EDGE;
-
-            if("SAUCELABS".contentEquals(defaultBrowser))
-                useThisDriver = BrowserName.SAUCELABS;
-
-            if("HTMLUNIT".contentEquals(defaultBrowser))
-                useThisDriver = BrowserName.HTMLUNIT;
-
-            // generic grid
-            if("GRID".contentEquals(defaultBrowser))
-                useThisDriver = BrowserName.GRID;
-
-            if("APPIUM".contentEquals(defaultBrowser))
-                useThisDriver = BrowserName.APPIUM;
-
-            // if none of the previous if statements were exercised then useThisDriver will
-            // still be none, this is the 'default' line from the Switch statement.
-            if(useThisDriver==null)
-                throw new RuntimeException("Unknown Browser in " + BROWSER_PROPERTY_NAME + ": " + defaultBrowser);
-
-            /* Code below requires Java 1.7 to switch on String
-            *  This would be my default way of writing the code, but have
-            *  not made it the default in this code base because people often compile
-            *  against 1.6 settings.
-            */
-            /*
             switch (defaultBrowser){
+                case "HTMLUNIT":
+                    useThisDriver = BrowserName.HTMLUNIT;
+                    break;
                 case "FIREFOX":
                     useThisDriver = BrowserName.FIREFOX;
                     break;
-                case "CHROME":
+                case "GOOGLECHROME":
                     useThisDriver = BrowserName.GOOGLECHROME;
+                    break;
+                case "EDGE":
+                    useThisDriver = BrowserName.EDGE;
                     break;
                 case "IE":
                     useThisDriver = BrowserName.IE;
                     break;
+                case "FIREFOXPORTABLE":
+                    useThisDriver = BrowserName.FIREFOXPORTABLE;
+                    break;
+                case "FIREFOXMARIONETTE":
+                    useThisDriver = BrowserName.FIREFOXMARIONETTE;
+                    break;
                 case "SAUCELABS":
                     useThisDriver = BrowserName.SAUCELABS;
-                    break;
-                case "HTMLUNIT":
-                    useThisDriver = BrowserName.HTMLUNIT;
                     break;
                 case "GRID":
                     useThisDriver = BrowserName.GRID;
                     break;
+                case "APPIUM":
+                    useThisDriver = BrowserName.APPIUM;
+                    break;
                 default:
                     throw new RuntimeException("Unknown Browser in " + BROWSER_PROPERTY_NAME + ": " + defaultBrowser);
             }
-            */
-
         }
 
-
         if(aDriver==null){
-
 
             long startBrowserTime = System.currentTimeMillis();
 
             // see the \docs\firefox47.pdf for a discussion on why we have Firefox and FirefoxPortable etc.
             switch (useThisDriver) {
+
+                case HTMLUNIT:
+
+                    // HtmlUnitDriver added as a maven dependency - no paths required
+                    aDriver = new HtmlUnitDriver(true);  // enable javascript
+                    currentDriver = BrowserName.HTMLUNIT;
+                    break;
                 case FIREFOX:
                     //FirefoxProfile profile = new FirefoxProfile();
                    // profile.setEnableNativeEvents(true);
 
-                    /** Webdriver 3 **/
                     /*
+                        Webdriver 3
                         To use legacy Firefox driver we can set capability for Marionette to be false
                         and it will use the legacy firefox driver
 
@@ -245,13 +182,6 @@ public class Driver extends Thread{
 
                     //aDriver = new MarionetteDriver();//profile);
                     currentDriver = BrowserName.FIREFOXMARIONETTE;
-                    break;
-
-                case HTMLUNIT:
-
-                    // HtmlUnitDriver added as a maven dependency - no paths required
-                    aDriver = new HtmlUnitDriver(true);  // enable javascript
-                    currentDriver = BrowserName.HTMLUNIT;
                     break;
 
                 case IE:
@@ -393,7 +323,7 @@ public class Driver extends Thread{
                     }
             );
 
-        }else{
+        } else {
 
             try{
                 // is browser still alive

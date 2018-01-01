@@ -1,4 +1,4 @@
-package manager;
+package webdriver.drivermanager;
 
 /**
  * Created by Alan on 25/07/2016.

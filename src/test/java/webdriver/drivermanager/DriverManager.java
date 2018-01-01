@@ -1,4 +1,4 @@
-package webdriver.manager;
+package webdriver.drivermanager;
 
 
 import org.openqa.selenium.WebDriver;
@@ -39,7 +39,7 @@ public class DriverManager {
 
         if("firefox".contentEquals(browserToUse)) {
             String currentDir = System.getProperty("user.dir");
-            System.setProperty("webdriver.gecko.manager", currentDir + "\\src/main/resources/geckodriver.exe");
+            System.setProperty("webdriver.gecko.drivermanager", currentDir + "\\src/main/resources/geckodriver.exe");
             return new FirefoxDriver();
         }
 

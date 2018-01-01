@@ -1,4 +1,4 @@
-package webdriver.manager;
+package webdriver.drivermanager;
 
 import org.junit.After;
 import org.junit.Test;
