@@ -342,9 +342,8 @@ public class Driver extends Thread{
             long browserStartedTime = System.currentTimeMillis();
             browserStartTime = browserStartedTime - startBrowserTime;
 
-            // Java has a thing called shut down hook that when the JVM stops that code will run.
-            // all that does is called the quite method in this particular class.
-            // we want to shutdown the shared brower when the tests finish
+            // Java has a thing called shut down hook that when the JVM stops that code will run. All that it does is
+            // call the quit method in this particular class. We want to shutdown the shared brower when the tests finish
             Runtime.getRuntime().addShutdownHook(
                     new Thread(){
                         public void run(){

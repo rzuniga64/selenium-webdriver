@@ -14,6 +14,21 @@ import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
+/**
+ *  Use the following URLs:
+ *      - navigate().to()
+ *      - forward()
+ *      - back()
+ *      - refresh()
+ *  URL: http://compendium.co.uk
+ *
+ *  File Path                       Title
+ *  /selenium                       "Selenium Simplified"
+ *  /selenium/search.php            "Selenium Simplified Search Engine"
+ *  /selenium/basic_html_form.html  "HTML Form elements"
+ *  /selenium/basic_web_page.html   "Basic Web Page Title"
+ *  /selenium/refresh.php           "Refreshed Page on ([0-9]{10})"
+ */
 public class NavigationBasicsTest {
 
     static WebDriver driver;
@@ -28,32 +43,29 @@ public class NavigationBasicsTest {
 
     @Test
     public void navigateWithGet(){
-        driver.get(ROOT_URL + "/selenium");
 
-        assertTrue(driver.getTitle().startsWith(
-                    "Selenium Simplified"));
+        driver.get(ROOT_URL + "/selenium");
+        assertTrue(driver.getTitle().startsWith("Selenium Simplified"));
     }
 
     @Test
     public void navigateWithNavigateTo(){
-        driver.navigate().to(ROOT_URL + "/selenium/search.php");
 
-        assertTrue(driver.getTitle().startsWith(
-                   "Selenium Simplified Search Engine"));
+        driver.navigate().to(ROOT_URL + "/selenium/search.php");
+        assertTrue(driver.getTitle().startsWith("Selenium Simplified Search Engine"));
     }
 
     @Test
     public void navigateWithNavigateToURL() throws MalformedURLException {
+
         URL searchPage = new URL(PROTOCOL,DOMAIN,"/selenium/search.php");
-
         driver.navigate().to(searchPage);
-
-        assertTrue(driver.getTitle().startsWith(
-                   "Selenium Simplified Search Engine"));
+        assertTrue(driver.getTitle().startsWith("Selenium Simplified Search Engine"));
     }
 
     @Test
     public void navigateWithNavigateBackAndForward(){
+
         driver.navigate().to(ROOT_URL + "/selenium/basic_html_form.html");
         assertTrue(driver.getTitle().startsWith("HTML Form Elements"));
 
@@ -69,43 +81,33 @@ public class NavigationBasicsTest {
 
     @Test
     public void navigateWithRefresh(){
+
         driver.navigate().to(ROOT_URL + "/selenium/refresh.php");
 
         final String refreshTitleConstant = "Refreshed Page on ";
         String pageTitle = driver.getTitle();
 
-        assertTrue(pageTitle.
-                            startsWith(refreshTitleConstant));
+        assertTrue(pageTitle.startsWith(refreshTitleConstant));
 
-        long startTime = Long.parseLong(
-                        pageTitle.
-                            replaceFirst(refreshTitleConstant, ""));
+        long startTime = Long.parseLong(pageTitle.replaceFirst(refreshTitleConstant, ""));
 
-        // synchronise using sleep to guarantee time moves on
-        // the only time we sleep is waiting for time
-        // never sleep waiting for page objects
+        // synchronise using sleep to guarantee time moves on the only time we sleep is waiting for time never sleep
+        // waiting for page objects
         try{Thread.sleep(2000);}
         catch(InterruptedException e){/*ignore interrupt */};
 
         driver.navigate().refresh();
 
-        // in opera the refresh did not block or wait for the page to change so
-        // needed a synchronisation check, not an assert
-        //        assertTrue(driver.getTitle().
-        //              startsWith(refreshTitleConstant));
+        // in opera the refresh did not block or wait for the page to change so needed a synchronisation check,
+        // not an assert
+        // assertTrue(driver.getTitle().startsWith(refreshTitleConstant));
 
         new WebDriverWait(driver,10).until(titleIsNoLonger(pageTitle));
-
-
-        long endTime = Long.parseLong(
-                            driver.getTitle().
-                                replaceFirst(refreshTitleConstant, ""));
+        long endTime = Long.parseLong(driver.getTitle().replaceFirst(refreshTitleConstant, ""));
 
         assertTrue("expected " + endTime + " > " + startTime, endTime > startTime);
-
         assertThat(endTime, greaterThan(startTime));
     }
-
 
     private ExpectedCondition<Boolean> titleIsNoLonger(final String pageTitle) {
         return new ExpectedCondition<Boolean>() {
@@ -118,6 +120,6 @@ public class NavigationBasicsTest {
 
     @AfterClass
     public static void quitDriver(){
-        //driver.quit();
+        driver.quit();
     }
 }
