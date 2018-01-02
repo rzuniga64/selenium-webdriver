@@ -4,7 +4,6 @@ import org.junit.BeforeClass;
 import webdriver.drivermanager.Driver;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import webdriver.drivermanager.Driver;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.core.Is.is;
@@ -18,12 +17,12 @@ import static org.junit.Assert.assertThat;
  */
 public class DriverInterrogateTest {
 
-    final String PROTOCOL = "https";
-    final String DOMAIN = "www.compendiumdev.co.uk";
-    final String ROOT_URL = PROTOCOL + "://" + DOMAIN;
-    final String PAGE = "/selenium/basic_web_page.html";
+    private final String PROTOCOL = "https";
+    private final String DOMAIN = "www.compendiumdev.co.uk";
+    private final String ROOT_URL = PROTOCOL + "://" + DOMAIN;
+    private final String PAGE = "/selenium/basic_web_page.html";
 
-    static WebDriver driver;
+    private static WebDriver driver;
 
     @BeforeClass
     public static void createDriver(){
