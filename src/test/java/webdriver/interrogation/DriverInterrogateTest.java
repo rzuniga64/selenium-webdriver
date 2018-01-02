@@ -8,6 +8,12 @@ import webdriver.drivermanager.Driver;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+/**
+ *  Create a test which visits www.compendium.co.uk/selenium/basic_web_page.html.
+ *  Assert title equals 'Basic Web Page Title'
+ *  Assert current URL is what you expect
+ *  Check page source contains 'A paragraph of text'
+ */
 public class DriverInterrogateTest {
 
     @Test
@@ -20,11 +26,9 @@ public class DriverInterrogateTest {
 
         WebDriver driver;
 
-        driver = Driver.get("selenium2basics.webdriver","CHROME" );
+        driver = Driver.get("selenium2basics.webdriver","HTMLUNIT" );
         driver.navigate().to(ROOT_URL + PAGE);
 
-        // in the videos you might see these the wrong way round
-        // always use expected, actual
         assertEquals("Basic Web Page Title", driver.getTitle());
 
         // Changed this from
@@ -36,7 +40,5 @@ public class DriverInterrogateTest {
         assertTrue(pageSource.contains("A paragraph of text"));
 
         System.out.println(pageSource);
-
     }
-
 }
