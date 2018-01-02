@@ -30,6 +30,12 @@ public class DriverManagerTest {
     }
 
     @Test
+    public void createAEdgeDriver(){
+        driver = Driver.get("webdriver.ie.driver","CHROME" );
+        assertBrowserTestRuns();
+    }
+
+    @Test
     public void createADefaultDriver(){
         assertBrowserTestRuns();
     }

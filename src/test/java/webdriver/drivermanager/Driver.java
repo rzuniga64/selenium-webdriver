@@ -212,6 +212,24 @@ public class Driver extends Thread{
                     currentDriver = BrowserName.CHROME;
                     break;
 
+                case EDGE:
+
+                    RESOURCE_DIR = System.getProperty("user.dir") + "\\src\\main\\resources\\";
+                    System.setProperty("webdriver.gecko.driver", RESOURCE_DIR + "geckodriver.exe");
+
+                    aDriver = new EdgeDriver();
+                    currentDriver = BrowserName.EDGE;
+                    break;
+
+                case IE:
+
+                    setDriverPropertyIfNecessary("webdriver.ie.driver", "/../tools/iedriver_32/IEDriverServer.exe", "C://webdrivers/iedriver_32/IEDriverServer.exe");
+                    //setDriverPropertyIfNecessary("webdriver.ie.driver", "/../tools/iedriver_64/IEDriverServer.exe", "C://webdrivers/iedriver_64/IEDriverServer.exe");
+
+                    aDriver = new InternetExplorerDriver();
+                    currentDriver = BrowserName.IE;
+                    break;
+
                 case FIREFOXPORTABLE:
 
                     setDriverPropertyIfNecessary("seleniumsimplified.firefoxportable", "/../tools/FirefoxPortable/FirefoxPortable.exe", "C://webdrivers/FirefoxPortable/FirefoxPortable.exe");
@@ -244,23 +262,6 @@ public class Driver extends Thread{
                     currentDriver = BrowserName.FIREFOXMARIONETTE;
                     break;
 
-                case IE:
-
-                    setDriverPropertyIfNecessary("webdriver.ie.driver", "/../tools/iedriver_32/IEDriverServer.exe", "C://webdrivers/iedriver_32/IEDriverServer.exe");
-                    //setDriverPropertyIfNecessary("webdriver.ie.driver", "/../tools/iedriver_64/IEDriverServer.exe", "C://webdrivers/iedriver_64/IEDriverServer.exe");
-
-                    aDriver = new InternetExplorerDriver();
-                    currentDriver = BrowserName.IE;
-                    break;
-
-                case EDGE:
-
-                    setDriverPropertyIfNecessary("webdriver.edge.driver", "/../tools/edgedriver/MicrosoftWebDriver.exe", "C://webdrivers/edgedriver/MicrosoftWebDriver.exe");
-
-                    aDriver = new EdgeDriver();
-                    currentDriver = BrowserName.EDGE;
-                    break;
-
                 case SAUCELABS:
 
                     DesiredCapabilities firefoxCapabilities = DesiredCapabilities.firefox();
@@ -276,33 +277,6 @@ public class Driver extends Thread{
                         e.printStackTrace();
                     }
                     currentDriver = BrowserName.SAUCELABS;
-                    break;
-
-                case APPIUM:
-
-                    // quick hack code to get appium running
-                    // only one env variable, your APPIUM_DEVICE_NAME
-                    // so amend code for your local version
-
-                    DesiredCapabilities appiumCapabilities = new DesiredCapabilities();
-
-                    // the device name can be seen when you do "adb devices"
-                    appiumCapabilities.setCapability("deviceName", EnvironmentPropertyReader.getPropertyOrEnv("APPIUM_DEVICE_NAME", ""));
-                    appiumCapabilities.setCapability("platformName", Platform.ANDROID);
-                    appiumCapabilities.setCapability("app", EnvironmentPropertyReader.getPropertyOrEnv("APPIUM_BROWSER", "browser"));
-
-
-                    try {
-                        // add url to environment variables to avoid releasing with source
-                        String appiumURL = "http://127.0.0.1:4723/wd/hub";
-                        aDriver = new RemoteWebDriver(
-                                        new URL(appiumURL),
-                                        appiumCapabilities);
-                    } catch (MalformedURLException e) {
-                        e.printStackTrace();
-                    }
-
-                    currentDriver = BrowserName.APPIUM;
                     break;
 
                 case GRID:
@@ -339,6 +313,33 @@ public class Driver extends Thread{
                         e.printStackTrace();
                     }
                     currentDriver = BrowserName.GRID;
+                    break;
+
+                case APPIUM:
+
+                    // quick hack code to get appium running
+                    // only one env variable, your APPIUM_DEVICE_NAME
+                    // so amend code for your local version
+
+                    DesiredCapabilities appiumCapabilities = new DesiredCapabilities();
+
+                    // the device name can be seen when you do "adb devices"
+                    appiumCapabilities.setCapability("deviceName", EnvironmentPropertyReader.getPropertyOrEnv("APPIUM_DEVICE_NAME", ""));
+                    appiumCapabilities.setCapability("platformName", Platform.ANDROID);
+                    appiumCapabilities.setCapability("app", EnvironmentPropertyReader.getPropertyOrEnv("APPIUM_BROWSER", "browser"));
+
+
+                    try {
+                        // add url to environment variables to avoid releasing with source
+                        String appiumURL = "http://127.0.0.1:4723/wd/hub";
+                        aDriver = new RemoteWebDriver(
+                                        new URL(appiumURL),
+                                        appiumCapabilities);
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    }
+
+                    currentDriver = BrowserName.APPIUM;
                     break;
             }
 
