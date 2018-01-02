@@ -1,5 +1,6 @@
 package webdriver.interrogation;
 
+import org.junit.BeforeClass;
 import webdriver.drivermanager.Driver;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
@@ -19,17 +20,21 @@ import static org.junit.Assert.assertTrue;
  */
 public class DriverInterrogateTest {
 
+    final String PROTOCOL = "https";
+    final String DOMAIN = "www.compendiumdev.co.uk";
+    final String ROOT_URL = PROTOCOL + "://" + DOMAIN;
+    final String PAGE = "/selenium/basic_web_page.html";
+
+    static WebDriver driver;
+
+    @BeforeClass
+    public static void createDriver(){
+        driver = Driver.get("selenium2basics.webdriver","HTMLUNIT" );
+    }
+
     @Test
     public void driverLevelPageInterrogateMethods(){
 
-        final String PROTOCOL = "https";
-        final String DOMAIN = "www.compendiumdev.co.uk";
-        final String ROOT_URL = PROTOCOL + "://" + DOMAIN;
-        final String PAGE = "/selenium/basic_web_page.html";
-
-        WebDriver driver;
-
-        driver = Driver.get("selenium2basics.webdriver","HTMLUNIT" );
         driver.navigate().to(ROOT_URL + PAGE);
 
         assertThat( driver.getTitle(), is("Basic Web Page Title"));
