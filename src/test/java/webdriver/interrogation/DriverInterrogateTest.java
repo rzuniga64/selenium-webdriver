@@ -5,6 +5,9 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import webdriver.drivermanager.Driver;
 
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -19,7 +22,7 @@ public class DriverInterrogateTest {
     @Test
     public void driverLevelPageInterrogateMethods(){
 
-        final String PROTOCOL = "http";
+        final String PROTOCOL = "https";
         final String DOMAIN = "www.compendiumdev.co.uk";
         final String ROOT_URL = PROTOCOL + "://" + DOMAIN;
         final String PAGE = "/selenium/basic_web_page.html";
@@ -29,16 +32,8 @@ public class DriverInterrogateTest {
         driver = Driver.get("selenium2basics.webdriver","HTMLUNIT" );
         driver.navigate().to(ROOT_URL + PAGE);
 
-        assertEquals("Basic Web Page Title", driver.getTitle());
-
-        // Changed this from
-        // assertEquals(theTestPageURL, driver.getCurrentUrl());
-        // to cope with the pages being served by either http or https
-        assertTrue( driver.getCurrentUrl().endsWith(PAGE));
-
-        String pageSource = driver.getPageSource();
-        assertTrue(pageSource.contains("A paragraph of text"));
-
-        System.out.println(pageSource);
+        assertThat( driver.getTitle(), is("Basic Web Page Title"));
+        assertThat( driver.getCurrentUrl(), is(ROOT_URL + PAGE));
+        assertThat( driver.getPageSource(), containsString("A paragraph of text"));
     }
 }
