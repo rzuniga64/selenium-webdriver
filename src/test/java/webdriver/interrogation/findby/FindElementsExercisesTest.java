@@ -14,6 +14,14 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+/**
+ *  FindElements Excercises
+ *
+ *  Assert that there are 19 div elements.
+ *  Assert that therea re 25 <a> which href to a para
+ *      Hint: List has a .size() method
+ *  Assert that there are 16 nested paragrapsh and 41 paras in total.
+ */
 public class FindElementsExercisesTest {
 
     static WebDriver driver;
