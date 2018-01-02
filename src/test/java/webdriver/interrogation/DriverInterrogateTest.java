@@ -9,8 +9,6 @@ import webdriver.drivermanager.Driver;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 /**
  *  Create a test which visits www.compendium.co.uk/selenium/basic_web_page.html.
