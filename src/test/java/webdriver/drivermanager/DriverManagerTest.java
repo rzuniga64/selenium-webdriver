@@ -31,7 +31,7 @@ public class DriverManagerTest {
 
     @Test
     public void createAEdgeDriver(){
-        driver = Driver.get("webdriver.ie.driver","CHROME" );
+        driver = Driver.get("webdriver.edge.driver","EDGE" );
         assertBrowserTestRuns();
     }
 

@@ -206,8 +206,6 @@ public class Driver extends Thread{
                     // convert theoptions to capabilities
                     chromeCapabilities.setCapability(ChromeOptions.CAPABILITY, options);
 
-
-
                     aDriver = new ChromeDriver(chromeCapabilities);
                     currentDriver = BrowserName.CHROME;
                     break;
@@ -215,7 +213,7 @@ public class Driver extends Thread{
                 case EDGE:
 
                     RESOURCE_DIR = System.getProperty("user.dir") + "\\src\\main\\resources\\";
-                    System.setProperty("webdriver.gecko.driver", RESOURCE_DIR + "geckodriver.exe");
+                    System.setProperty("webdriver.edge.driver", RESOURCE_DIR + "MicrosoftWebDriver.exe");
 
                     aDriver = new EdgeDriver();
                     currentDriver = BrowserName.EDGE;
@@ -253,7 +251,6 @@ public class Driver extends Thread{
                     break;
 
                 case FIREFOXMARIONETTE:
-
 
                     // prior to Selenium 3 this was wires.exe
                     setDriverPropertyIfNecessary("webdriver.gecko.driver", "/../tools/marionette/geckodriver.exe", "C://webdrivers/marionette/geckodriver.exe");
@@ -328,7 +325,6 @@ public class Driver extends Thread{
                     appiumCapabilities.setCapability("platformName", Platform.ANDROID);
                     appiumCapabilities.setCapability("app", EnvironmentPropertyReader.getPropertyOrEnv("APPIUM_BROWSER", "browser"));
 
-
                     try {
                         // add url to environment variables to avoid releasing with source
                         String appiumURL = "http://127.0.0.1:4723/wd/hub";
@@ -342,7 +338,6 @@ public class Driver extends Thread{
                     currentDriver = BrowserName.APPIUM;
                     break;
             }
-
 
             long browserStartedTime = System.currentTimeMillis();
             browserStartTime = browserStartedTime - startBrowserTime;
