@@ -52,7 +52,7 @@ public class FindByChainingExampleTest {
     @BeforeClass
     public static void createDriverAndVisitTestPage(){
         driver = Driver.get("selenium2basics.webdriver","HTMLUNIT" );
-        driver = Driver.get("http://www.compendiumdev.co.uk" + "/selenium/find_by_playground.php");
+        driver = Driver.get("http://www.compendiumdev.co.uk/selenium/find_by_playground.php");
     }
 
     @Test
