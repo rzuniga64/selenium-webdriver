@@ -32,7 +32,7 @@ import static org.junit.Assert.fail;
  */
 public class FirstFindByExercisesTest {
 
-    static WebDriver driver;
+    private static WebDriver driver;
 
     @BeforeClass
     public static void createDriverAndVisitTestPage(){

@@ -7,13 +7,12 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import webdriver.drivermanager.Driver;
 
 import static org.junit.Assert.assertEquals;
 
 public class FindByExampleTest {
 
-    static WebDriver driver;
+    private static WebDriver driver;
 
     @BeforeClass
     public static void createDriverAndVisitTestPage(){

@@ -11,8 +11,6 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 /**
  *  FindElements Excercises
@@ -24,7 +22,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class FindElementsExercisesTest {
 
-    static WebDriver driver;
+    private static WebDriver driver;
 
     @BeforeClass
     public static void createDriverAndVisitTestPage(){
