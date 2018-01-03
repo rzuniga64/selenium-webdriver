@@ -11,7 +11,7 @@ import webdriver.drivermanager.Driver;
 
 import static org.junit.Assert.assertEquals;
 
-public class AFirstFindByExampleTest {
+public class FindByExampleTest {
 
     static WebDriver driver;
 
