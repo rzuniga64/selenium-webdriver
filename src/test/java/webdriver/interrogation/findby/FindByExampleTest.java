@@ -16,7 +16,6 @@ public class FindByExampleTest {
 
     @BeforeClass
     public static void createDriverAndVisitTestPage(){
-        //driver = new FirefoxDriver();
         driver = Driver.get("selenium2basics.webdriver","HTMLUNIT" );
         driver.get("http://www.compendiumdev.co.uk/selenium/find_by_playground.php");
     }
