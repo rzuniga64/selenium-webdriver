@@ -74,10 +74,10 @@ public class ManipulateExercisesSubmitFormTest {
         WebElement submitButton;
         submitButton = driver.findElement(By.cssSelector("input[type='submit'][name='submitbutton']"));
 
-            submitButton.sendKeys(Keys.ENTER);
-            // if enter does not work then try SPACE
-            //submitButton.sendKeys(Keys.SPACE);
+        submitButton.sendKeys(Keys.ENTER);
+        // if enter does not work then try SPACE
+        //submitButton.sendKeys(Keys.SPACE);
 
-            new WebDriverWait(driver,10).until(ExpectedConditions.titleIs("Processed Form Details"));
+        new WebDriverWait(driver,10).until(ExpectedConditions.titleIs("Processed Form Details"));
     }
 }
