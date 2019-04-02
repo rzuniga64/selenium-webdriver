@@ -1,64 +1,33 @@
 package junit;
 
-import junit.framework.TestCase;
-import org.junit.*;
-import org.junit.runner.RunWith;
-import org.junit.runners.BlockJUnit4ClassRunner;
+import org.junit.Assert;
+import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriverService;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.io.File;
-import java.io.IOException;
+/**
+ *  The following code is for the Chrome Driver.
+ *  You also need to download the ChromeDriver executable:
+ *  - https://sites.google.com/a/chromium.org/chromedriver/
+ *
+ *  You can easily install Chromedriver on windows using chocolatey:
+ *  - https://chocolatey.org/packages?q=ChromeDriver
+ *
+ *  If you are on a Mac then you could install ChromeDriver using HomeBrew
+ *  - http://brewformulas.org/Chromedriver
+ */
 
-@RunWith(BlockJUnit4ClassRunner.class)
-public class ChromeTest extends TestCase {
-
-    private static ChromeDriverService service;
-    private WebDriver driver;
-
-    @BeforeClass
-    public static void createAndStartService() {
-        String currentDir = System.getProperty("user.dir");
-        service = new ChromeDriverService.Builder()
-
-            // You need to download the ChromeDriver executable: https://sites.google.com/a/chromium.org/chromedriver/
-            .usingDriverExecutable(new File(currentDir + "\\src\\main\\resources\\chromedriver.exe"))
-            .usingAnyFreePort()
-            .build();
-        try {
-            service.start();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    @AfterClass
-    public static void createAndStopService() {
-        service.stop();
-    }
-
-    @Before
-    public void createDriver() {
-        driver = new RemoteWebDriver(service.getUrl(),
-                DesiredCapabilities.chrome());
-    }
-
-    @After
-    public void quitDriver() {
-        driver.quit();
-    }
-
+public class ChromeTest {
 
     @Test
-    public void startWebDriver(){
+    public void startWebDriver() {
+
+        WebDriver driver = new ChromeDriver();
 
         driver.navigate().to("http://seleniumsimplified.com");
 
         Assert.assertTrue("title should start differently",
-                            driver.getTitle().startsWith("Selenium Simplified"));
+                driver.getTitle().startsWith("Selenium Simplified"));
 
         driver.close();
         driver.quit();
