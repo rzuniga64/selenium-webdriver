@@ -29,7 +29,7 @@ public class FirefoxTest {
                 driver.getTitle().startsWith("Selenium Simplified"));
 
         // FirefoxDriver seems to prefer either quit or close, but sometimes throws an error if you use both
-        driver.close();
-        //driver.quit();
+        //driver.close();
+        driver.quit();
     }
 }
