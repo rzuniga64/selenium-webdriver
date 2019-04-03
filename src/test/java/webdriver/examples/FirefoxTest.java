@@ -1,42 +1,42 @@
-package junit;
+package webdriver.examples;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 /**
- *  The following code is for the Chrome Driver.
- *  You also need to download the ChromeDriver executable:
- *  - https://sites.google.com/a/chromium.org/chromedriver/
+ *  The following code is for the FirefoxDriver.
+ *  You also need to download the GeckoDriver executable:
+ *  -https://github.com/mozilla/geckodriver/releases
  *
- *  You can easily install Chromedriver on windows using chocolatey:
- *  - https://chocolatey.org/packages?q=ChromeDriver
+ *  You can easily install GeckoDriver on windows using chocolatey:
+ *  - https://chocolatey.org/packages/selenium-gecko-driver
  *
  *  If you are on a Mac then you could install ChromeDriver using HomeBrew
- *  - http://brewformulas.org/Chromedriver
+ *  - http://brewformulas.org/geckodriver
  */
-
-public class ChromeTest {
+public class FirefoxTest {
 
     @Test
-    public void startWebDriver() {
+    public void startWebDriver(){
 
         String currentDir = System.getProperty("user.dir");
-        String chromeDriverLocation = currentDir + "/src/tools/chromedriver.exe";
-        System.setProperty("webdriver.chrome.driver", chromeDriverLocation);
+        String geckoDriverLocation = currentDir + "/src/tools/geckodriver.exe";
+        System.setProperty("webdriver.gecko.driver", geckoDriverLocation);
 
         // WebDriver is used here because we may want to inject the driver. So have the driver itself instantiated
         // somewhere else because we may want our tests to run across Firefox, Chrome, Opera, HtmlUnit, or a remote
         // Web Driver. The driver may have additional commands on it, but that's for each driver to decide.
-        WebDriver driver = new ChromeDriver();
+        WebDriver driver = new FirefoxDriver();
 
         driver.navigate().to("http://seleniumsimplified.com");
 
         Assert.assertTrue("title should start differently",
                 driver.getTitle().startsWith("Selenium Simplified"));
 
-        driver.close();
+        // FirefoxDriver seems to prefer either quit or close, but sometimes throws an error if you use both
+        //driver.close();
         driver.quit();
     }
 }
