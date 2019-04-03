@@ -6,6 +6,7 @@ import static org.junit.Assert.assertEquals;
 
 /**
  *  MyClassTest class.
+ *  - Class needs to have 'Test' in the class name so it can run in Maven.
  *  - in order to a test to be considered a test it must be under the src/test folder.
  *  - In order for a method to be treated as a test, in the Junit 4 version, we annotate the test with @Test.
  *  - You must have 'Test' in the method name.
