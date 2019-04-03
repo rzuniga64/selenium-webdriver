@@ -2,6 +2,11 @@ package junit;
 
 import org.junit.*;
 
+/**
+ *  JUnitBeforeAndAfterTest class.
+ *  - @BeforeClass, @AfterClass must be static.
+ *  - Any class variables used in the @BeforeClass, @Afterclass methods must be static.
+ */
 public class JUnitBeforeAndAfterTest {
 
     @BeforeClass
