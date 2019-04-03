@@ -21,6 +21,10 @@ public class FirefoxTest {
     @Test
     public void startWebDriver(){
 
+        String currentDir = System.getProperty("user.dir");
+        String geckoDriverLocation = currentDir + "/src/tools/geckodriver.exe";
+        System.setProperty("webdriver.gecko.driver", geckoDriverLocation);
+
         // WebDriver is used here because we may want to inject the driver. So have the driver itself instantiated
         // somewhere else because we may want our tests to run across Firefox, Chrome, Opera, HtmlUnit, or a remote
         // Web Driver. The driver may have additional commands on it, but that's for each driver to decide.
