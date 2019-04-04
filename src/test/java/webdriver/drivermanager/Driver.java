@@ -133,33 +133,9 @@ public class Driver extends Thread{
 
                 case FIREFOX:
 
-                    RESOURCE_DIR = System.getProperty("user.dir") + "\\src\\main\\resources\\";
+                    RESOURCE_DIR = System.getProperty("user.dir") + "\\src\\tools\\";
                     System.setProperty("webdriver.gecko.driver", RESOURCE_DIR + "geckodriver.exe");
-                    //FirefoxProfile profile = new FirefoxProfile();
-                   // profile.setEnableNativeEvents(true);
-
-                    /*
-                        Webdriver 3
-                        To use legacy Firefox driver we can set capability for Marionette to be false and it will use
-                        the legacy firefox driver
-
-                        FirefoxDriver.MARIONETTE == "marionette"
-                     */
-                    //DesiredCapabilities legacyCapabilities = DesiredCapabilities.firefox();
-                    //legacyCapabilities.setCapability("marionette", false);
-                    //aDriver = new FirefoxDriver(legacyCapabilities);//profile);
-
                     aDriver = new FirefoxDriver();
-
-                    /*
-                     NOTE: 20160729 this property doesn't seem to be honoured in the code yet so use the capability above.
-                     or I can run the test with a property
-                    -Dwebdriver.firefox.marionette=false
-
-                      I could set that in code with
-                      System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE, "false");
-                     */
-
                     currentDriver = BrowserName.FIREFOX;
                     break;
 
@@ -343,13 +319,9 @@ public class Driver extends Thread{
             browserStartTime = browserStartedTime - startBrowserTime;
 
             // Java has a thing called shut down hook that when the JVM stops that code will run. All that it does is
-            // call the quit method in this particular class. We want to shutdown the shared brower when the tests finish
+            // call the quit method in this particular class. We want to shutdown the shared browser when the tests finish
             Runtime.getRuntime().addShutdownHook(
-                    new Thread(){
-                        public void run(){
-                            Driver.quit();
-                        }
-                    }
+                    new Thread(() -> Driver.quit())
             );
 
         } else {
