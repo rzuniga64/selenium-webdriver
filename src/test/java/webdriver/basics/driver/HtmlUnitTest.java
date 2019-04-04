@@ -24,7 +24,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  <artifactId>htmlunit-driver</artifactId>
  <version>${htmlunitdriver.version}</version>
  </dependency>
- *
  */
 public class HtmlUnitTest {
 
