@@ -6,15 +6,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 /**
- *  The following code is for the Chrome Driver.
- *  You also need to download the ChromeDriver executable:
- *  - https://sites.google.com/a/chromium.org/chromedriver/
+ *  The following code is for the Gecko Driver.
+ *  You also need to download the GeckoDriver executable:
+ *  - https://github.com/mozilla/geckodriver/releases
  *
- *  You can easily install Chromedriver on windows using chocolatey:
- *  - https://chocolatey.org/packages?q=ChromeDriver
+ *  You can easily install Geckodriver on windows using chocolatey:
+ *  - https://chocolatey.org/packages?q=GeckoDriver
  *
  *  If you are on a Mac then you could install ChromeDriver using HomeBrew
- *  - http://brewformulas.org/Chromedriver
+ *  - http://brewformulas.org/Geckodriver
  */
 
 public class FirefoxTest {
