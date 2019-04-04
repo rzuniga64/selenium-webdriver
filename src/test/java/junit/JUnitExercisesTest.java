@@ -4,15 +4,18 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.hamcrest.Matchers.both;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsNot.not;
-import static org.hamcrest.core.IsNull.nullValue;
-import static org.junit.Assert.*;
 
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertEquals;
+//import static org.junit.Assert.assertThat;
+//import static org.hamcrest.core.Is.is;
+//import static org.hamcrest.core.IsNot.not;
+//import static org.hamcrest.core.IsNull.nullValue;
 
-
+/**
+ *  JUnitExercisesTest. Junit is provided with a subset of Hamcrest Matchers. Junit also has some custom Matchers.
+ */
 public class JUnitExercisesTest {
 
     private String iSetThisBefore = "set as field";
@@ -82,8 +85,8 @@ public class JUnitExercisesTest {
     @Test
     public void assertThatBonusQuestion(){
         //assertThat uses Hamcrest Matchers
-        assertThat("The Answer", is(not("An Answer")));
-        assertThat("The Answer", is(not(nullValue())));
+        //assertThat("The Answer", is("An Answer"));
+        //assertThat("The Answer", is(not(nullValue())));
 
         // JUnit had some custom matchers in 4.10, in 4.11 they have been moved to Hamcrest
         // in 4.10 they were in "import static org.junit.matchers.JUnitMatchers.both;"
@@ -96,6 +99,6 @@ public class JUnitExercisesTest {
         //       It works in Java 1.7
         //       if you can, I suggest upgrading to Java 1.7
         //       This is an optional exercise, and is hamcrest related so I don't worry about it.
-        assertThat("The Answer", both(containsString("The")).and(containsString("Answer")));
+        //assertThat("The Answer", both(containsString("The")).and(containsString("Answer")));
     }
 }
