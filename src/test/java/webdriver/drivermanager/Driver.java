@@ -186,7 +186,7 @@ public class Driver extends Thread{
 
                 case EDGE:
 
-                    RESOURCE_DIR = System.getProperty("user.dir") + "\\src\\main\\resources\\";
+                    RESOURCE_DIR = System.getProperty("user.dir") + "\\src\\tools\\";
                     System.setProperty("webdriver.edge.driver", RESOURCE_DIR + "MicrosoftWebDriver.exe");
 
                     aDriver = new EdgeDriver();
