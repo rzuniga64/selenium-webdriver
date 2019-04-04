@@ -140,11 +140,9 @@ public class Driver extends Thread{
                     break;
 
                 case CHROME:
-
-                    RESOURCE_DIR = System.getProperty("user.dir") + "\\src\\main\\resources\\";
+                    // You need to download the ChromeDriver executable: https://sites.google.com/a/chromium.org/chromedriver/
+                    RESOURCE_DIR = System.getProperty("user.dir") + "\\src\\tools\\";
                     service = new ChromeDriverService.Builder()
-
-                            // You need to download the ChromeDriver executable: https://sites.google.com/a/chromium.org/chromedriver/
                             .usingDriverExecutable(new File(RESOURCE_DIR + "chromedriver.exe"))
                             .usingAnyFreePort()
                             .build();
