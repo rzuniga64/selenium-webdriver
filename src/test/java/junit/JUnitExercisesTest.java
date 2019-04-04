@@ -99,6 +99,8 @@ public class JUnitExercisesTest {
         //       It works in Java 1.7
         //       if you can, I suggest upgrading to Java 1.7
         //       This is an optional exercise, and is hamcrest related so I don't worry about it.
+
+        // Junit has some custom matchers.
         //assertThat("The Answer", both(containsString("The")).and(containsString("Answer")));
     }
 }
