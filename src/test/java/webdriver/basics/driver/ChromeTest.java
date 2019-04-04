@@ -1,4 +1,4 @@
-package webdriver.examples;
+package webdriver.basics.driver;
 
 import org.junit.Assert;
 import org.junit.Test;
