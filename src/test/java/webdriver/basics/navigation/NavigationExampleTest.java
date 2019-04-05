@@ -21,7 +21,7 @@ public class NavigationExampleTest {
     @BeforeClass
     public static void createDriver(){
 
-        driver = Driver.get("webdriver.gecko.driver","FIREFOX" );
+        driver = Driver.get("webdriver.chrome.driver","CHROME" );
     }
 
     @Test
@@ -33,6 +33,6 @@ public class NavigationExampleTest {
 
     @AfterClass
     public static void quitDriver(){
-        //driver.quit();
+        driver.quit();
     }
 }
