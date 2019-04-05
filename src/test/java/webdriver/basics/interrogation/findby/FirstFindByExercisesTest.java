@@ -1,18 +1,19 @@
 package webdriver.basics.interrogation.findby;
 
-import webdriver.drivermanager.Driver;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
-
-
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import webdriver.drivermanager.Driver;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
 
 /**
  *  First find By Exercises
@@ -21,7 +22,7 @@ import static org.junit.Assert.fail;
  *  /selenium/find_by/playground.php: inspect the DOM or look at the page source to identify locator approaches.
  *
  *  findElement and then assert. If multiple elements match then findElement will return the first.
- *  'NoSuchElementException' means that the locator didn't match anyting in the DOM.
+ *  'NoSuchElementException' means that the locator didn't match anything in the DOM.
  *
  *  Create a test for each By
  *  - By.id
@@ -36,90 +37,95 @@ public class FirstFindByExercisesTest {
 
     @BeforeClass
     public static void createDriverAndVisitTestPage(){
-        driver = Driver.get("selenium2basics.webdriver","HTMLUNIT" );
+
+        driver = Driver.get("webdriver.chrome.driver","CHROME" );
         driver = Driver.get("http://www.compendiumdev.co.uk/selenium/find_by_playground.php");
     }
 
+    /**
+     *  Match by an element's id attribute.
+     */
+    @Test
+    public void findByID(){
+
+        WebElement cParagraph = driver.findElement(By.id("p3"));
+        assertThat("This is c paragraph text", is(cParagraph.getText()));
+    }
+
+    /**
+     *  Look for an <a> via the text (i.e. getText)
+     */
+    @Test
+    public void findByLinkText(){
+
+        WebElement jumpToPara0 = driver.findElement(By.linkText("jump to para 0"));
+        assertThat("a26", is(jumpToPara0.getAttribute("id")));
+    }
+
+    /**
+     *  Match by an element's name attribute.
+     */
+    @Test
+    public void findByName(){
+
+        WebElement aParagraph = driver.findElement(By.name("pName1"));
+        assertThat("This is a paragraph text", is(aParagraph.getText()));
+    }
+
+    /**
+     *  Match an <a> using part of the link text
+     */
+    @Test
+    public void findByPartialLinkText(){
+
+        // match beginning of text
+        WebElement jump_to = driver.findElement(By.partialLinkText("jump to"));
+        assertEquals("jump to para 0", jump_to.getText());
+
+        // match middle of text
+        jump_to = null;
+        jump_to = driver.findElement(By.partialLinkText("to"));
+        assertEquals("jump to para 0", jump_to.getText());
+
+        // match at end of text
+        jump_to = null;
+        jump_to = driver.findElement(By.partialLinkText("7"));
+        assertEquals("jump to para 7", jump_to.getText());
+    }
+
+    /**
+     *  Match by an element's class attribute.
+     */
+    @Test
+    public void findByClassName(){
+
+        WebElement aDiv = driver.findElement(By.className("specialDiv"));
+        assertThat("mydivname", is(aDiv.getAttribute("name")));
+    }
+
+    /**
+     *  We wanted to find an exception. Make sure you import the selenium exception
+     *  import org.openqa.selenium.NoSuchElementException;
+     */
     @Test
     public void noSuchElementException_thrownWhenLocatorWrong(){
 
         try{
             // id is p3, name is p3Name, this will fail
             WebElement cParagraph = driver.findElement(By.id("p3Name"));
-
             fail("Expected NoSuchElementException");
-        }catch(NoSuchElementException e){
-            // ignore, we wanted to find an exception
-            // make sure you import the selenium exception
-            // import org.openqa.selenium.NoSuchElementException;
-            // and not the java.util.NoSuchElementException
+
+        } catch(NoSuchElementException e){
         }
     }
 
+    /**
+     *  We wanted to find an exception. id is p3, name is p3Name, this will fail.
+     */
     @Test(expected = NoSuchElementException.class)
     public void noSuchElementException_thrownWhenLocatorWrong_Expected(){
 
-           // id is p3, name is p3Name, this will fail
-            WebElement cParagraph = driver.findElement(By.id("p3Name"));
-
-    }
-
-    @Test
-    public void findByID(){
-        // match an element's id attribute
-        WebElement cParagraph = driver.findElement(
-                                            By.id("p3"));
-
-        assertEquals("This is c paragraph text", cParagraph.getText());
-    }
-
-    @Test
-    public void findByLinkText(){
-        //look for an <a> via the text (i.e. getText)
-        WebElement jumpToPara0 = driver.findElement(
-                                            By.linkText("jump to para 0"));
-
-        assertEquals("a26", jumpToPara0.getAttribute("id"));
-    }
-
-    @Test
-    public void findByName(){
-        // match an element's name attribute
-        WebElement aParagraph = driver.findElement(
-                                        By.name("pName1"));
-
-        assertEquals("This is a paragraph text", aParagraph.getText());
-    }
-
-    @Test
-    public void findByPartialLinkText(){
-        // match an <a> using part of the link text
-
-        // match beginning of text
-        WebElement jump_to = driver.findElement(
-                                    By.partialLinkText("jump to"));
-        assertEquals("jump to para 0", jump_to.getText());
-
-        // match middle of text
-        jump_to = null;
-        jump_to = driver.findElement(
-                            By.partialLinkText("to"));
-        assertEquals("jump to para 0", jump_to.getText());
-
-        // match at end of text
-        jump_to = null;
-        jump_to = driver.findElement(
-                By.partialLinkText("7"));
-        assertEquals("jump to para 7", jump_to.getText());
-    }
-
-    @Test
-    public void findByClassName(){
-        // match an element's class attribute
-        WebElement aDiv = driver.findElement(
-                                By.className("specialDiv"));
-
-        assertEquals("mydivname", aDiv.getAttribute("name"));
+        WebElement cParagraph = driver.findElement(By.id("p3Name"));
     }
 
     @AfterClass
