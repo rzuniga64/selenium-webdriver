@@ -9,11 +9,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import webdriver.drivermanager.Driver;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.fail;
 
 /**
  *  First find By Exercises
@@ -80,17 +78,17 @@ public class FirstFindByExercisesTest {
 
         // match beginning of text
         WebElement jump_to = driver.findElement(By.partialLinkText("jump to"));
-        assertEquals("jump to para 0", jump_to.getText());
+        assertThat("jump to para 0", is(jump_to.getText()));
 
         // match middle of text
         jump_to = null;
         jump_to = driver.findElement(By.partialLinkText("to"));
-        assertEquals("jump to para 0", jump_to.getText());
+        assertThat("jump to para 0", is(jump_to.getText()));
 
         // match at end of text
         jump_to = null;
         jump_to = driver.findElement(By.partialLinkText("7"));
-        assertEquals("jump to para 7", jump_to.getText());
+        assertThat("jump to para 7", is(jump_to.getText()));
     }
 
     /**
