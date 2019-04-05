@@ -23,7 +23,7 @@ public class FirefoxTest {
     public void startWebDriver() {
 
         String currentDir = System.getProperty("user.dir");
-        String firefoxDriverLocation = currentDir + "/src/tools/firefoxdriver.exe";
+        String firefoxDriverLocation = currentDir + "\\src\\test\\resources\\firefoxdriver.exe";
         System.setProperty("webdriver.chrome.driver", firefoxDriverLocation);
 
         // WebDriver is used here because we may want to inject the driver. So have the driver itself instantiated
