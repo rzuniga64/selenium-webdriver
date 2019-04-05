@@ -37,5 +37,7 @@ public class DriverInterrogateTest {
         assertEquals( driver.getTitle(), "Basic Web Page Title");
         assertEquals( driver.getCurrentUrl(), theTestPageURL);
         assertTrue( driver.getPageSource().contains("A paragraph of text"));
+
+        System.out.println(driver.getPageSource());
     }
 }
