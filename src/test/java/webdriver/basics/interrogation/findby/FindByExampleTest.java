@@ -1,14 +1,15 @@
 package webdriver.basics.interrogation.findby;
 
-import webdriver.drivermanager.Driver;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import webdriver.drivermanager.Driver;
 
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
 
 public class FindByExampleTest {
 
@@ -16,14 +17,16 @@ public class FindByExampleTest {
 
     @BeforeClass
     public static void createDriverAndVisitTestPage(){
-        driver = Driver.get("selenium2basics.webdriver","HTMLUNIT" );
-        driver.get("http://www.compendiumdev.co.uk/selenium/find_by_playground.php");
+
+        driver = Driver.get("webdriver.chrome.webdriver","CHROME" );
+        driver.navigate().to("http://www.compendiumdev.co.uk/selenium/find_by_playground.php");
     }
 
     @Test
     public void findByID(){
+
         WebElement cParagraph = driver.findElement(By.id("p3"));
-        assertEquals("This is c paragraph text", cParagraph.getText());
+        assertThat(cParagraph.getText(), is("This is c paragraph text"));
     }
 
     @AfterClass
