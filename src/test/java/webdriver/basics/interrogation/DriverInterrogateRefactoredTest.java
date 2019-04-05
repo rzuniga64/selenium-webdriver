@@ -1,16 +1,15 @@
 package webdriver.basics.interrogation;
 
-import org.hamcrest.Matcher;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import webdriver.drivermanager.Driver;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.endsWith;
 import static org.hamcrest.core.Is.is;
-
 
 public class DriverInterrogateRefactoredTest {
 
@@ -38,8 +37,6 @@ public class DriverInterrogateRefactoredTest {
         assertThat(driver.getCurrentUrl(), endsWith(theTestPageURL));
         assertThat(driver.getPageSource(), containsString("A paragraph of text"));
     }
-
-    private void assertThat(String title, Matcher<String> basic_web_page_title) {}
 
     @AfterClass
     public static void stopDriver(){
