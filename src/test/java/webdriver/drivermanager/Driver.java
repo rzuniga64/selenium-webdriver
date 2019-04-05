@@ -133,7 +133,7 @@ public class Driver extends Thread{
 
                 case FIREFOX:
 
-                    RESOURCE_DIR = System.getProperty("user.dir") + "\\src\\tools\\";
+                    RESOURCE_DIR = System.getProperty("user.dir") + "\\src\\test\\resources\\";
                     System.setProperty("webdriver.gecko.driver", RESOURCE_DIR + "geckodriver.exe");
                     aDriver = new FirefoxDriver();
                     currentDriver = BrowserName.FIREFOX;
@@ -141,7 +141,7 @@ public class Driver extends Thread{
 
                 case CHROME:
                     // You need to download the ChromeDriver executable: https://sites.google.com/a/chromium.org/chromedriver/
-                    RESOURCE_DIR = System.getProperty("user.dir") + "\\src\\tools\\";
+                    RESOURCE_DIR = System.getProperty("user.dir") + "\\src\\test\resources\\";
                     service = new ChromeDriverService.Builder()
                             .usingDriverExecutable(new File(RESOURCE_DIR + "chromedriver.exe"))
                             .usingAnyFreePort()
