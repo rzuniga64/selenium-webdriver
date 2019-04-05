@@ -21,8 +21,6 @@ public class DriverInterrogateTest {
     private final String ROOT_URL = PROTOCOL + "://" + DOMAIN;
     private final String PAGE = "/selenium/basic_web_page.html";
 
-    private final String theTestPageURL = ROOT_URL + PAGE;
-
     private static WebDriver driver;
 
     @BeforeClass
@@ -32,6 +30,8 @@ public class DriverInterrogateTest {
 
     @Test
     public void driverLevelPageInterrogateMethods(){
+
+        final String theTestPageURL = ROOT_URL + PAGE;
 
         driver.navigate().to(theTestPageURL);
 
