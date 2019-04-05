@@ -1,14 +1,13 @@
 package webdriver.basics.interrogation;
 
-import webdriver.drivermanager.Driver;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import webdriver.drivermanager.Driver;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertEquals;
 
 public class WebElementInterrogationTest {
 
@@ -16,7 +15,7 @@ public class WebElementInterrogationTest {
 
     @BeforeClass
     public static void createDriver(){
-        driver = Driver.get("selenium2basics.webdriver","HTMLUNIT" );
+        driver = Driver.get("webdriver.chrome.driver","CHROME" );
     }
 
     @Test
@@ -26,6 +25,6 @@ public class WebElementInterrogationTest {
 
         driver.navigate().to(theTestPageURL);
         WebElement para1 = driver.findElement(By.id("para1"));
-        assertThat(para1.getText(), is("A paragraph of text"));
+        assertEquals(para1.getText(),"A paragraph of text");
     }
 }
