@@ -9,6 +9,10 @@ import webdriver.drivermanager.Driver;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ *  WebElementInterrogationTest class.
+ *
+ */
 public class WebElementInterrogationTest {
 
     private static WebDriver driver;
@@ -24,7 +28,12 @@ public class WebElementInterrogationTest {
         final String theTestPageURL = "http://www.compendiumdev.co.uk/selenium/basic_web_page.html";
 
         driver.navigate().to(theTestPageURL);
+
+        // Find an Element by using a locator strategy, in this case the id of the element.
+        // WebElement represents an object in the DOM.
         WebElement para1 = driver.findElement(By.id("para1"));
+
+        // Inspect the WebElement using teh exposed methods.
         assertEquals(para1.getText(),"A paragraph of text");
     }
 }
