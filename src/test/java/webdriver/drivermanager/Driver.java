@@ -127,7 +127,7 @@ public class Driver extends Thread{
                 case HTMLUNIT:
 
                     // HtmlUnitDriver added as a maven dependency - no paths required
-                    aDriver = new HtmlUnitDriver(true);  // enable javascript
+                    aDriver = new HtmlUnitDriver();  // enable javascript
                     currentDriver = BrowserName.HTMLUNIT;
                     break;
 
