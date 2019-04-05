@@ -1,17 +1,16 @@
 package webdriver.basics.navigation;
 
-import webdriver.drivermanager.Driver;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import webdriver.drivermanager.Driver;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import static org.hamcrest.Matchers.greaterThan;
-import static org.junit.Assert.assertThat;
+
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -21,6 +20,7 @@ import static org.junit.Assert.assertTrue;
  *      - back()
  *      - refresh()
  *  URL: http://compendium.co.uk
+ *  Assert on titles to check navigation worked.
  *
  *  File Path                       Title
  *  /selenium                       "Selenium Simplified"
@@ -38,7 +38,7 @@ public class NavigationBasicsTest {
 
     @BeforeClass
     public static void createDriver(){
-        driver = Driver.get("selenium2basics.webdriver","CHROME" );
+        driver = Driver.get("webdriver.chrome.driver","CHROME" );
     }
 
     @Test
@@ -58,7 +58,7 @@ public class NavigationBasicsTest {
     @Test
     public void navigateWithNavigateToURL() throws MalformedURLException {
 
-        URL searchPage = new URL(PROTOCOL,DOMAIN,"/selenium/search.php");
+        URL searchPage = new URL(PROTOCOL, DOMAIN,"/selenium/search.php");
         driver.navigate().to(searchPage);
         assertTrue(driver.getTitle().startsWith("Selenium Simplified Search Engine"));
     }
@@ -91,8 +91,10 @@ public class NavigationBasicsTest {
 
         long startTime = Long.parseLong(pageTitle.replaceFirst(refreshTitleConstant, ""));
 
-        // synchronise using sleep to guarantee time moves on the only time we sleep is waiting for time never sleep
-        // waiting for page objects
+        // Synchronise using sleep to guarantee time moves on.
+        // The only time we sleep is waiting for time.
+        // Never sleep waiting for page objects.
+        // Allow for time to advance so the next time the page is refreshed we get a different title.
         try{Thread.sleep(2000);}
         catch(InterruptedException e){/*ignore interrupt */};
 
@@ -106,7 +108,7 @@ public class NavigationBasicsTest {
         long endTime = Long.parseLong(driver.getTitle().replaceFirst(refreshTitleConstant, ""));
 
         assertTrue("expected " + endTime + " > " + startTime, endTime > startTime);
-        assertThat(endTime, greaterThan(startTime));
+        //assertThat(endTime, greaterThan(startTime));
     }
 
     private ExpectedCondition<Boolean> titleIsNoLonger(final String pageTitle) {
