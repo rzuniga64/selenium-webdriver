@@ -5,9 +5,8 @@ import webdriver.drivermanager.Driver;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  *  Create a test which visits www.compendium.co.uk/selenium/basic_web_page.html.
@@ -23,19 +22,20 @@ public class DriverInterrogateTest {
     private final String PAGE = "/selenium/basic_web_page.html";
 
     private static WebDriver driver;
+    private final String theTestPageURL = ROOT_URL + PAGE;
 
     @BeforeClass
     public static void createDriver(){
-        driver = Driver.get("selenium2basics.webdriver","HTMLUNIT" );
+        driver = Driver.get("webdriver.htmlunit.driver","HTMLUNIT" );
     }
 
     @Test
     public void driverLevelPageInterrogateMethods(){
 
-        driver.navigate().to(ROOT_URL + PAGE);
+        driver.navigate().to(theTestPageURL);
 
-        assertThat( driver.getTitle(), is("Basic Web Page Title"));
-        assertThat( driver.getCurrentUrl(), is(ROOT_URL + PAGE));
-        assertThat( driver.getPageSource(), containsString("A paragraph of text"));
+        assertEquals( driver.getTitle(), "Basic Web Page Title");
+        assertEquals( driver.getCurrentUrl(), theTestPageURL);
+        assertTrue( driver.getPageSource().contains("A paragraph of text"));
     }
 }
