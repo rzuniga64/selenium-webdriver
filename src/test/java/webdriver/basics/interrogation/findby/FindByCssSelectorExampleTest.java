@@ -12,16 +12,24 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ *  FindByCssSelectorExampleTest class. The CSS selector is a formula or Matcher. If the page changes you can probably
+ *  get to it using a CSS selector.
+ */
 public class FindByCssSelectorExampleTest {
 
     private static WebDriver driver;
 
     @BeforeClass
     public static void createDriverAndVisitTestPage(){
-        driver = Driver.get("selenium2basics.webdriver","HTMLUNIT" );
+
+        driver = Driver.get("webdriver.chrome.driver","CHROME" );
         driver = Driver.get("http://www.compendiumdev.co.uk/selenium/find_by_playground.php");
     }
 
+    /**
+     *  Find an element by using CSS id.
+     */
     @Test
     public void findByIdUsingCSSId(){
 
@@ -31,6 +39,9 @@ public class FindByCssSelectorExampleTest {
         assertEquals("expected a match on id", "This is c paragraph text", element.getText());
     }
 
+    /**
+     *  Find an element by using CSS tag.
+     */
     @Test
     public void findElementsUsingCSSTag(){
 
