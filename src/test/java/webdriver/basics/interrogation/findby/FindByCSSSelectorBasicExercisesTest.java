@@ -1,14 +1,15 @@
 package webdriver.basics.interrogation.findby;
 
-import webdriver.drivermanager.Driver;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import webdriver.drivermanager.Driver;
 
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
 
 /**
  *  CSS Basic Exercises
@@ -29,48 +30,49 @@ public class FindByCSSSelectorBasicExercisesTest {
 
     @BeforeClass
     public static void createDriverAndVisitTestPage(){
-        driver = Driver.get("selenium2basics.webdriver","HTMLUNIT" );
+
+        driver = Driver.get("webdriver.chrome.driver","CHROME" );
         driver = Driver.get("http://www.compendiumdev.co.uk/selenium/find_by_playground.php");
     }
 
+    /**
+     *  Use By.cssSelector to find element by id and assert that getAttribute("name") == "pName31".
+     */
     @Test
     public void findByIdUsingCSS(){
 
-        WebElement element;
-        //element = driver.findElement(By.id("p31"));
-        element = driver.findElement(By.cssSelector("#p31"));
-
-        assertEquals("expected a match on id", "pName31", element.getAttribute("name"));
+        WebElement element = driver.findElement(By.cssSelector("#p31"));
+        assertThat("expected a match on id", "pName31", is(element.getAttribute("name")));
     }
 
+    /**
+     *  Use By.cssSelector to find element by name and assert that getAttribute("id") == "u1".
+     */
     @Test
     public void findByNameUsingCSS(){
 
-        WebElement element;
-        //element = driver.findElement(By.name("ulName1"));
-        element = driver.findElement(By.cssSelector("[name='ulName1']"));
-
-        assertEquals("expected a different id","ul1", element.getAttribute("id"));
+        WebElement element = driver.findElement(By.cssSelector("[name='ulName1']"));
+        assertThat("expected a different id","ul1", is(element.getAttribute("id")));
     }
 
+    /**
+     *  Use By.cssSelector to find element by className and assert that  getAttribute("id") == "div1".
+     */
     @Test
     public void findByClassNameUsingCSS(){
 
-        WebElement element;
-        //element = driver.findElement(By.className("specialDiv"));
-        element = driver.findElement(By.cssSelector(".specialDiv"));
-
-        assertEquals("expected a different id","div1", element.getAttribute("id"));
+        WebElement element = driver.findElement(By.cssSelector(".specialDiv"));
+        assertThat("expected a different id","div1", is(element.getAttribute("id")));
     }
 
+    /**
+     *  Use By.cssSelector to find element by tagName and assert that getAttribute("name") == "liName1"
+     */
     @Test
     public void findByTagNameUsingCSS(){
 
-        WebElement element;
-        //element = driver.findElement(By.tagName("li"));
-        element = driver.findElement(By.cssSelector("li"));
-
-        assertEquals("expected a different name","liName1", element.getAttribute("name"));
+        WebElement element = driver.findElement(By.cssSelector("li"));
+        assertThat("expected a different name","liName1", is(element.getAttribute("name")));
     }
 
     @AfterClass
