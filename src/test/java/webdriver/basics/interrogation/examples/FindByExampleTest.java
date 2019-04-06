@@ -11,6 +11,10 @@ import webdriver.drivermanager.Driver;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
+/**
+ *  FindByExampleTest class.
+ *  Example of using findelement(By) to find an element.
+ */
 public class FindByExampleTest {
 
     private static WebDriver driver;
@@ -22,6 +26,9 @@ public class FindByExampleTest {
         driver.navigate().to("http://www.compendiumdev.co.uk/selenium/find_by_playground.php");
     }
 
+    /**
+     *  Use By.id to find element by id.
+     */
     @Test
     public void findByID(){
 
