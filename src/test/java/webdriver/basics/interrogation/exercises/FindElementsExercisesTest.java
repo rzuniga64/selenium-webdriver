@@ -1,4 +1,4 @@
-package webdriver.basics.interrogation.findby;
+package webdriver.basics.interrogation.exercises;
 
 import webdriver.drivermanager.Driver;
 import org.junit.AfterClass;
