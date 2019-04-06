@@ -11,17 +11,22 @@ import org.openqa.selenium.WebElement;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
-import static org.junit.Assert.assertThat;
-
+/**
+ *  FindByCSSSelectorBasicExercises2Test class.
+ *  A data driven test that loops around the set of data and checks it. Not a proper data driven test.
+ *  Different approaches for adding a CSS Selector.
+ */
 public class FindByCSSSelectorBasicExercises2Test {
 
     private static WebDriver driver;
 
     @BeforeClass
     public static void createDriverAndVisitTestPage(){
-        driver = Driver.get("selenium2basics.webdriver","HTMLUNIT" );
+
+        driver = Driver.get("webdriver.chrome.driver","CHROME" );
         driver = Driver.get("http://www.compendiumdev.co.uk/selenium/find_by_playground.php");
     }
 
@@ -29,20 +34,23 @@ public class FindByCSSSelectorBasicExercises2Test {
     public void findByUsingCSSDataDriven(){
 
         class TestData {
+
             private String css;
             private String name;
             private String value;
             private String alt;
 
             private TestData(String css, String name, String value, String alternativeTo) {
+
                 this.css = css;
                 this.name = name;
-                this.value=value;
+                this.value= value;
                 this.alt = alternativeTo;
             }
         }
 
         List<TestData> dataItems = Arrays.asList(
+
                 new TestData("#p31", "name", "pName31", "By.id(\"p31\")"),
                 new TestData("*[id='p31']", "name", "pName31", "By.id(\"p31\")"),
                 new TestData("[id='p31']", "name", "pName31", "By.id(\"p31\")"),
@@ -64,10 +72,8 @@ public class FindByCSSSelectorBasicExercises2Test {
         for(TestData dataItem : dataItems){
             element = driver.findElement(By.cssSelector(dataItem.css));
 
-            System.out.println(
-                    String.format(
-                            "Instead of %s use By.cssSelector(\"%s\")",
-                            dataItem.alt, dataItem.css.replaceAll("\"", "\\\\\"")));
+            System.out.println(String.format("Instead of %s use By.cssSelector(\"%s\")",
+                    dataItem.alt, dataItem.css.replaceAll("\"", "\\\\\"")));
 
             assertThat(element.getAttribute(dataItem.name), is(dataItem.value));
         }
