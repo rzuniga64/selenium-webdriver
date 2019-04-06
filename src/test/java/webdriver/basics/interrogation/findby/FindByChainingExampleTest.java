@@ -70,7 +70,7 @@ public class FindByChainingExampleTest {
     }
 
     /**
-     *  Chaining by using byChained By method.
+     *  Chaining by using ByChained By method. ByChained is a custom By method.
      */
     @Test
     public void chainingWithSupportClassByChained(){
