@@ -1,18 +1,18 @@
 package webdriver.basics.interrogation.exercises;
 
-import webdriver.drivermanager.Driver;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import webdriver.drivermanager.Driver;
 
 import java.util.Arrays;
 import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
 
 /**
  *  XPath Basic Exercises
@@ -35,7 +35,8 @@ public class FindByXPathSelectorBasicExerciseTest {
 
     @BeforeClass
     public static void createDriverAndVisitTestPage(){
-        driver = Driver.get("selenium2basics.webdriver","HTMLUNIT" );
+
+        driver = Driver.get("webdriver.chrome.driver","CHROME" );
         driver = Driver.get("http://www.compendiumdev.co.uk/selenium/find_by_playground.php");
     }
 
@@ -48,8 +49,8 @@ public class FindByXPathSelectorBasicExerciseTest {
             private String value;
             private String alt;
 
-            private TestData(String xpath, String name,
-                            String value, String alternativeTo) {
+            private TestData(String xpath, String name, String value, String alternativeTo) {
+
                 this.xpath = xpath;
                 this.name = name;
                 this.value=value;
@@ -58,6 +59,7 @@ public class FindByXPathSelectorBasicExerciseTest {
         }
 
         List<TestData> dataItems = Arrays.asList(
+
                 new TestData("//*[@id='p31']", "name", "pName31", "By.id(\"p31\")"),
                 new TestData("//p[@id='p31']", "name", "pName31", "By.id(\"p31\")"),
                 new TestData("//*[@name='ulName1']", "id", "ul1", "By.name(\"ulName1\")"),
@@ -73,18 +75,15 @@ public class FindByXPathSelectorBasicExerciseTest {
         for(TestData dataItem : dataItems){
             element = driver.findElement(By.xpath(dataItem.xpath));
 
-            System.out.println(
-                    String.format(
-                            "Instead of %s use By.xpath(\"%s\")",
+            System.out.println(String.format("Instead of %s use By.xpath(\"%s\")",
                             dataItem.alt, dataItem.xpath.replaceAll("\"", "\\\\\"")));
-
-
             assertThat(element.getAttribute(dataItem.name), is(dataItem.value));
         }
     }
 
     @AfterClass
     public static void closeBrowser(){
-        driver.quit();
+
+        //driver.quit();
     }
 }
