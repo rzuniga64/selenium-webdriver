@@ -1,4 +1,4 @@
-package webdriver.basics.manipulation;
+package webdriver.basics.manipulation.exercises;
 
 import webdriver.drivermanager.Driver;
 import org.junit.Before;

@@ -1,4 +1,4 @@
-package webdriver.basics.manipulation;
+package webdriver.basics.manipulation.examples;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
