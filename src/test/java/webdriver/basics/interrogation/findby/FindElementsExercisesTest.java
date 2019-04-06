@@ -13,12 +13,11 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 /**
- *  FindElements Excercises
+ *  FindElements Exercises
  *
  *  Assert that there are 19 div elements.
- *  Assert that therea re 25 <a> which href to a para
- *      Hint: List has a .size() method
- *  Assert that there are 16 nested paragrapsh and 41 paras in total.
+ *  Assert that there a re 25 <a> which href to a paragraph. Hint: List has a .size() method
+ *  Assert that there are 16 nested paragraphs and 41 paragraphs in total.
  */
 public class FindElementsExercisesTest {
 
@@ -26,40 +25,38 @@ public class FindElementsExercisesTest {
 
     @BeforeClass
     public static void createDriverAndVisitTestPage(){
-        driver = Driver.get("selenium2basics.webdriver","HTMLUNIT" );
+
+        driver = Driver.get("webdriver.chrome.driver","CHROME" );
         driver = Driver.get("http://www.compendiumdev.co.uk/selenium/find_by_playground.php");
     }
 
-    @Test
-    public void doesFindElementsThrowAnExceptionIfNoMatch(){
-
-        List<WebElement> elements;
-        elements = driver.findElements(By.tagName("bob"));
-        assertEquals(0,elements.size());
-    }
-
+    /**
+     *  Count the number of div elements.
+     */
     @Test
     public void assertDivElementsCount(){
 
-        List<WebElement> elements;
-        elements = driver.findElements(By.tagName("div"));
+        List<WebElement> elements = driver.findElements(By.tagName("div"));
         assertEquals(19,elements.size());
     }
 
-
+    /**
+     *  Count the number of href links to paragraphs.
+     */
     @Test
     public void assert25LocalHrefLinks(){
 
-        List<WebElement> elements;
-        elements = driver.findElements(By.partialLinkText("jump to para"));
+        List<WebElement> elements = driver.findElements(By.partialLinkText("jump to para"));
         assertEquals(25,elements.size());
     }
 
+    /**
+     *  Count the number of paragraphs and nest paragrapsh.
+     */
     @Test
     public void assertNumberOfParagraphs(){
 
-        List<WebElement> elements;
-        elements = driver.findElements(By.tagName("p"));
+        List<WebElement> elements = driver.findElements(By.tagName("p"));
 
         int nestedCount = 0;
         for(WebElement e : elements){
@@ -69,6 +66,16 @@ public class FindElementsExercisesTest {
         }
         assertEquals(16,nestedCount);
         assertEquals(41, elements.size());
+    }
+
+    /**
+     *  Does findElements throw an exception?
+     */
+    @Test
+    public void doesFindElementsThrowAnExceptionIfNoMatch(){
+
+        List<WebElement> elements = driver.findElements(By.tagName("bob"));
+        assertEquals(0,elements.size());
     }
 
     @AfterClass
