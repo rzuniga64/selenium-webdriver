@@ -13,8 +13,8 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 /**
- *  FindByCssSelectorExampleTest class. The CSS selector is a formula or Matcher. If the page changes you can probably
- *  get to it using a CSS selector.
+ *  FindByCssSelectorExampleTest class.
+ *  The CSS selector is a formula or Matcher. If the page changes you can probably get to it using a CSS selector.
  */
 public class FindByCssSelectorExampleTest {
 
