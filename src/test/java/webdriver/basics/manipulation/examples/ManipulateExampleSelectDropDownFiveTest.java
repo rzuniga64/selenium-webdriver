@@ -19,12 +19,18 @@ public class ManipulateExampleSelectDropDownFiveTest {
 
     @Before
     public void setup(){
-        driver = Driver.get("selenium2basics.webdriver", "CHROME");
+
+        driver = Driver.get("webdriver.chrome.driver", "CHROME");
         driver = Driver.get("http://compendiumdev.co.uk/selenium/basic_html_form.html");
     }
 
+    /**
+     *  submitFormWithDropDownSelectedBySelect method.
+     *  Select an item in a drop down menu using CSS tag name 'select' and attribute 'name'..
+     *  Click the submit button and check the results on the next page.
+     */
     @Test
-    public void submitFormWithDropDown5SelectedChainOfFindElements(){
+    public void submitFormWithDropDownSelectedBySelect(){
 
         WebElement dropDownSelect;
         WebElement dropDownOption;
@@ -38,8 +44,13 @@ public class ManipulateExampleSelectDropDownFiveTest {
         assertDropdownValueIsCorrect();
     }
 
+    /**
+     *  submitFormWithDropDownSelectedByOption method.
+     *  Select an item in a drop down menu using CSS tag name 'option' and attribute 'value'.
+     *  Click the submit button and check the results on the next page.
+     */
     @Test
-    public void submitFormWithDropDown5SelectedOptionFiveDirect(){
+    public void submitFormWithDropDownSelectedByOption(){
 
         driver.findElement(By.cssSelector("option[value='dd5']")).click();
         clickSubmitButton();
@@ -47,12 +58,13 @@ public class ManipulateExampleSelectDropDownFiveTest {
         assertDropdownValueIsCorrect();
     }
 
-    // This test currently doesn't work on Chrome -
-    // for some reason typing into a drop down doesn't work as it used to
-    // The same thing happens manually so I don't think it is a WebDriver problem
+    /**
+     *  submitFormWithDropDownUsingKeyboardFullText method.
+     *  Select an item in a drop down menu using the keyboard.
+     *  Click the submit button and check the results on the next page.
+     */
     @Test
-    public void submitFormWithDropDownFiveUsingKeyboardFullText(){
-
+    public void submitFormWithDropDownUsingKeyboardFullText(){
 
         WebElement dropDownSelect;
         dropDownSelect = driver.findElement(By.cssSelector("select[name='dropdown']"));
@@ -66,6 +78,10 @@ public class ManipulateExampleSelectDropDownFiveTest {
 
     }
 
+    /**
+     *  submitFormWithDropDownFiveUsingKeyboardSpecialKeys method.
+     *  Helper function to select option 5 in a drop down using the keyboard.
+     */
     @Test
     public void submitFormWithDropDownFiveUsingKeyboardSpecialKeys(){
         WebElement dropDownSelect;
@@ -84,6 +100,14 @@ public class ManipulateExampleSelectDropDownFiveTest {
         assertDropdownValueIsCorrect();
     }
 
+    /*******************************************************************************************************************
+     *  Helper functions.
+     ******************************************************************************************************************/
+
+    /**
+     *  waitForOption5DropDownSelected method.
+     *  Helper function to wait for option 5 in a  drop down to be selected.
+     */
     private void waitForOption5DropDownSelected() {
         new WebDriverWait(driver,10).until(
                 ExpectedConditions.elementToBeSelected(
@@ -91,9 +115,9 @@ public class ManipulateExampleSelectDropDownFiveTest {
     }
 
     /**
-     * Helper methods
+     *  clickSubmitButton method
+     *  Helper function that clicks a Submit button in a form.
      */
-
     private void clickSubmitButton() {
 
         WebElement submitButton;
@@ -101,6 +125,10 @@ public class ManipulateExampleSelectDropDownFiveTest {
         submitButton.click();
     }
 
+    /**
+     *  assertDropdownValueIsCorrect method
+     *  Helper function that asserts that option 5 in a drop down was selected.
+     */
     private void assertDropdownValueIsCorrect() {
 
         WebElement dropDownResult;
