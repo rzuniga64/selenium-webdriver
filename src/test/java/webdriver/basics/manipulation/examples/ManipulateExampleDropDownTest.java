@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.junit.Assert.assertEquals;
 
-public class ManipulateExampleSelectDropDownFiveTest {
+public class ManipulateExampleDropDownTest {
 
     private static WebDriver driver;
 
