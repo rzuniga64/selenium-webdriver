@@ -1,36 +1,42 @@
 package webdriver.basics.manipulation.exercises;
 
-import webdriver.drivermanager.Driver;
-import org.junit.Before;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import webdriver.drivermanager.Driver;
 
 import static org.junit.Assert.assertEquals;
 
-
+/**
+ *  ManipulateExercisesSelectRadioTest class.
+ *  Submit form with radio 2 selected.
+ */
 public class ManipulateExercisesSelectRadioTest {
 
     private static WebDriver driver;
 
-    @Before
-    public void setup(){
-        driver = Driver.get("selenium2basics.webdriver", "CHROME");
+    @BeforeClass
+    public static void setup(){
+
+        driver = Driver.get("webdriver.chrome.driver", "CHROME");
         driver = Driver.get("http://compendiumdev.co.uk/selenium/basic_html_form.html");
     }
 
+    /**
+     *  submitFormWithOnlyRadioButton2SelectedFindElementException method.
+     *  Submit form with radio 2 selected.
+     */
     @Test
     public void submitFormWithOnlyRadioButton2SelectedFindElementException(){
 
         WebElement radioButton = driver.findElement(By.cssSelector("input[value='rd2']"));
 
-        //radioButton is not selected by default, but we trust nothing
-        if(!radioButton.isSelected()){
-            radioButton.click();
-        }
+        if(!radioButton.isSelected())radioButton.click();
 
         WebElement submitButton = driver.findElement(By.cssSelector("input[type='submit'][name='submitbutton']"));
         submitButton.click();
@@ -38,5 +44,10 @@ public class ManipulateExercisesSelectRadioTest {
 
         WebElement radioButtonResult = driver.findElement(By.id("_valueradioval"));
         assertEquals("expected to radio button 2", radioButtonResult.getText(), "rd2");
+    }
+
+    @AfterClass
+    public static void closeBrowser(){
+        //driver.quit();
     }
 }
