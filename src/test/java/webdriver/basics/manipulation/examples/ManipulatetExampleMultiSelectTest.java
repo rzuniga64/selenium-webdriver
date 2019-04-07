@@ -14,19 +14,29 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+/**
+ *  ManipulatetExampleMultiSelectTest class.
+ *  An example of selecting/unselecting options in a drop down list, submitting the form, and checking the results
+ *  on the next page.
+ */
 public class ManipulatetExampleMultiSelectTest {
 
     private static WebDriver driver;
 
-
     @Before
     public void setup(){
-        driver = Driver.get("selenium2basics.webdriver", "CHROME");
+
+        driver = Driver.get("webdriver.chrome.driver", "CHROME");
         driver = Driver.get("http://compendiumdev.co.uk/selenium/basic_html_form.html");
     }
 
+    /**
+     *  submitFormWithMultiSelectChainOfFindElements method.
+     *  Selects the first three options and unselect the last option in a drop down list.
+     *  Submits the form and then checks the output on the next page.
+     */
     @Test
-    public void submitFormWithMultiSelect123SelectedChainOfFindElements(){
+    public void submitFormWithMultiSelectChainOfFindElements(){
 
         WebElement multiSelect;
         WebElement dropDownOption;
