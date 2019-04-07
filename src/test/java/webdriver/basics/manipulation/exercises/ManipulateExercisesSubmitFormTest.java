@@ -1,27 +1,31 @@
 package webdriver.basics.manipulation.exercises;
 
-import webdriver.drivermanager.Driver;
-import org.junit.Before;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import webdriver.drivermanager.Driver;
 
 /**
  *  using http://compendiumdev.co.uk/selenium/basic_html_form.html
  *
- *  1. Submits form with button click and assert page title changes.
- *  2. Submits form with submit and assert page title changes.
+ *  1. Submits form with Submit button click and assert page title changes.
+ *  2. Submits form with submit call on the Submit button and assert page title changes.
  *  3. Submits form with form submit and assert page title changes.
- *  4. Submits form with input of type 'password' and assert page title changes.
- *     Test that you can submit on any form element.
+ *  4. Submits form with by doing a submit on form element. That submit bubbles up. We submit the form on the password
+ *     input.
  *  5. Submits form with keyboard key ENTER and assert page title changes.
  */
 public class ManipulateExercisesSubmitFormTest {
 
     private static WebDriver driver;
 
-    @Before
+    @BeforeClass
     public void setup(){
 
         driver = Driver.get("webdriver.chrome.driver", "CHROME");
@@ -29,7 +33,7 @@ public class ManipulateExercisesSubmitFormTest {
     }
 
     /**
-     *  Submits form with button click and assert page title changes.
+     *  Submits form with Submit button click and assert page title changes.
      */
     @Test
     public void submitFormWithButtonClick(){
@@ -40,7 +44,7 @@ public class ManipulateExercisesSubmitFormTest {
     }
 
     /**
-     *  Submits form with submit and assert page title changes.
+     *  Submits form with submit call on the Submit button and assert page title changes.
      */
     @Test
          public void submitFormWithButtonSubmit(){
@@ -62,8 +66,8 @@ public class ManipulateExercisesSubmitFormTest {
     }
 
     /**
-     *  Submits form with input of type 'password' and assert page title changes.
-     *  Test that you can submit on any form element.
+     *  Submits form with by doing a submit on form element. That submit bubbles up. We submit the form on the password
+     *  input.
      */
     @Test
     public void iCanActuallySubmitOnAnyFormElement(){
@@ -85,5 +89,10 @@ public class ManipulateExercisesSubmitFormTest {
         //submitButton.sendKeys(Keys.SPACE);
 
         new WebDriverWait(driver,10).until(ExpectedConditions.titleIs("Processed Form Details"));
+    }
+
+    @AfterClass
+    public static void closeBrowser(){
+        //driver.quit();
     }
 }
