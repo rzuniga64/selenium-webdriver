@@ -28,8 +28,10 @@ public class ManipulateExampleTest2 {
 
     /**
      *  myFirstManipulation method.
-     *  Find dropdown with option with a value of 3.
-     *  Click the checkbox and verify that it is selected.
+     *  Find category dropdown with option with a value of 3 (Server) .
+     *  Find language dropdown with option with a value of 23 (Java) .
+     *  Click the Submit button.
+     *  Verify on the page that the language id is 23.
      */
     @Test
     public void myFirstManipulation(){
