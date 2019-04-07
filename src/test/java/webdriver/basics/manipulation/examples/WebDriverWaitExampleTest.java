@@ -9,13 +9,19 @@ import webdriver.drivermanager.Driver;
 
 import static junit.framework.TestCase.assertEquals;
 
+/**
+ *  WebDriverWaitExampleTest.class.
+ *  WebDriver has a helper class WebDriverWait which can help us synchronize our tests.
+ *  Used in conjunction with another helper class ExpectedConditions we can write simple synchronization statements.
+ */
 public class WebDriverWaitExampleTest {
 
     private static WebDriver driver;
 
     @BeforeClass
     public static void createDriverAndVisitTestPage() {
-        driver = Driver.get("selenium2basics.webdriver", "CHROME");
+
+        driver = Driver.get("webdriver.chrome.driver", "CHROME");
         driver.get("http://compendiumdev.co.uk/selenium/basic_html_form.html");
     }
 
