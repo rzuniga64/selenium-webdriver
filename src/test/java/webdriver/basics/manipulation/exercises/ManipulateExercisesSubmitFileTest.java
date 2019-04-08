@@ -14,6 +14,10 @@ import java.net.URISyntaxException;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ *  ManipulateExercisesSubmitFileTest class.
+ *  Submit with a file, and check name on output.
+ */
 public class ManipulateExercisesSubmitFileTest {
 
     private static WebDriver driver;
@@ -24,6 +28,10 @@ public class ManipulateExercisesSubmitFileTest {
         driver = Driver.get("http://compendiumdev.co.uk/selenium/basic_html_form.html");
     }
 
+    /**
+     *
+     * @throws URISyntaxException
+     */
     @Test
     public void submitFormWithAFile() throws URISyntaxException {
 
@@ -35,6 +43,10 @@ public class ManipulateExercisesSubmitFileTest {
         assertEquals("testTextFile.txt", driver.findElement(By.id("_valuefilename")).getText());
     }
 
+    /**
+     *  clickSubmitButton method.
+     *  Click on a form's Submit button.
+     */
     private void clickSubmitButton(){
         WebElement submitButton;
         submitButton = driver.findElement(By.cssSelector("input[type='submit'][name='submitbutton']"));
