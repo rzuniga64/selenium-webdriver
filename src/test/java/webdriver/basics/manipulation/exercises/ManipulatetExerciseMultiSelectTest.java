@@ -16,8 +16,7 @@ import static org.junit.Assert.assertTrue;
 
 /**
  *  ManipulatetExerciseMultiSelectTest class.
- *  An example of selecting/unselecting options in a multiple select list, submitting the form, and checking the results
- *  on the next page.
+ *  Submit form with multiple select 1, 2, & 3.
  */
 public class ManipulatetExerciseMultiSelectTest {
 
