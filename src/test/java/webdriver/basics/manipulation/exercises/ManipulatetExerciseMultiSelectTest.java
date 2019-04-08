@@ -1,4 +1,4 @@
-package webdriver.basics.manipulation.examples;
+package webdriver.basics.manipulation.exercises;
 
 import webdriver.drivermanager.Driver;
 import org.junit.Before;
@@ -15,11 +15,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
- *  ManipulatetExampleMultiSelectTest class.
- *  An example of selecting/unselecting options in a drop down list, submitting the form, and checking the results
+ *  ManipulatetExerciseMultiSelectTest class.
+ *  An example of selecting/unselecting options in a multiple select list, submitting the form, and checking the results
  *  on the next page.
  */
-public class ManipulatetExampleMultiSelectTest {
+public class ManipulatetExerciseMultiSelectTest {
 
     private static WebDriver driver;
 
@@ -32,7 +32,7 @@ public class ManipulatetExampleMultiSelectTest {
 
     /**
      *  submitFormWithMultiSelectChainOfFindElements method.
-     *  Selects the first three options and unselect the last option in a drop down list.
+     *  Selects the first three options and unselect the last option in a multiple select list.
      *  Submits the form and then checks the output on the next page.
      */
     @Test
@@ -64,6 +64,10 @@ public class ManipulatetExampleMultiSelectTest {
         assertTrue("Expected no 4th element", driver.findElements(By.id("_valuemultipleselect3")).isEmpty());
     }
 
+    /**
+     *  clickSubmitButton method.
+     *  Click on a form's Submit button.
+     */
     private void clickSubmitButton() {
 
         WebElement submitButton;
