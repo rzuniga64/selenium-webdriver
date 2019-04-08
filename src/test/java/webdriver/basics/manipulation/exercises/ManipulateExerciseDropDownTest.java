@@ -1,4 +1,4 @@
-package webdriver.basics.manipulation.examples;
+package webdriver.basics.manipulation.exercises;
 
 import webdriver.drivermanager.Driver;
 import org.junit.Before;
@@ -12,7 +12,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.junit.Assert.assertEquals;
 
-public class ManipulateExampleDropDownTest {
+/**
+ *  ManipulateExerciseDropDownTest class.
+ *  Submit form with drop down item 5 selected.
+ */
+public class ManipulateExerciseDropDownTest {
 
     private static WebDriver driver;
 
@@ -26,7 +30,7 @@ public class ManipulateExampleDropDownTest {
 
     /**
      *  submitFormWithDropDownSelectedBySelect method.
-     *  Select an item in a drop down menu using CSS tag name 'select' and attribute 'name'..
+     *  Select item five in a drop down menu using CSS tag name 'select' and attribute 'name'..
      *  Click the submit button and check the results on the next page.
      */
     @Test
@@ -46,7 +50,7 @@ public class ManipulateExampleDropDownTest {
 
     /**
      *  submitFormWithDropDownSelectedByOption method.
-     *  Select an item in a drop down menu using CSS tag name 'option' and attribute 'value'.
+     *  Select item five in a drop down menu using CSS tag name 'option' and attribute 'value'.
      *  Click the submit button and check the results on the next page.
      */
     @Test
@@ -60,7 +64,7 @@ public class ManipulateExampleDropDownTest {
 
     /**
      *  submitFormWithDropDownUsingKeyboardFullText method.
-     *  Select an item in a drop down menu using the keyboard.
+     *  Select item five in a drop down menu using the keyboard.
      *  Click the submit button and check the results on the next page.
      */
     @Test
