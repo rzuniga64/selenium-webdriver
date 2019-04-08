@@ -16,7 +16,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import static org.junit.Assert.*;
 
 /**
- *  Using: http://compendiumdev.co.uk/selenium/gui_user_interactions.html
+ *  public class UserInteractionsExercisesTest class
  *
  *  1. Move draggable1 on to droppable1
  *     a. assert droppable1 text changed to "Dropped!"
@@ -24,8 +24,8 @@ import static org.junit.Assert.*;
  *     a. Assert droppable 1 text change to "Get Off Me!"
  *  3. Press control+B and assert for text change on draggable1 to "Bwa! Ha! Ha!"
  *  Optional Challenges:
- *     a. Can you draw something in the canvas?
- *     b. Control + Space and red squares say "Let GO!!" can you assert for this?
+ *     a. Press control + B and assert for text change on draggable1 to "Bwa! Ha! Ha!"
+ *     b. Can you draw something in the canvas?
  */
 public class UserInteractionsExercisesTest {
 
@@ -33,12 +33,13 @@ public class UserInteractionsExercisesTest {
 
     @BeforeClass
     public static void setup(){
-        driver = Driver.get("selenium2basics.webdriver", "FIREFOX");
+        driver = Driver.get("webdriver.chrome.driver", "CHROME");
         driver = Driver.get("http://compendiumdev.co.uk/selenium/gui_user_interactions.html");
     }
 
     @Before
     public void resetPage(){
+
         driver.navigate().refresh();
 
         // Added additional Synchronisation for Opera as the refresh did not block in any way making the test
@@ -59,13 +60,17 @@ public class UserInteractionsExercisesTest {
 
         // user interactions can be intermittent so click on the html to force focus to the page but this workaround no
         // longer works on Chrome in 2.46.0 and driver 2.16
-        if(Driver.currentBrowser() != Driver.BrowserName.GOOGLECHROME) {
+        if(Driver.currentBrowser() != Driver.BrowserName.CHROME) {
             driver.findElement(By.tagName("html")).click();
         }
     }
 
+    /**
+     *  Move draggable1 on to droppable1 and assert droppable1 text changed to "Dropped!"
+     */
     @Test
     public void moveDraggable1ToDroppable1(){
+
         WebElement draggable1 = driver.findElement(By.id("draggable1"));
         WebElement droppable1 = driver.findElement(By.id("droppable1"));
 
@@ -74,11 +79,14 @@ public class UserInteractionsExercisesTest {
         actions.clickAndHold(draggable1).moveToElement(droppable1).release().perform();
 
         assertEquals("Dropped!", droppable1.getText());
-
     }
 
+    /**
+     *  Drag and Drop draggable2 to droppable1 and assert droppable 1 text change to "Get Off Me!"
+     */
     @Test
     public void dragAndDropDraggable2ToDroppable1(){
+
         WebElement draggable2 = driver.findElement(By.id("draggable2"));
         WebElement droppable1 = driver.findElement(By.id("droppable1"));
 
@@ -91,19 +99,19 @@ public class UserInteractionsExercisesTest {
         assertEquals("Get Off Me!", droppable1.getText());
     }
 
-
+    /**
+     *  Press control + B and assert for text change on draggable1 to "Bwa! Ha! Ha!"
+     */
     @Test
     public void controlAndSpace(){
-        /*
-            when I press control+space the red squares say "Let GO!!"
-            we can't check this
-         */
+
+        // when I press control + space the red squares say "Let GO!!" we can't check this.
         WebElement droppable1 = driver.findElement(By.id("droppable1"));
 
         Actions actions = new Actions(driver);
         actions.click(droppable1).build().perform();
-        // sendkeys does a keydown followed by keyup, so you can't use it for this
-        // as keys need to be held down
+
+        // sendkeys does a keydown followed by keyup, so you can't use it for this as keys need to be held down
         actions.keyDown(Keys.CONTROL).sendKeys(Keys.SPACE).build().perform();
         String dropText = droppable1.getText();
         actions.keyUp(droppable1,Keys.CONTROL).build().perform();
@@ -117,11 +125,13 @@ public class UserInteractionsExercisesTest {
         }
     }
 
-
+    /**
+     *  Optional Challenges: Press control + B and assert for text change on draggable1 to "Bwa! Ha! Ha!"
+     */
     @Test
-    public void controlAndBwaHaHa(){
+    public void controlSpace(){
 
-        /* when we issue a control+ B draggable 1 says "Bwa! Ha! Ha! */
+        /* when we issue a control + B draggable 1 says "Bwa! Ha! Ha! */
         WebElement draggable1 = driver.findElement(By.id("draggable1"));
         draggable1.click();
 
@@ -134,6 +144,9 @@ public class UserInteractionsExercisesTest {
         // firefox used to fail on this when it did a keyup after every keyDown
     }
 
+    /**
+     *  Optional Challenges: Can you draw something in the canvas?
+     */
     @Test
     public void drawSomethingOnCanvas(){
 
@@ -143,7 +156,6 @@ public class UserInteractionsExercisesTest {
         int eventCount = eventList.findElements(By.tagName("li")).size();
         new Actions(driver).
                 // click doesn't do it, need to click and hold
-                //click(canvas).
                 clickAndHold(canvas).
                 moveByOffset(10,10).
                 release().
