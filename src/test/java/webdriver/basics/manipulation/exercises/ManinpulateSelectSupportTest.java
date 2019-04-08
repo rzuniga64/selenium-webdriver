@@ -15,13 +15,24 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class SelectSupportTest {
+/**
+ *  ManipulateSelectSupportTest class.
+ *  There is a support class for Select. Makes working with selects a little easier: new Select(WebElement).
+ *  - .isMultiple
+ *  - .getOptions
+ *  - .getAllSelectedOptions
+ *  - .getFirstSelectedOption
+ *  - .selectByVisibileText
+ *  - .deselect All.
+ */
+public class ManinpulateSelectSupportTest {
 
     private static WebDriver driver;
 
     @Before
     public void setup(){
-        driver = Driver.get("selenium2basics.webdriver", "CHROME");
+
+        driver = Driver.get("webdriver.chrome.driver", "CHROME");
         driver = Driver.get("http://compendiumdev.co.uk/selenium/basic_html_form.html");
     }
 
@@ -29,18 +40,16 @@ public class SelectSupportTest {
     public void selectSupportExplore(){
 
         // repeat exercise to select 1 2 and 3 on multiple with Select on support.ui
-        WebElement multipleSelectElement;
-
-        multipleSelectElement = driver.findElement(By.cssSelector("select[multiple='multiple']"));
+        WebElement multipleSelectElement = driver.findElement(By.cssSelector("select[multiple='multiple']"));
 
         Select multipleSelect = new Select(multipleSelectElement);
         assertTrue(multipleSelect.isMultiple());
 
         List<WebElement> selectedElements = multipleSelect.getAllSelectedOptions();
-        assertEquals("By default expected only 1 selected", 1, selectedElements.size());
 
-        // for Chrome I had to trim the resulting getText otherwise the whitespace padding
-        // made it impossible to assert on cross browser
+        assertEquals("By default expected only 1 selected", 1, selectedElements.size());
+        // for Chrome I had to trim the resulting getText otherwise the whitespace padding made it impossible to assert
+        // on cross browser
         assertEquals("By default expected different item",
                      "Selection Item 4", selectedElements.get(0).getText().trim());
 
@@ -63,16 +72,16 @@ public class SelectSupportTest {
         assertEquals("ms1", driver.findElement(By.id("_valuemultipleselect0")).getText());
         assertEquals("ms2", driver.findElement(By.id("_valuemultipleselect1")).getText());
         assertEquals("ms3", driver.findElement(By.id("_valuemultipleselect2")).getText());
-        assertTrue("Expected no 4th element",
-                driver.findElements(By.id("_valuemultipleselect3")).isEmpty());
+        assertTrue("Expected no 4th element", driver.findElements(By.id("_valuemultipleselect3")).isEmpty());
     }
 
+    /**
+     *  clickSubmitButton method.
+     *  Click on a form's Submit button.
+     */
     private void clickSubmitButton() {
         WebElement submitButton;
-        submitButton = driver.findElement(
-                By.cssSelector(
-                        "input[type='submit'][name='submitbutton']"));
-
+        submitButton = driver.findElement(By.cssSelector("input[type='submit'][name='submitbutton']"));
         submitButton.click();
     }
 }
