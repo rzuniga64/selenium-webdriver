@@ -12,6 +12,17 @@ import java.util.Set;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+/**
+ *  WindowsExampleTest class.
+ *  Windows
+ *  Each browser had a unique handler
+ *  driver.getWindowhandle() returns handle for current window
+ *  driver.getWindowHandles() returns a Set<String> of all window handles
+ *  driver.switchTo.window(String handle) switches control to the chosen window
+ *
+ *  Current bug open with chrome driver
+ *  http://code.google.com/p/chromedriver/issues/detail?id=107
+ */
 public class WindowsExampleTest {
 
     private static WebDriver driver;
@@ -19,21 +30,14 @@ public class WindowsExampleTest {
     @Before
     public void quitToRestart(){
 
-        driver = Driver.get("selenium2basics.webdriver", "CHROME");
-        // I need to make sure that only one window open so...
-        //Driver.quit();
-
+        driver = Driver.get("webdriver.chrome.driver", "CHROME");
     }
 
     @Test
     public void switchToNewWindow(){
 
-        // Current bug open with chrome driver
-        // http://code.google.com/p/chromedriver/issues/detail?id=107
-
         // We start with one window open
-        WebDriver driver = Driver.get(
-                    "http://www.compendiumdev.co.uk/selenium/frames");
+        driver.navigate().to("http://www.compendiumdev.co.uk/selenium/frames");
 
         // Remember the current window handle
         String framesWindowHandle = driver.getWindowHandle();
@@ -60,16 +64,14 @@ public class WindowsExampleTest {
         // for Marionette Geckodriver need to switchTo defaultContent to check title
         driver.switchTo().defaultContent();
 
-
         // Driver commands now act on  new window
-        assertTrue("Expected Selenium Simplified site",
-                driver.getTitle().contains("Selenium Simplified"));
+        assertTrue("Expected Selenium Simplified site", driver.getTitle().contains("Selenium Simplified"));
     }
 
     @After
     public void quitToClean(){
 
         // I need to make sure that only one window open for other tests in CI
-        Driver.quit();
+        driver.quit();
     }
 }
