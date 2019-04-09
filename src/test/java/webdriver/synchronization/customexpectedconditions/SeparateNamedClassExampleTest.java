@@ -44,8 +44,7 @@ public class SeparateNamedClassExampleTest {
             WebElement categorySelect = driver.findElement(By.id("combo1"));
             categorySelect.findElement(By.cssSelector("option[value='3']")).click();
 
-            wait.until(new SelectContainsText(By.id("combo2"),"Java")
-            );
+            wait.until(new SelectContainsText(By.id("combo2"),"Java"));
 
             // then select Java
             WebElement languageSelect = driver.findElement(By.id("combo2"));
@@ -92,7 +91,7 @@ public class SeparateNamedClassExampleTest {
             // Implement your checking code using the passed in WebDriver.
             for(WebElement anOption : options){
                 try{
-                    if(anOption.getText().equals(this.textToFind))
+                    if (anOption.getText().equals(this.textToFind))
                         return true;
                 } catch(StaleElementReferenceException e){
                     // too fast, need to refresh the list so trigger a poll and wait for next time
