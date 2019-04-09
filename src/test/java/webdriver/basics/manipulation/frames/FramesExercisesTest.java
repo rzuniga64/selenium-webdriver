@@ -10,6 +10,17 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ *  FramesExercisesTest class.
+ *  1. In the content click on “Load green page” link.
+ *  2. On “Green Page” click on “Back to original page” link.
+ *  3. Assert for the presence of “<h1>Content</h1>”
+ *
+ *  1. Click on the “iFrames Example” in the 'menu' frame.
+ *  2. In the iframe click on “Example 5”.
+ *  3. In the content click on “Load Main Frames Page”.
+ *  4. Assert.
+ */
 public class FramesExercisesTest {
 
     private WebDriver driver;
@@ -20,8 +31,15 @@ public class FramesExercisesTest {
         driver = Driver.get("http://www.compendiumdev.co.uk/selenium/frames");
     }
 
+    /**
+     *  loadTheGreenPage method.
+     *  1. In the content click on “Load green page” link.
+     *  2. On “Green Page” click on “Back to original page” link.
+     *  3. Assert for the presence of “<h1>Content</h1>”
+     */
     @Test
     public void loadTheGreenPage(){
+
         assertEquals("Frameset Example Title (Example 6)",driver.getTitle());
 
         // load the green page
@@ -41,18 +59,25 @@ public class FramesExercisesTest {
         assertEquals("Content",driver.findElement(By.tagName("h1")).getText());
     }
 
+    /**
+     *  workWithTheIFrame method.
+     *  1. Click on the “iFrames Example” in the 'menu' frame.
+     *  2. In the iframe click on “Example 5”.
+     *  3. In the content click on “Load Main Frames Page”.
+     *  4. Assert.
+     */
     @Test
     public void workWithTheIFrame(){
+
         assertEquals("Frameset Example Title (Example 6)",driver.getTitle());
 
         // click on "menu"."iFrames Example"
         driver.switchTo().frame("menu");
         driver.findElement(By.cssSelector("a[href='iframe.html']")).click();
 
-        // with Marionette Driver each time we take an action that
-        // we know moves us out of the frame we need to switch to defaultContent
-        // does not impact any other browser driver, but is needed for Marionette
-        // only if we want to synchronise on title - not needed for any other synchronisation
+        // with Marionette Driver each time we take an action that we know moves us out of the frame we need to switch
+        // to defaultContent does not impact any other browser driver, but is needed for Marionette only if we want to
+        // synchronise on title - not needed for any other synchronisation
         driver.switchTo().defaultContent();
 
         new WebDriverWait(driver,Driver.DEFAULT_TIMEOUT_SECONDS).
