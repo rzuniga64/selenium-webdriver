@@ -56,13 +56,13 @@ public class AnonymousClassExampleTest {
         // If not Boolean then null == false.
         wait.until(new ExpectedCondition<Boolean>() {
 
-                    // WebDriver automatically passed through to the apply method.
-                    // Add your synchronization code in the apply method.
-                    @Override
-                    public Boolean apply(WebDriver webDriver) {
-                        return webDriver.findElement(By.cssSelector("option[value='23']")).isDisplayed();
-                    }
+                // WebDriver automatically passed through to the apply method.
+                // Add your synchronization code in the apply method.
+                @Override
+                public Boolean apply(WebDriver webDriver) {
+                    return webDriver.findElement(By.cssSelector("option[value='23']")).isDisplayed();
                 }
+            }
         );
 
         // then select Java
