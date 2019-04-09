@@ -1,20 +1,32 @@
 package webdriver.basics.manipulation.frames;
 
-import webdriver.drivermanager.Driver;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import webdriver.drivermanager.Driver;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 import static org.openqa.selenium.support.ui.ExpectedConditions.titleIs;
 
-// refactored for static imports, see above
-// and create a wait in the before to make code less verbose
+/**
+ *  FramesExercisesRefactoredTest class.
+ *  Refactored for static imports, see above and create a wait in the before to make code less verbose
+ *
+ *  1. In the content click on “Load green page” link.
+ *  2. On “Green Page” click on “Back to original page” link.
+ *  3. Assert for the presence of “<h1>Content</h1>”
+ *
+ *  1. Click on the “iFrames Example” in the 'menu' frame.
+ *  2. In the iframe click on “Example 5”.
+ *  3. In the content click on “Load Main Frames Page”.
+ *  4. Assert.
+ */
 public class FramesExercisesRefactoredTest {
 
     private WebDriver driver;
@@ -22,13 +34,21 @@ public class FramesExercisesRefactoredTest {
 
     @Before
     public void setup(){
+
         driver = Driver.get("selenium2basics.webdriver", "CHROME");
-        driver = Driver.get("http://www.compendiumdev.co.uk/selenium/frames");
-        wait = new WebDriverWait(driver,Driver.DEFAULT_TIMEOUT_SECONDS);
+        driver.navigate().to("http://www.compendiumdev.co.uk/selenium/frames");
+        wait = new WebDriverWait(driver, Driver.DEFAULT_TIMEOUT_SECONDS);
     }
 
+    /**
+     *  loadTheGreenPage method.
+     *  1. In the content click on “Load green page” link.
+     *  2. On “Green Page” click on “Back to original page” link.
+     *  3. Assert for the presence of “<h1>Content</h1>”
+     */
     @Test
     public void loadTheGreenPage(){
+
         assertThat(driver.getTitle(), is("Frameset Example Title (Example 6)"));
 
         // load the green page
@@ -46,8 +66,16 @@ public class FramesExercisesRefactoredTest {
         assertThat(h1.getText(), is("Content"));
     }
 
+    /**
+     *  workWithTheIFrame method.
+     *  1. Click on the “iFrames Example” in the 'menu' frame.
+     *  2. In the iframe click on “Example 5”.
+     *  3. In the content click on “Load Main Frames Page”.
+     *  4. Assert.
+     */
     @Test
     public void workWithTheIFrame(){
+
         assertThat(driver.getTitle(), is("Frameset Example Title (Example 6)"));
 
         // click on "menu"."iFrames Example"
@@ -70,5 +98,10 @@ public class FramesExercisesRefactoredTest {
 
         driver.switchTo().defaultContent();
         wait.until(titleIs("Frameset Example Title (Example 6)"));
+    }
+
+    @After
+    public void closeBrowser(){
+        driver.close();
     }
 }

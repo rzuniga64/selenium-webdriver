@@ -1,5 +1,6 @@
 package webdriver.basics.manipulation.frames;
 
+import org.junit.After;
 import webdriver.drivermanager.Driver;
 import org.junit.Before;
 import org.junit.Test;
@@ -100,5 +101,10 @@ public class FramesExercisesTest {
 
         new WebDriverWait(driver,Driver.DEFAULT_TIMEOUT_SECONDS).
                 until(ExpectedConditions.titleIs("Frameset Example Title (Example 6)"));
+    }
+
+    @After
+    public void closeBrowser(){
+        driver.close();
     }
 }
