@@ -1,15 +1,27 @@
 package webdriver.basics.manipulation.frames;
 
-import webdriver.drivermanager.Driver;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import webdriver.drivermanager.Driver;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ *  switchToFrameExample class.
+ *  A frame is an included HTMl page that is displayed as a frame on that page.
+ *  driver.switchTo().
+ *  frame(“framename”)
+ *  frame(int)
+ *  frame(WebElement)
+ *  defaultContent()
+ *  _top
+ *  When you switch your commands act on the new <body>
+ */
 public class FramesExampleTest {
 
     private static WebDriver driver;
@@ -17,10 +29,17 @@ public class FramesExampleTest {
 
     @Before
     public void setup(){
-        driver = Driver.get("selenium2basics.webdriver", "CHROME");
-        WebDriver driver = Driver.get("http://www.compendiumdev.co.uk/selenium/frames");
+
+        driver = Driver.get("webdriver.chrome.driver", "CHROME");
+        driver.navigate().to("http://www.compendiumdev.co.uk/selenium/frames");
     }
 
+    /**
+     *  switchToFrameExample method.
+     *  Switch to a frame.
+     *  Find a link in the frame and click on it. The menu itself is an e-mail page in a frame. It opens up a new page.
+     *  Switch to the new page and assert on the title.
+     */
     @Test
     public void switchToFrameExample(){
 
@@ -31,15 +50,17 @@ public class FramesExampleTest {
         driver.findElement(By.cssSelector("a[href='frames_example_1.html']")).click();
         String titleForExample1 = "Frameset Example Title (Example 1)";
 
-        // added for Marionette Driver to force moving frame
-        // not needed for other drivers but it does no harm for other drivers
-        // Note - this is only needed if we are checking the title, not for
-        // any other action
+        // Added for Marionette Driver to force moving frame.
+        // Not needed for other drivers but it does no harm for other drivers.
+        // Note - this is only needed if we are checking the title, not for any other action.
         driver.switchTo().defaultContent();
 
-        new WebDriverWait(driver,Driver.DEFAULT_TIMEOUT_SECONDS).
-                until(ExpectedConditions.titleIs(titleForExample1));
-
+        new WebDriverWait(driver,Driver.DEFAULT_TIMEOUT_SECONDS).until(ExpectedConditions.titleIs(titleForExample1));
         assertEquals(titleForExample1,driver.getTitle());
+    }
+
+    @After
+    public void closeBrowser(){
+        driver.close();
     }
 }
