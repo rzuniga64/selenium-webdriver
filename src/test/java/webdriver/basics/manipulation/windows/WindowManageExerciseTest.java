@@ -1,12 +1,13 @@
 package webdriver.basics.manipulation.windows;
 
 
+import org.junit.AfterClass;
 import org.junit.Before;
-import webdriver.drivermanager.Driver;
 import org.junit.Test;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
+import webdriver.drivermanager.Driver;
 
 import java.awt.*;
 
@@ -14,6 +15,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
+ *  WindowManageExerciseTest class.
  *  Using http://www.compendiumdev.co.uk/selenium/bounce.html
  *  Maximise the window
  *  Reduces the window to half size
@@ -26,13 +28,16 @@ public class WindowManageExerciseTest {
 
     @Before
     public void setup(){
+
         driver = Driver.get("selenium2basics.webdriver", "CHROME");
+        driver.navigate().to("http://www.compendiumdev.co.uk/selenium/bounce.html");
     }
 
+    /**
+     *  Maximize the window.
+     */
     @Test
     public void maximizeTheWindow(){
-
-        driver = Driver.get("http://www.compendiumdev.co.uk/selenium/bounce.html",false);
 
         driver.manage().window().maximize();
         Dimension fullScreenSize = driver.manage().window().getSize();
@@ -52,24 +57,26 @@ public class WindowManageExerciseTest {
         assertTrue(expected,(screenDimension.getHeight()*0.9) < fullScreenSize.getHeight());
     }
 
+    /**
+     *  Reduce the window to half size.
+     */
     @Test
     public void halfSizeTheWindow(){
 
-        driver = Driver.get("http://www.compendiumdev.co.uk/selenium/bounce.html");
         driver.manage().window().maximize();
-
         Dimension fullScreenSize = driver.manage().window().getSize();
-
         driver.manage().window().setSize(new Dimension(fullScreenSize.getWidth()/2, fullScreenSize.getHeight()/2));
 
         assertEquals("Width Half Equals", fullScreenSize.getWidth()/2, driver.manage().window().getSize().getWidth());
         assertEquals("Height Half Equals", fullScreenSize.getHeight() / 2, driver.manage().window().getSize().getHeight());
     }
 
+    /**
+     *  Move the reduced window into the center of the screen.
+     */
     @Test
     public void moveHalfSizeToCenterTheWindow(){
 
-        driver = Driver.get("http://www.compendiumdev.co.uk/selenium/bounce.html");
         driver.manage().window().maximize();
 
         Dimension fullScreenSize = driver.manage().window().getSize();
@@ -79,10 +86,12 @@ public class WindowManageExerciseTest {
         driver.manage().window().setPosition(new Point(fullScreenSize.getWidth()/4, fullScreenSize.getHeight()/4));
     }
 
-        @Test
+    /**
+     *  Just for fun, make it smaller and bounce it around the screen.
+     */
+    @Test
     public void bounceTheWindow(){
 
-        driver = Driver.get("http://www.compendiumdev.co.uk/selenium/bounce.html");
         driver.manage().window().maximize();
         Dimension fullScreenSize = driver.manage().window().getSize();
 
@@ -128,5 +137,10 @@ public class WindowManageExerciseTest {
                 yDir = 10;
             }
         }
+    }
+
+    @AfterClass
+    public static void quitToClean() {
+        driver.quit();
     }
 }
