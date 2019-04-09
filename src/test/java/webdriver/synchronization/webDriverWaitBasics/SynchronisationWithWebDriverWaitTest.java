@@ -1,45 +1,65 @@
 package webdriver.synchronization.webDriverWaitBasics;
 
 import org.junit.Before;
-import webdriver.drivermanager.Driver;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import webdriver.drivermanager.Driver;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
+import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
+/**
+ *  exampleUsingExpectedConditions class
+ *  Write a test which navigates to compendiumdev.co.uk/selenium/basic_ajax.html
+ *  1. Select “Server” from combo1
+ *  2. Select “Java” from combo2
+ *  3. Click “Code In It” button
+ *  4. Assert that the loaded page has “_valuelanguage_id” text of 23
+ */
 public class SynchronisationWithWebDriverWaitTest {
 
-    private WebDriver driver;
+    private static WebDriver driver;
+    private static WebDriverWait wait;
 
     @Before
     public void setup(){
-        driver = Driver.get("selenium2basics.webdriver", "CHROME");
+
+        driver = Driver.get("webdriver.chrome.driver", "CHROME");
+        driver.navigate().to("http://compendiumdev.co.uk/selenium/basic_ajax.html");
+        wait = new WebDriverWait(driver,10);
     }
 
+    /**
+     *  chooseToCodeInJavaOnTheServerFromCombosNoSynchronisationExample method.
+     *  Write a test which navigates to compendiumdev.co.uk/selenium/basic_ajax.html
+     *  1. Select “Server” from combo1
+     *  2. Select “Java” from combo2
+     *  3. Click “Code In It” button
+     *  4. Assert that the loaded page has “_valuelanguage_id” text of 23
+     *
+     *  NEVER DO THIS. We wrapped a failing test in a try/catch and expect it to fail.
+     */
     @Test
     public void chooseToCodeInJavaOnTheServerFromCombosNoSynchronisationExample(){
 
         try{
-            driver = Driver.get("http://compendiumdev.co.uk/selenium/basic_ajax.html");
-
-            // select Server
+            // select Server from combo1
             WebElement categorySelect = driver.findElement(By.id("combo1"));
             categorySelect.findElement(By.cssSelector("option[value='3']")).click();
 
-            // then select Java
+            // then select Java from combo2
             WebElement languageSelect = driver.findElement(By.id("combo2"));
             languageSelect.findElement(By.cssSelector("option[value='23']")).click();
 
-            // Submit the form
+            // click "Code In It" button
             WebElement codeInIt = driver.findElement(By.name("submitbutton"));
             codeInIt.click();
 
+            // Assert that the loaded page has “_valuelanguage_id” text of 23
             WebElement languageWeUsed = driver.findElement(By.id("_valuelanguage_id"));
             assertEquals("Expected Java code", "23",languageWeUsed.getText());
 
@@ -48,60 +68,83 @@ public class SynchronisationWithWebDriverWaitTest {
         }
     }
 
+    /**
+     *  chooseToCodeInJavaOnTheServerFromCombosSyncOnAjaxBusyExample method.
+     *  Write a test which navigates to compendiumdev.co.uk/selenium/basic_ajax.html
+     *  1. Select “Server” from combo1
+     *  2. Select “Java” from combo2
+     *  3. Click “Code In It” button
+     *  4. Assert that the loaded page has “_valuelanguage_id” text of 23
+     */
     @Test
     public void chooseToCodeInJavaOnTheServerFromCombosSyncOnAjaxBusyExample(){
 
-        startBrowserAndSelectServer();
-
+        // select Server from combo1
+        selectServer();
         // wait until the ajax symbol has gone because then the drop down has populated
-        new WebDriverWait(driver,10).until(ExpectedConditions.invisibilityOfElementLocated(
-                        By.id("ajaxBusy")));
-
+        wait.until(invisibilityOfElementLocated(By.id("ajaxBusy")));
+        // then select Java
         selectJavaSubmitFormAndCheckResult();
     }
 
+    /**
+     *  chooseToCodeInJavaOnTheServerFromCombosSyncOnOptionPresentExample method.
+     *  Write a test which navigates to compendiumdev.co.uk/selenium/basic_ajax.html
+     *  1. Select “Server” from combo1
+     *  2. Select “Java” from combo2
+     *  3. Click “Code In It” button
+     *  4. Assert that the loaded page has “_valuelanguage_id” text of 23
+     */
     @Test
     public void chooseToCodeInJavaOnTheServerFromCombosSyncOnOptionPresentExample(){
 
-        startBrowserAndSelectServer();
-
+        // select Server from combo1
+        selectServer();
         // wait until the option I want to click is present
-        new WebDriverWait(driver,10).until(ExpectedConditions.presenceOfElementLocated(
-                        By.cssSelector("option[value='23']")));
-
+        wait.until(presenceOfElementLocated(By.cssSelector("option[value='23']")));
         // then select Java
         selectJavaSubmitFormAndCheckResult();
     }
 
+    /**
+     *  chooseToCodeInJavaOnTheServerFromCombosSyncOnOptionVisibleExample method.
+     *  Write a test which navigates to compendiumdev.co.uk/selenium/basic_ajax.html
+     *  1. Select “Server” from combo1
+     *  2. Select “Java” from combo2
+     *  3. Click “Code In It” button
+     *  4. Assert that the loaded page has “_valuelanguage_id” text of 23
+     */
     @Test
     public void chooseToCodeInJavaOnTheServerFromCombosSyncOnOptionVisibleExample(){
 
-        startBrowserAndSelectServer();
-
+        // select Server from combo1
+        selectServer();
         // wait until the option I want to click is visible
-        new WebDriverWait(driver,10).until(ExpectedConditions.visibilityOfElementLocated(
-                        By.cssSelector("option[value='23']")));
-
+        wait.until(visibilityOfElementLocated(By.cssSelector("option[value='23']")));
         // then select Java
         selectJavaSubmitFormAndCheckResult();
     }
 
+    /**
+     *  chooseToCodeInJavaOnTheServerFromCombosSyncOnOptionClickableExample method.
+     *  Write a test which navigates to compendiumdev.co.uk/selenium/basic_ajax.html
+     *  1. Select “Server” from combo1
+     *  2. Select “Java” from combo2
+     *  3. Click “Code In It” button
+     *  4. Assert that the loaded page has “_valuelanguage_id” text of 23
+     */
     @Test
     public void chooseToCodeInJavaOnTheServerFromCombosSyncOnOptionClickableExample(){
 
-        startBrowserAndSelectServer();
-
+        // select Server from combo1
+        selectServer();
         // wait until the option I want to click is clickable
-        new WebDriverWait(driver,10).until(ExpectedConditions.elementToBeClickable(
-                        By.cssSelector("option[value='23']")));
-
+        wait.until(elementToBeClickable(By.cssSelector("option[value='23']")));
         // then select Java
         selectJavaSubmitFormAndCheckResult();
     }
 
-    private void startBrowserAndSelectServer() {
-        driver = Driver.get("http://compendiumdev.co.uk/selenium/" +
-                "basic_ajax.html");
+    private void selectServer() {
 
         // select Server
         WebElement categorySelect = driver.findElement(By.id("combo1"));
@@ -118,11 +161,11 @@ public class SynchronisationWithWebDriverWaitTest {
         WebElement codeInIt = driver.findElement(By.name("submitbutton"));
         codeInIt.click();
 
-        new WebDriverWait(driver,10).until(ExpectedConditions.titleIs("Processed Form Details"));
+        wait.until(titleIs("Processed Form Details"));
 
         // don't have to synchronise with other browsers but do with GeckoDriver
         //WebElement languageWeUsed = driver.findElement(By.id("_valuelanguage_id"));
-        WebElement languageWeUsed = new WebDriverWait(driver,10).until(elementToBeClickable( By.id("_valuelanguage_id")));
+        WebElement languageWeUsed = wait.until(elementToBeClickable( By.id("_valuelanguage_id")));
         assertEquals("Expected Java code", "23",languageWeUsed.getText());
     }
 }
