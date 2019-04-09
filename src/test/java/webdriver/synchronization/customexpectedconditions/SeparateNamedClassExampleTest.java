@@ -1,4 +1,4 @@
-package webdriver.synchronization.conditions;
+package webdriver.synchronization.customexpectedconditions;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -16,7 +16,7 @@ import static org.junit.Assert.assertEquals;
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 
 /**
- *  CustomExpectedConditionsExampleTest class.
+ *  SeparateNamedClassExampleTest class.
  *  Use a CustomExpectedCondition when ExpectedConditions does not have what you need.
  *  You want to make your tests read well for your usage scenario
  *  You want to pass additional values to the apply method
@@ -24,7 +24,7 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClick
  *  ...create a Custom ExpectedCondition
  *  One method is a separate named class
  */
-public class CustomExpectedConditionsExampleTest {
+public class SeparateNamedClassExampleTest {
 
     private static WebDriver driver;
     private static WebDriverWait wait;
