@@ -53,12 +53,12 @@ public class CookiesExampleTest {
         driver.navigate().refresh();
 
         // Find a named cookie. Return null if not found.
-        Cookie aCookie = driver.manage().getCookieNamed("SeleniumSimplifiedLastSearch");
-        assertEquals("Should be no last search cookie", null, aCookie);
+        Cookie aCookie = driver.manage().getCookieNamed("seleniumSimplifiedSearchLastVisit");
+        assertEquals("Should be last search cookie", "seleniumSimplifiedSearchLastVisit", aCookie.getName());
     }
 
     @After
-    public static void closeBrowser() {
+    public void closeBrowser() {
         driver.quit();
     }
 }
