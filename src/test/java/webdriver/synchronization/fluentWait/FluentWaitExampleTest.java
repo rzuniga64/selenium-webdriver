@@ -1,6 +1,8 @@
 package webdriver.synchronization.fluentWait;
 
 import com.google.common.base.Function;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebDriver;
@@ -13,20 +15,38 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ *  FluentWaitExampleTest class.
+ *  FluentWait is the class that underpins the WebDriverWait. It is there to give you the additional flexibility when you need it.
+ *
+ *  WebDriverWait extends FluentWait so everything you have seen is really FluentWait
+ *  Main difference between FluentWait and WebDriverWait:
+ *  - FluentWait until can apply to anything
+ *    - e.g. WebElement, String, Time, Files, etc.
+ *    - And can return anything
+ *  - WebDriverWait until applies to WebDriver
+ *    - And can return anything
+ */
 public class FluentWaitExampleTest {
 
+    private static WebDriver driver;
+
+    @BeforeClass
+    public static void setup() {
+
+        driver = Driver.get("webdriver.chrome.driver", "CHROME");
+        driver.navigate().to("http://compendiumdev.co.uk/selenium/basic_html_form.html");
+    }
+
     /**
-     * FluentWait gives more granular control and can adjust params on the fly
-     * so reuse the wait but next time with a different timeout or a different
-     * polling interval, or add additional exceptions to ignore
+     *  exampleUsingExpectedConditions method.
+     *  Uses a FluentWait that uses a WebDriver. So, this is going to be equivalent to a WebDriverWait.
+     *
+     *  FluentWait gives more granular control and can adjust params on the fly so reuse the wait but next time with a
+     *  different timeout or a different polling interval, or add additional exceptions to ignore.
      */
     @Test
     public void exampleUsingExpectedConditions(){
-
-        WebDriver driver;
-
-        driver = Driver.get("http://compendiumdev.co.uk/selenium/" +
-                            "basic_html_form.html");
 
         FluentWait<WebDriver> wait = new FluentWait<WebDriver>(driver).
                                 withTimeout(10, TimeUnit.SECONDS).
@@ -38,8 +58,11 @@ public class FluentWaitExampleTest {
         assertEquals("HTML Form Elements", driver.getTitle());
     }
 
-    // this is equivalent to the above
-    // example only
+    /**
+     *  exampleUsingExpectedConditionsMix method.
+     *  exampleUsingExpectedConditionsMix method.
+     *  This is equivalent to the above but uses a WebDriverWait.
+     */
     @Test
     public void exampleUsingExpectedConditionsMix(){
 
@@ -51,18 +74,17 @@ public class FluentWaitExampleTest {
         WebDriverWait wait = (WebDriverWait) new WebDriverWait(driver,10).
                                  pollingEvery(100, TimeUnit.MILLISECONDS);
 
-        // the following line is not needed because a WebDriverWait
-        // add the NotFoundException to the ignored list
+        // the following line is not needed because a WebDriverWait adds the NotFoundException to the ignored list
         // wait.ignoring(NotFoundException.class);
 
         wait.until(ExpectedConditions.titleIs("HTML Form Elements"));
-
         assertEquals("HTML Form Elements", driver.getTitle());
     }
 
     /**
-     * Fluent wait does not need webdriver, this test waits
-     * for a minimum of 4 seconds using FluentWait
+     *  fluentWaitDoesNotNeedWebDriver method.
+     *  Uses a FluentWait that uses a Long.
+     *  Fluent wait does not need webdriver, this test waits for a minimum of 4 seconds using FluentWait
      */
     @Test
     public void fluentWaitDoesNotNeedWebDriver(){
@@ -86,5 +108,10 @@ public class FluentWaitExampleTest {
                         });
 
         System.out.println("Actual Time difference = " + (endTime- startTime) + " milliseconds");
+    }
+
+    @AfterClass
+    public static void closeBrowser() {
+        //driver.quit();
     }
 }
