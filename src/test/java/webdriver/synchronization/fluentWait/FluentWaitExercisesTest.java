@@ -17,6 +17,13 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ *  FluentWaitExercisesTest class.
+ *  Using javascript_countdown.hmtl
+ *  1. Create a fluent wait that returns a String with the time when the last two chars are “04”. Assert the returned
+ *     time is 01:01:04
+ *  2. Do the same with a WebDriverWait
+ */
 public class FluentWaitExercisesTest {
 
     private static WebDriver driver;
@@ -24,35 +31,38 @@ public class FluentWaitExercisesTest {
 
     @BeforeClass
     public static void setup(){
-        driver = Driver.get("http://compendiumdev.co.uk/selenium/javascript_countdown.html");
-    }
 
+        driver = Driver.get("webdriver.chrome.driver", "CHROME");
+        driver.navigate().to("http://compendiumdev.co.uk/selenium/javascript_countdown.html");
+    }
 
     @Before
     public void setupTest(){
 
         driver.navigate().refresh();
-
         countdown = driver.findElement(By.id("javascript_countdown_time"));
-
-        new WebDriverWait(driver,10).
-                until(ExpectedConditions.visibilityOf(countdown));
+        new WebDriverWait(driver,10).until(ExpectedConditions.visibilityOf(countdown));
     }
 
+    /**
+     *  waitForWebElementFluently method.
+     *  Create a fluent wait that returns a String with the time when the last two chars are “04”. Assert the returned
+     *  time is 01:01:04.
+     */
     @Test
     public void waitForWebElementFluently(){
 
         String theTime = new FluentWait<WebElement>(countdown).
                 withTimeout(20, TimeUnit.SECONDS).
                 pollingEvery(10,TimeUnit.MILLISECONDS).
+                // Works on a WebElement and returns a String.
                 until(new Function<WebElement, String>() {
                     @Override
                     public String apply(WebElement element) {
                         // amended from
                         // return element.getText().endsWith("04") ? element.getText() : null;
-                        // because on grid, the time between the two getText calls was enough
-                        // to allow the time to have advanced further than necessary
-                        // so store the getText and use that in the condition and return
+                        // because on grid, the time between the two getText calls was enough to allow the time to have
+                        // advanced further than necessary so store the getText and use that in the condition and return
                         String elementText = element.getText();
                         return elementText.endsWith("04") ? elementText : null;
                     }
@@ -62,10 +72,16 @@ public class FluentWaitExercisesTest {
         assertEquals("Expected a different time", "01:01:04", theTime);
     }
 
+    /**
+     *  waitForTimeWithWebDriverWaitFunction method.
+     *  Create a WebDriverWait that returns a String with the time when the last two chars are “04”. Assert the returned
+     *  time is 01:01:04
+     */
     @Test
     public void waitForTimeWithWebDriverWaitFunction(){
 
         String theTime = new WebDriverWait(driver,20,100).
+                // works on a WebDriver and returns a String.
                 until(new Function<WebDriver, String>() {
                     @Override
                     public String apply(WebDriver driver) {
@@ -81,14 +97,20 @@ public class FluentWaitExercisesTest {
                     }
                 }
                 );
-
         assertEquals("Expected a different time", "01:01:04", theTime);
     }
 
+    /**
+     *  waitForTimeWithWebDriverWaitExpectedCondition method.
+     *  Use an ExpectedCondition instead of a function.
+     *  Create a WebDriverWait that returns a String with the time when the last two chars are “04”. Assert the returned
+     *  time is 01:01:04
+     */
     @Test
     public void waitForTimeWithWebDriverWaitExpectedCondition(){
 
         String theTime = new WebDriverWait(driver,20,100).
+                // returns a String
                 until(new ExpectedCondition<String>() {
                     @Override
                     public String apply(WebDriver driver) {
@@ -104,9 +126,6 @@ public class FluentWaitExercisesTest {
                     }
                 }
                 );
-
         assertEquals("Expected a different time", "01:01:04", theTime);
     }
-
-
 }
