@@ -1,7 +1,7 @@
 package webdriver.cookies;
 
 import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
@@ -33,7 +33,7 @@ public class CookiesExercisesTest {
     private static WebElement queryInput;
     private static WebElement submitButton;
 
-    @BeforeClass
+    @Before
     public void setup(){
 
         driver = Driver.get("webdriver.chrome.driver", "CHROME");
