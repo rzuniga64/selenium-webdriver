@@ -30,7 +30,6 @@ public class WaitingExercisesTest {
     public static void setup(){
 
         driver = Driver.get("webdriver.chrome.driver", "CHROME");
-        driver.navigate().to("http://compendiumdev.co.uk/selenium/basic_ajax.html");
         wait = new WebDriverWait(driver,10);
     }
 
@@ -41,6 +40,8 @@ public class WaitingExercisesTest {
      */
     @Test
     public void canReturnAWebElementUsingAnonymousClass(){
+
+        driver.navigate().to("http://compendiumdev.co.uk/selenium/basic_ajax.html");
 
         // select Server
         WebElement categorySelect = driver.findElement(By.id("combo1"));
