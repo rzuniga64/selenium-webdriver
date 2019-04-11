@@ -1,7 +1,7 @@
 package webdriver.drivers;
 
 import webdriver.drivermanager.Driver;
-import webdriver.manager.ProxyPort;
+import manager.ProxyPort;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
