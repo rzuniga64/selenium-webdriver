@@ -31,16 +31,15 @@ public class ChromeDriverPathTest {
 
         // I have set the path to chromedriver.exe on the PATH.
         // PATH = C:\tools\selenium
+        chrome = new ChromeDriver();
+        chrome.get("http://www.compendiumdev.co.uk/selenium/basic_html_form.html");
     }
 
     // @Ignore("Test requires chromedriver on the path")
     @Test
     public void basicChromeUsage(){
-
-        chrome = new ChromeDriver();
-        chrome.get("http://www.compendiumdev.co.uk/selenium/basic_html_form.html");
+        
         assertThat(chrome.getTitle(), is("HTML Form Elements"));
-
         chrome.quit();
     }
 
