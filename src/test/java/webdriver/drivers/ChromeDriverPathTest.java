@@ -18,6 +18,9 @@ import static org.hamcrest.core.Is.is;
  *  String chromeDriverLocation = currentDir + "\\src\\test\\resources\\chromedriver.exe";
  *  System.setProperty("webdriver.chrome.driver", chromeDriverLocation);
  *
+ *  RESOURCE_DIR = System.getProperty("user.dir") + "\\src\\test\\resources\\";
+ *  System.setProperty("webdriver.gecko.driver", RESOURCE_DIR + "geckodriver.exe");
+ *
  *  Add the folder of the chrome driver to the system path variable (you'll want to restart the IDE)
  *  You can check if it is in the path by running 'chromedriver.exe' from any folder
  *  If it runs, then chrome driver is on the path. Then run the test.
