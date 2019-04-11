@@ -1,6 +1,8 @@
 package webdriver.drivers;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import org.junit.After;
+import org.junit.AfterClass;
 import webdriver.drivermanager.Driver;
 import manager.ProxyPort;
 import org.junit.Test;
@@ -12,40 +14,43 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+/**
+ *  HtmlUnitDriverTest class.
+ *  Make sure you have HtmlUnitDriver in your pom.xml https://github.com/SeleniumHQ/htmlunit-driver
+ */
 public class HtmlUnitDriverTest {
 
-    // make sure you have HtmlUnitDriver in your pom.xml
-    //https://github.com/SeleniumHQ/htmlunit-driver
+    private static WebDriver htmlunit;
 
+    /**
+     *  basicHTMLUnitDriverBrowserVersion method.
+     *  Start an HtmlUnitDriver to use headers that tell the application that I am coming from Firefox 60.
+     *  There are different browser than I can use.
+     */
     @Test
     public void basicHTMLUnitDriverBrowserVersion(){
 
-        // changed to BrowserVersion.FIREFOX_38 from BrowserVersion.FIREFOX_24
-        // when upgrading to WebDriver 2.46.0
-        // changed to BrowserVersion.FIREFOX_24 from BrowserVersion.FIREFOX_3_6
-        // when upgrading to WebDriver 2.42.2, if you are using a version below this
-        // then change it back to FIREFOX_3_6
-        WebDriver htmlunit = new HtmlUnitDriver(BrowserVersion.FIREFOX_52);
-
-        htmlunit.get("http://www.compendiumdev.co.uk/selenium/basic_html_form.html");
-
+        htmlunit = new HtmlUnitDriver(BrowserVersion.FIREFOX_60);
+        htmlunit.navigate().to("http://www.compendiumdev.co.uk/selenium/basic_html_form.html");
         assertThat(htmlunit.getTitle(), is("HTML Form Elements"));
-
-        htmlunit.quit();
     }
 
+    /**
+     *  basicHTMLUnitDriverJavascriptOn method.
+     *  Enable JavaScript.
+     */
     @Test
     public void basicHTMLUnitDriverJavascriptOn(){
 
-        WebDriver htmlunit = new HtmlUnitDriver(true);
-
-        htmlunit.get("http://www.compendiumdev.co.uk/selenium/basic_html_form.html");
-
+        htmlunit = new HtmlUnitDriver(true);
+        htmlunit.navigate().to("http://www.compendiumdev.co.uk/selenium/basic_html_form.html");
         assertThat(htmlunit.getTitle(), is("HTML Form Elements"));
-
-        htmlunit.quit();
     }
 
+    /**
+     *  basicHTMLUnitDriverCapabilities method.
+     *  Use capabilities.
+     */
     @Test
          public void basicHTMLUnitDriverCapabilities(){
 
@@ -54,13 +59,9 @@ public class HtmlUnitDriverTest {
         capabilities.setJavascriptEnabled(true);
         capabilities.setBrowserName("htmlunit");
 
-        WebDriver htmlunit = new HtmlUnitDriver(capabilities);
-
-        htmlunit.get("http://www.compendiumdev.co.uk/selenium/basic_html_form.html");
-
+        htmlunit = new HtmlUnitDriver(capabilities);
+        htmlunit.navigate().to("http://www.compendiumdev.co.uk/selenium/basic_html_form.html");
         assertThat(htmlunit.getTitle(), is("HTML Form Elements"));
-
-        htmlunit.quit();
     }
 
     @Test
@@ -79,19 +80,24 @@ public class HtmlUnitDriverTest {
                     .setSslProxy(Driver.PROXY);
             capabilities.setCapability(CapabilityType.PROXY, proxy);
 
-            WebDriver htmlunit = new HtmlUnitDriver(capabilities);
-
-            htmlunit.get("http://www.compendiumdev.co.uk/selenium/basic_html_form.html");
-
+            htmlunit = new HtmlUnitDriver(capabilities);
+            htmlunit.navigate().to("http://www.compendiumdev.co.uk/selenium/basic_html_form.html");
             assertThat(htmlunit.getTitle(), is("HTML Form Elements"));
-
-            htmlunit.quit();
-
-        }else{
+        } else {
             System.out.println(
                     "No Proxy seemed to be running on " +
                             Driver.PROXY +
                             " so didn't run test basicHTMLUnitDriverProxyCapabilities");
         }
+    }
+
+    @After
+    public void closeBrowser() {
+        htmlunit.close();
+    }
+
+    @AfterClass
+    public static void quitBrowser() {
+        htmlunit.quit();
     }
 }
