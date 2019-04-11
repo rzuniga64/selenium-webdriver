@@ -25,7 +25,7 @@ public class ChromeDriverTest {
 
         // tell webdriver where to find the chrome driver
         String RESOURCE_DIR = System.getProperty("user.dir") + "\\src\\test\\resources\\";
-        System.setProperty("webdriver.gecko.driver", RESOURCE_DIR + "geckodriver.exe");
+        System.setProperty("webdriver.chrome.driver", RESOURCE_DIR + "chromedriver.exe");
     }
 
     /**
