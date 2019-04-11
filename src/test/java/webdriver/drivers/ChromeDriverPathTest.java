@@ -12,7 +12,7 @@ import static org.hamcrest.core.Is.is;
 /**
  *  ChromeDriverPathTest class.
  *  Cover nuances with the Chrome Driver
- *  If we don't tell webdriver where to find the chrome driver it will look on the path
+ *  If we don't tell webdriver where to find the chrome driver it will look on the path.
  *
  *  String currentDir = System.getProperty("user.dir");
  *  String chromeDriverLocation = currentDir + "\\src\\test\\resources\\chromedriver.exe";
