@@ -38,7 +38,7 @@ public class ChromeDriverPathTest {
     // @Ignore("Test requires chromedriver on the path")
     @Test
     public void basicChromeUsage(){
-        
+
         assertThat(chrome.getTitle(), is("HTML Form Elements"));
         chrome.quit();
     }
