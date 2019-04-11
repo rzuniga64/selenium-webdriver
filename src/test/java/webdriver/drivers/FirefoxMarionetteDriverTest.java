@@ -1,7 +1,7 @@
 package webdriver.drivers;
 
-import com.seleniumsimplified.webdriver.manager.Driver;
-import com.seleniumsimplified.webdriver.manager.ProxyPort;
+import webdriver.drivermanager.Driver;
+import webdriver.manager.ProxyPort;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
@@ -11,7 +11,7 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  * cover nuances with the Marionette Driver

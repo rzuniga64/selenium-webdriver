@@ -1,7 +1,7 @@
 package webdriver.drivers;
 
-import com.seleniumsimplified.webdriver.manager.Driver;
-import com.seleniumsimplified.webdriver.manager.ProxyPort;
+import webdriver.drivermanager.Driver;
+import webdriver.manager.ProxyPort;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -15,7 +15,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  * Created by Alan on 28/07/2016.
