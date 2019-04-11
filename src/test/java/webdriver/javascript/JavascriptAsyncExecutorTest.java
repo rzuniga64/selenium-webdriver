@@ -1,6 +1,6 @@
 package webdriver.javascript;
 
-import com.seleniumsimplified.webdriver.manager.Driver;
+import webdriver.drivermanager.Driver;
 import org.junit.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -13,16 +13,27 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.Assert.assertEquals;
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 
-
+/**
+ *  JavascriptAsyncExecutorTest class.
+ *
+ *  When executeAsyncScript is called an addition final arguments added into the script by WebDriver as a final
+ *  argument, a callback function to signal that async execution has finished.
+ *  - “var callback = arguments[arguments.length = 1];”
+ *  Any argument you pass to the callback function will be returned to WebDriver
+ *  - HTML Element == WebElement, number == Long etc.
+ *  Call it expecting an Object and cast appropriately
+ *  SetScriptTimeout
+ *  - driver.manage().timeouts.setScriptTimeout(10, TimeUnit.SECONDS);
+ */
 public class JavascriptAsyncExecutorTest {
-
 
     private static WebDriver driver;
 
-
     @BeforeClass
     public static void setup(){
-        driver = Driver.get("http://www.compendiumdev.co.uk/selenium/basic_ajax.html");
+
+        driver = Driver.get("webdriver.chrome.driver", "CHROME");
+        driver.navigate().to("http://www.compendiumdev.co.uk/selenium/basic_ajax.html");
     }
 
     @Before
@@ -31,18 +42,21 @@ public class JavascriptAsyncExecutorTest {
         driver.navigate().refresh();
     }
 
-    // for hints see http://stackoverflow.com/questions/2857900/onhide-type-event-in-
-
+    /**
+     *  syncOnAjaxGifRemovalViaAsync method.
+     *  for hints see http://stackoverflow.com/questions/2857900/onhide-type-event-in-
+     *
+     *  add a function to the global space. When executeAsyncScript is called an addition final arguments added into
+     *  the script by WebDriver as a final argument, a callback function to signal that async execution has finished.
+     *  Get the JQuery hide function into a variable. Then make this the  new JQuery hide function which calls the
+     *  old JQuery hide function. Once it is hidden my WebDriver callback function will be called.
+     */
     @Test
     public void syncOnAjaxGifRemovalViaAsync(){
 
-        WebDriver driver;
-
-        driver = Driver.get("http://compendiumdev.co.uk/selenium/" +
-                "basic_ajax.html");
-
         JavascriptExecutor js =(JavascriptExecutor)driver;
-
+        // Set the execute timeout. We have to do this before we execute the async script. Otherwise it will time out
+        // right away.
         driver.manage().timeouts().setScriptTimeout(10, TimeUnit.SECONDS);
 
         js.executeScript("window.webdrivercallback = function(){};" +
@@ -74,8 +88,5 @@ public class JavascriptAsyncExecutorTest {
         //WebElement languageWeUsed = driver.findElement(By.id("_valuelanguage_id"));
         WebElement languageWeUsed = new WebDriverWait(driver,10).until(elementToBeClickable( By.id("_valuelanguage_id")));
         assertEquals("Expected Java code", "23",languageWeUsed.getText());
-
-
     }
-
 }
