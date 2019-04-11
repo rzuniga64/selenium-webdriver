@@ -23,8 +23,9 @@ public class ChromeDriverTest {
     @BeforeClass
     public static void setupTheChromeDriverSystemProperty(){
 
-        // tell webdriver where to find the chrome driver
+        // tell webdriver where to find the chrome driver.
         String RESOURCE_DIR = System.getProperty("user.dir") + "\\src\\test\\resources\\";
+        // Set the property so that the driver can be found.
         System.setProperty("webdriver.chrome.driver", RESOURCE_DIR + "chromedriver.exe");
     }
 
@@ -52,8 +53,10 @@ public class ChromeDriverTest {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("test-type");
         options.addArguments("disable-plugins");
+        // Disable the plugins and extensions to prevent them from interfering with tests
         options.addArguments("disable-extensions");
 
+        // Get the driver
         chrome = new ChromeDriver(options);
         chrome.get("http://www.compendiumdev.co.uk/selenium/basic_html_form.html");
         assertThat(chrome.getTitle(), is("HTML Form Elements"));
