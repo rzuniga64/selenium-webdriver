@@ -1,114 +1,98 @@
 package webdriver.drivers;
 
-import webdriver.drivermanager.Driver;
 import manager.ProxyPort;
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import webdriver.drivermanager.Driver;
 
-import static org.hamcrest.core.Is.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
 
 /**
  * cover nuances with the Chrome Driver
  */
 public class ChromeDriverTest {
 
-    // As of Chrome v35, it reports an error regarding --ignore-certificate-errors
-    // to remove this error start the chrome driver with
-    // args "test-type"
-
+    private static WebDriver chrome;
 
     @BeforeClass
     public static void setupTheChromeDriverSystemProperty(){
 
         // tell webdriver where to find the chrome driver
-        String currentDir = System.getProperty("user.dir");
-        String chromeDriverLocation = currentDir + "/../tools/chromedriver/chromedriver.exe";
-
-        // if chrome is on your path then you do not need to set the location
-        // if this test fails then Chrome might not be on your path and you may need to configure the property above
-        //System.setProperty("webdriver.chrome.driver", chromeDriverLocation);
-
-
+        String RESOURCE_DIR = System.getProperty("user.dir") + "\\src\\test\\resources\\";
+        System.setProperty("webdriver.gecko.driver", RESOURCE_DIR + "geckodriver.exe");
     }
 
-
-    // You may see an error regarding --ignore-certificate-errors when using Chrome v35 or above
-    // as the following test does not use the args "test-type"
+    /**
+     *  basicChromeUsage method.
+     */
     @Test
     public void basicChromeUsage(){
 
-        WebDriver chrome = new ChromeDriver();
-
+        chrome = new ChromeDriver();
         chrome.get("http://www.compendiumdev.co.uk/selenium/basic_html_form.html");
-
         assertThat(chrome.getTitle(), is("HTML Form Elements"));
-
-        chrome.quit();
     }
 
+    /**
+     *  basicChromeDriverOptions method.
+     *  Chrome is supported by WebDriver, on linux it may not find the location of your browser.
+     *  The 'which' command for chromium-browser may find it.
+     *
+     *  http://peter.sh/experiments/chromium-command-line-switches/
+     */
     @Test
-    /*
-      * Chrome is supported by WebDriver, on linux it may not
-      * find the location of your browser
-      * the 'which' command for chromium-browser may find it
-      */
     public void basicChromeDriverOptions(){
-
-        // http://peter.sh/experiments/chromium-command-line-switches/
-
-        // with Chrome v35 it now reports an error on --ignore-certificate-errors
-        // so call with args "test-type"
-        // https://code.google.com/p/chromedriver/issues/detail?id=799&q=ignore-certificate-errors&colspec=ID%20Status%20Pri%20Owner%20Summary
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("test-type");
         options.addArguments("disable-plugins");
         options.addArguments("disable-extensions");
 
-
-        WebDriver chrome = new ChromeDriver(options);
-
+        chrome = new ChromeDriver(options);
         chrome.get("http://www.compendiumdev.co.uk/selenium/basic_html_form.html");
-
         assertThat(chrome.getTitle(), is("HTML Form Elements"));
-
-        chrome.quit();
     }
 
-
+    /**
+     *  basicChromeDriverProxy method.
+     *  Set a Chrome driver proxy.
+     *  http://peter.sh/experiments/chromium-command-line-switches/
+     */
     @Test
     public void basicChromeDriverProxy(){
 
         //run this only if proxy is running e.g. Fiddler or BrowserMobProxy or BurpSuite etc.
         if(ProxyPort.inUse(Driver.PROXYHOST, Driver.PROXYPORT)) {
 
-            // http://peter.sh/experiments/chromium-command-line-switches/
             ChromeOptions options = new ChromeOptions();
             options.addArguments("test-type");
             options.addArguments("disable-plugins");
             options.addArguments("disable-extensions");
             options.addArguments("proxy-server=" + Driver.PROXY);
 
-            WebDriver chrome = new ChromeDriver(options);
-
+            chrome = new ChromeDriver(options);
             chrome.get("http://www.compendiumdev.co.uk/selenium/basic_html_form.html");
-
             assertThat(chrome.getTitle(), is("HTML Form Elements"));
 
-            chrome.quit();
-
-        }else{
-            System.out.println(
-                    "No Proxy seemed to be running on " +
-                            Driver.PROXY +
+        } else {
+            System.out.println("No Proxy seemed to be running on " + Driver.PROXY +
                             " so didn't run test basicChromeDriverProxy");
         }
     }
 
+    @After
+    public void closeBrowser() {
+        chrome.close();
+    }
 
-
+    @AfterClass
+    public static void quitBrowser() {
+        chrome.quit();
+    }
 }
