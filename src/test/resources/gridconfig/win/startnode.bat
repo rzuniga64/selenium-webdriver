@@ -3,4 +3,4 @@ REM http://code.google.com/p/selenium/source/browse/trunk/java/server/src/org/op
 REM java -jar selenium-server-standalone-3.0.1.jar -role node -nodeConfig node.json -Dwebdriver.chrome.driver=../chromedriver/chromedriver.exe
 
 REM to start one locally it all goes on the command line
-java -jar selenium-server-standalone-3.0.1.jar -role node -hub http://localhost:4444/grid/register
+java -jar selenium-server-standalone-3.141.59.jar -role node -hub http://localhost:4444/grid/register
