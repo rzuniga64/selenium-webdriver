@@ -59,7 +59,7 @@ public class Driver extends Thread{
     public static BrowserName currentDriver;
     public static String RESOURCE_DIR = "";
     public static String PROXYHOST = "localhost";
-    public static String PROXYPORT = "8888";     // default port for browsermob: 8080, fiddler: 8888
+    public static String PROXYPORT = "8888";     // default port for browsermob, burpesuite: 8080, fiddler: 8888
     public static String PROXY = PROXYHOST+":"+PROXYPORT;
 
     public static void set(BrowserName aBrowser){
@@ -195,8 +195,8 @@ public class Driver extends Thread{
 
                 case IE:
 
-                    setDriverPropertyIfNecessary("webdriver.ie.driver", "/../tools/iedriver_32/IEDriverServer.exe", "C://webdrivers/iedriver_32/IEDriverServer.exe");
-                    //setDriverPropertyIfNecessary("webdriver.ie.driver", "/../tools/iedriver_64/IEDriverServer.exe", "C://webdrivers/iedriver_64/IEDriverServer.exe");
+                    String RESOURCE_DIR = System.getProperty("user.dir") + "\\src\\test\\resources\\";
+                    System.setProperty("webdriver.ie.driver", RESOURCE_DIR + "IEDriverServer.exe");
 
                     aDriver = new InternetExplorerDriver();
                     currentDriver = BrowserName.IE;
