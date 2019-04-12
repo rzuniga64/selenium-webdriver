@@ -15,11 +15,11 @@ import static org.hamcrest.core.Is.is;
  *  If we don't tell webdriver where to find the opera driver it will look on the path.
  *
  *  String currentDir = System.getProperty("user.dir");
- *  String chromeDriverLocation = currentDir + "\\src\\test\\resources\\chromedriver.exe";
- *  System.setProperty("webdriver.chrome.driver", chromeDriverLocation);
+ *  String operaDriverLocation = currentDir + "\\src\\test\\resources\\operadriver.exe";
+ *  System.setProperty("webdriver.opera.driver", operaDriverLocation);
  *
  *  RESOURCE_DIR = System.getProperty("user.dir") + "\\src\\test\\resources\\";
- *  System.setProperty("webdriver.gecko.driver", RESOURCE_DIR + "geckodriver.exe");
+ *  System.setProperty("webdriver.opera.driver", RESOURCE_DIR + "operadriver.exe");
  *
  *  Add the folder of the opera driver to the system path variable (you'll want to restart the IDE)
  *  You can check if it is in the path by running 'operadriver.exe' from any folder
@@ -34,6 +34,9 @@ public class OperaDriverTest {
 
         // I have set the path to operadriver.exe on the PATH.
         // PATH = C:\tools\selenium
+
+        String RESOURCE_DIR = System.getProperty("user.dir") + "\\src\\test\\resources\\";
+        System.setProperty("webdriver.opera.driver", RESOURCE_DIR + "operadriver.exe");
         opera = new OperaDriver();
         opera.get("http://www.compendiumdev.co.uk/selenium/basic_html_form.html");
     }
