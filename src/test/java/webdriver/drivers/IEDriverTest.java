@@ -1,7 +1,8 @@
 package webdriver.drivers;
 
-import webdriver.drivermanager.Driver;
 import manager.ProxyPort;
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.Proxy;
@@ -9,31 +10,32 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import webdriver.drivermanager.Driver;
 
-import static org.hamcrest.core.Is.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
 
 public class IEDriverTest {
+
+    private static WebDriver iedriver;
+    private static WebDriverWait wait;
 
     @BeforeClass
     public static void setupTheIEDriverSystemProperty(){
 
-        // tell webdriver where to find the IE driver
-        String currentUserDir = System.getProperty("user.dir");
-        String IEDriverLocation = currentUserDir + "/../tools/iedriver_32/IEDriverServer.exe";
-        System.setProperty("webdriver.ie.driver", IEDriverLocation);
+        String RESOURCE_DIR = System.getProperty("user.dir") + "\\src\\test\\resources\\";
+        System.setProperty("webdriver.ie.driver", RESOURCE_DIR + "IEDriverServer.exe");
     }
 
     @Test
     public void basicIEDriverTest(){
 
-        WebDriver iedriver = new InternetExplorerDriver();
-
-        iedriver.get("http://www.compendiumdev.co.uk/selenium/basic_html_form.html");
-
+        iedriver = new InternetExplorerDriver();
+        iedriver.navigate().to("http://www.compendiumdev.co.uk/selenium/basic_html_form.html");
+        new WebDriverWait(iedriver, 10).until(ExpectedConditions.titleContains("HTML Form Elements"));
         assertThat(iedriver.getTitle(), is("HTML Form Elements"));
-
-        iedriver.quit();
     }
 
     @Test
@@ -49,15 +51,10 @@ public class IEDriverTest {
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setCapability(CapabilityType.PROXY, proxy);
 
-            WebDriver iedriver = new InternetExplorerDriver(capabilities);
-
-            iedriver.get("http://www.compendiumdev.co.uk/selenium/basic_html_form.html");
-
+            iedriver = new InternetExplorerDriver(capabilities);
+            iedriver.navigate().to("http://www.compendiumdev.co.uk/selenium/basic_html_form.html");
             assertThat(iedriver.getTitle(), is("HTML Form Elements"));
-
-            iedriver.quit();
-
-        }else{
+        } else {
             System.out.println(
                     "No Proxy seemed to be running on " +
                             Driver.PROXY +
@@ -65,4 +62,13 @@ public class IEDriverTest {
         }
     }
 
+    @After
+    public void closeBrowser() {
+        //iedriver.close();
+    }
+
+    @AfterClass
+    public static void quitBrowser() {
+        //iedriver.quit();
+    }
 }
