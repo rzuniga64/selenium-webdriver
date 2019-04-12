@@ -29,7 +29,10 @@ public class FirefoxDriverTest {
     private static WebDriver firefox;
 
     @BeforeClass
-    public static void setupTheChromeDriverSystemProperty(){
+    public static void setup(){
+
+        // String RESOURCE_DIR = System.getProperty("user.dir") + "\\src\\test\\resources\\";
+        // System.setProperty("webdriver.chrome.driver", RESOURCE_DIR + "geckodriver.exe");
 
         firefox = new FirefoxDriver();
     }
