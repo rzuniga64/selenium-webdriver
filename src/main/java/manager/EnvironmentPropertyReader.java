@@ -6,8 +6,8 @@ package manager;
 public class EnvironmentPropertyReader {
 
     /**
-     * Allow setting the controls via property or environment variable
-     * property takes precedence, then environment variable, then default
+     *  Allow setting the controls via property or environment variable property takes precedence, then environment
+     *  variable, then default
      */
     public static String getPropertyOrEnv(String name, String theDefault){
 
