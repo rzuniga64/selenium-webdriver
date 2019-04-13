@@ -322,6 +322,7 @@ public class Driver extends Thread{
 
                 quit();
                 aDriver=null;
+                // Since this is a recursive call set a flag to stop an infinite loop.
                 avoidRecursiveCall = true;
                 return get();
             }
