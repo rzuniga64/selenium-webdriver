@@ -23,6 +23,8 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
+import static webdriver.drivermanager.EnvironmentPropertyReader.getPropertyOrEnv;
+
 /**
  *  A singleton style drivermanager to maintain Drivers to prevent test slowdown for creating a browser for each class with
  *  tests. Also counts time to start a browser and extrapolates from that how much time you have saved using such hacky
@@ -94,7 +96,7 @@ public class Driver extends Thread{
             System.setProperty(browserPropertyName, browser);
 
             // to allow setting the browser as a property or an environment variable
-            String defaultBrowser = EnvironmentPropertyReader.getPropertyOrEnv(browserPropertyName, browser);
+            String defaultBrowser = getPropertyOrEnv(browserPropertyName, browser);
 
             // We could move this out so we don't have a switch statement.
             // Instead, we instantiate a browser supplier object and call it a single time.
@@ -116,9 +118,6 @@ public class Driver extends Thread{
                     break;
                 case "FIREFOXPORTABLE":
                     useThisDriver = BrowserName.FIREFOXPORTABLE;
-                    break;
-                case "FIREFOXMARIONETTE":
-                    useThisDriver = BrowserName.FIREFOXMARIONETTE;
                     break;
                 case "SAUCELABS":
                     useThisDriver = BrowserName.SAUCELABS;
@@ -161,7 +160,6 @@ public class Driver extends Thread{
                     break;
 
                 case CHROME:
-                    // You need to download the ChromeDriver executable: https://sites.google.com/a/chromium.org/chromedriver/
                     RESOURCE_DIR = System.getProperty("user.dir") + "\\src\\test\\resources\\";
                     service = new ChromeDriverService.Builder()
                             .usingDriverExecutable(new File(RESOURCE_DIR + "chromedriver.exe"))
@@ -234,11 +232,14 @@ public class Driver extends Thread{
 
                 case FIREFOXPORTABLE:
 
-                    setDriverPropertyIfNecessary("seleniumsimplified.firefoxportable", "/../tools/FirefoxPortable/FirefoxPortable.exe", "C://webdrivers/FirefoxPortable/FirefoxPortable.exe");
+                    setDriverPropertyIfNecessary("seleniumsimplified.firefoxportable",
+                                            "/../tools/FirefoxPortable/FirefoxPortable.exe",
+                                                "C://webdrivers/FirefoxPortable/FirefoxPortable.exe");
 
                     //System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE, "false");
 
-                    // for WebDriver 3 compatibility I need to set the FirefoxDriver to use the legacy driver rather than marionette
+                    // for WebDriver 3 compatibility I need to set the FirefoxDriver to use the legacy driver rather
+                    // than marionette
                     DesiredCapabilities portableCapabilities = DesiredCapabilities.firefox();
                     portableCapabilities.setCapability("marionette", false);
                     portableCapabilities.setCapability("firefox_binary",
@@ -252,15 +253,6 @@ public class Driver extends Thread{
 
                     aDriver = new FirefoxDriver(portableCapabilities);
                     currentDriver = BrowserName.FIREFOX;
-                    break;
-
-                case FIREFOXMARIONETTE:
-
-                    // prior to Selenium 3 this was wires.exe
-                    setDriverPropertyIfNecessary("webdriver.gecko.driver", "/../tools/marionette/geckodriver.exe", "C://webdrivers/marionette/geckodriver.exe");
-
-                    //aDriver = new MarionetteDriver();//profile);
-                    currentDriver = BrowserName.FIREFOXMARIONETTE;
                     break;
 
                 case SAUCELABS:
@@ -282,9 +274,12 @@ public class Driver extends Thread{
 
                 case GRID:
 
-                    String gridBrowser = EnvironmentPropertyReader.getPropertyOrEnv("WEBDRIVER_GRID_BROWSER", "firefox");
-                    String gridBrowserVersion = EnvironmentPropertyReader.getPropertyOrEnv("WEBDRIVER_GRID_BROWSER_VERSION", "");
-                    String gridBrowserPlatform = EnvironmentPropertyReader.getPropertyOrEnv("WEBDRIVER_GRID_BROWSER_PLATFORM", "");
+                    String gridBrowser = getPropertyOrEnv("WEBDRIVER_GRID_BROWSER",
+                                                                    "firefox");
+                    String gridBrowserVersion = getPropertyOrEnv("WEBDRIVER_GRID_BROWSER_VERSION",
+                                                                           "");
+                    String gridBrowserPlatform = getPropertyOrEnv("WEBDRIVER_GRID_BROWSER_PLATFORM",
+                                                                            "");
 
                     DesiredCapabilities gridCapabilities = new DesiredCapabilities();
                     gridCapabilities.setBrowserName(gridBrowser);
@@ -308,7 +303,8 @@ public class Driver extends Thread{
 
                     try {
                         // add url to environment variables to avoid releasing with source
-                        String gridURL = EnvironmentPropertyReader.getPropertyOrEnv("WEBDRIVER_GRID_URL", "http://localhost:4444/wd/hub");
+                        String gridURL = getPropertyOrEnv("WEBDRIVER_GRID_URL",
+                                                                    "http://localhost:4444/wd/hub");
                         aDriver = new RemoteWebDriver(new URL(gridURL), gridCapabilities);
                     } catch (MalformedURLException e) {
                         e.printStackTrace();
@@ -325,9 +321,11 @@ public class Driver extends Thread{
                     DesiredCapabilities appiumCapabilities = new DesiredCapabilities();
 
                     // the device name can be seen when you do "adb devices"
-                    appiumCapabilities.setCapability("deviceName", EnvironmentPropertyReader.getPropertyOrEnv("APPIUM_DEVICE_NAME", ""));
+                    appiumCapabilities.setCapability("deviceName",
+                            getPropertyOrEnv("APPIUM_DEVICE_NAME", ""));
                     appiumCapabilities.setCapability("platformName", Platform.ANDROID);
-                    appiumCapabilities.setCapability("app", EnvironmentPropertyReader.getPropertyOrEnv("APPIUM_BROWSER", "browser"));
+                    appiumCapabilities.setCapability("app",
+                            getPropertyOrEnv("APPIUM_BROWSER", "browser"));
 
                     try {
                         // add url to environment variables to avoid releasing with source
@@ -347,7 +345,8 @@ public class Driver extends Thread{
             browserStartTime = browserStartedTime - startBrowserTime;
 
             // Java has a thing called shut down hook that when the JVM stops that code will run. All that it does is
-            // call the quit method in this particular class. We want to shutdown the shared browser when the tests finish
+            // call the quit method in this particular class. We want to shutdown the shared browser when the tests
+            // finish
             Runtime.getRuntime().addShutdownHook(
                     new Thread(() -> Driver.quit())
             );
@@ -402,7 +401,8 @@ public class Driver extends Thread{
             // get the current browser from the property or environment
             // if not set then default to firefox
             // make lowercase for consistent comparison
-            String gridBrowser = EnvironmentPropertyReader.getPropertyOrEnv("WEBDRIVER_GRID_BROWSER", "firefox").toLowerCase();
+            String gridBrowser = getPropertyOrEnv("WEBDRIVER_GRID_BROWSER",
+                                                            "firefox").toLowerCase();
 
             if(gridBrowser.contains("firefox")){
                 return BrowserName.FIREFOX;
@@ -428,7 +428,13 @@ public class Driver extends Thread{
         return currentDriver;
     }
 
-    private static void addAnyValidExtraCapabilityTo(DesiredCapabilities gridCapabilities, Set<String> possibleCapabilityKeys) {
+    /**
+     * addAnyValidExtraCapabilityTo method.
+     * @param gridCapabilities grid capabilities.
+     * @param possibleCapabilityKeys capability keys.
+     */
+    private static void addAnyValidExtraCapabilityTo(DesiredCapabilities gridCapabilities,
+                                                     Set<String> possibleCapabilityKeys) {
 
         String extraCapabilityPrefix = "WEBDRIVER_GRID_CAP_X_";
 
@@ -436,7 +442,7 @@ public class Driver extends Thread{
 
             if(capabilityName.startsWith(extraCapabilityPrefix)){
 
-                String capabilityValue = EnvironmentPropertyReader.getPropertyOrEnv(capabilityName, "");
+                String capabilityValue = getPropertyOrEnv(capabilityName, "");
 
                 if(capabilityValue.length()>0){
                     String capability = capabilityName.replaceFirst(extraCapabilityPrefix,"");
@@ -447,8 +453,15 @@ public class Driver extends Thread{
         }
     }
 
+    /**
+     *  setDriverPropertyIfNecessary method.
+     *  @param propertyKey System property key.
+     *  @param relativeToUserPath relative path to driver.
+     *  @param absolutePath absolute path to driver.
+     *
+     *  http://docs.oracle.com/javase/tutorial/essential/environment/sysprop.html
+     */
     private static void setDriverPropertyIfNecessary(String propertyKey, String relativeToUserPath, String absolutePath) {
-        // http://docs.oracle.com/javase/tutorial/essential/environment/sysprop.html
 
         if(!System.getProperties().containsKey(propertyKey)){
 
@@ -457,11 +470,11 @@ public class Driver extends Thread{
             File driverExe = new File(chromeDriverLocation);
             if(driverExe.exists()){
                 System.setProperty(propertyKey, chromeDriverLocation);
-            }else{
+            } else {
                 driverExe = new File(absolutePath);
                 if(driverExe.exists()){
                     System.setProperty(propertyKey, absolutePath);
-                }else{
+                } else {
                     // expect an error on the follow through when we try to use the driver
                     // unless the user has it in their Path in which case WebDriver will use that
                 }
@@ -469,6 +482,12 @@ public class Driver extends Thread{
         }
     }
 
+    /**
+     *  get method.
+     * @param aURL the URL to navigate to.
+     * @param maximize true if you want to maximize the window; false otherwise.
+     * @return a WebDriver.
+     */
     public static WebDriver get(String aURL, boolean maximize){
 
         //get();
