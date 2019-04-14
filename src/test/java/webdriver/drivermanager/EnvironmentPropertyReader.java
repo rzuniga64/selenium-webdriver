@@ -11,25 +11,23 @@ public class EnvironmentPropertyReader {
      */
     public static String getPropertyOrEnv(String browserPropertyName, String browser){
 
-        String theValue = System.getProperty(browserPropertyName);
-        if(theValue == null){
+        String browserName = System.getProperty(browserPropertyName);
+        if(browserName == null){
 
-            // this message just confuses people
-            //System.out.println("Could not find Property " + name);
-            theValue = System.getenv(browserPropertyName);
+            browserName = System.getenv(browserPropertyName);
 
-            if(theValue==null){
+            if(browserName==null){
 
                 System.out.println("No Environment Variable or Property named [" + browserPropertyName + "] using default value [" + browser + "]");
-                theValue = browser;
+                browserName = browser;
 
-            }else{
-                System.out.println("Using Environment Variable " + browserPropertyName + " with value " + theValue);
+            } else {
+                System.out.println("Using Environment Variable " + browserPropertyName + " with value " + browserName);
             }
-        }else{
-            System.out.println("Using Property " + browserPropertyName + " with value " + theValue);
+        } else {
+            System.out.println("Using Property " + browserPropertyName + " with value " + browserName);
         }
 
-        return theValue;
+        return browserName;
     }
 }
