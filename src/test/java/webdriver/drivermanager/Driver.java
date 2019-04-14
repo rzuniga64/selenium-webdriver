@@ -43,8 +43,10 @@ import java.util.Set;
  */
 public class Driver extends Thread{
 
-    public enum BrowserName{HTMLUNIT, FIREFOX, CHROME, GOOGLECHROME, EDGE, IE, FIREFOXPORTABLE, FIREFOXMARIONETTE, SAUCELABS, GRID,
-        APPIUM, OPERA}
+    public enum BrowserName{
+        HTMLUNIT, FIREFOX, CHROME, GOOGLECHROME, EDGE, IE, FIREFOXPORTABLE, FIREFOXMARIONETTE, SAUCELABS, GRID,
+        APPIUM, OPERA
+    }
 
     public static final String BROWSER_PROPERTY_NAME = "selenium2basics.webdriver";
     private static final String DEFAULT_BROWSER = "CHROME";
