@@ -26,6 +26,9 @@ import static org.junit.Assert.fail;
  * - Save screenshot to file with a random name.
  * - Save BASE64 string to file with random name. Hint: Base64 object can decode before writing to a FileOutputStream
  * - Save BYTE to a file with a random name. Hint: FileOutputStream can write a byte[]
+ *
+ *  Use Output.FILE when we are running locally. When we are running with a remote webdriver we want to use
+ *  OutputType.BASE64 or OutputType.BYTES.
  */
 public class PersistScreenshotsTest {
 
@@ -41,6 +44,7 @@ public class PersistScreenshotsTest {
     /**
      *  persistOutputTypeFile method.
      *  Ensure driver has the capability to take a screenshot then save screenshot to file with a random name.
+     *  Use Output.FILE when we are running locally.
      *  @throws IOException
      */
     @Test
@@ -80,6 +84,8 @@ public class PersistScreenshotsTest {
      *  persistOutputTypeBase64 method.
      *  Ensure driver has the capability to take a screenshot then save BASE64 string to file with random name.
      *  Hint: Base64 object can decode before writing to a FileOutputStream
+     *
+     *  When we are running with a remote webdriver we want to use OutputType.BASE64 or OutputType.BYTES.
      *  @throws IOException
      */
     @Test
@@ -122,6 +128,8 @@ public class PersistScreenshotsTest {
      *  persistOutputTypeBytes method.
      *  Ensure driver has the capability to take a screenshot then save BYTE to a file with a random name.
      *  Hint: FileOutputStream can write a byte[]
+     *
+     *  When we are running with a remote webdriver we want to use OutputType.BASE64 or OutputType.BYTES.
      * @throws IOException
      */
     @Test
