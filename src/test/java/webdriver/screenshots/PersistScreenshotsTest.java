@@ -86,6 +86,7 @@ public class PersistScreenshotsTest {
      *  Hint: Base64 object can decode before writing to a FileOutputStream
      *
      *  When we are running with a remote webdriver we want to use OutputType.BASE64 or OutputType.BYTES.
+     *  Whether use one or the other depends if you want to do any processing on that image beforehand.
      *  @throws IOException
      */
     @Test
