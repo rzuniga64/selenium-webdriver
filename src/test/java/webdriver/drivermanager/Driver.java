@@ -78,6 +78,8 @@ public class Driver extends Thread{
 
         if(useThisDriver == null){
 
+            System.setProperty(browserPropertyName, browser);
+
             // to allow setting the browser as a property or an environment variable
             String defaultBrowser = EnvironmentPropertyReader.getPropertyOrEnv(browserPropertyName, browser);
 
