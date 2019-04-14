@@ -13,7 +13,6 @@ public class DriverTest {
     @Test
     public void createAnHtmlUnitDriver(){
 
-        System.setProperty(Driver.BROWSER_PROPERTY_NAME, "HTMLUNIT");
         driver = Driver.get(Driver.BROWSER_PROPERTY_NAME,"HTMLUNIT" );
         assertBrowserTestRuns();
     }
@@ -21,7 +20,6 @@ public class DriverTest {
     @Test
     public void createAFirefoxDriver(){
 
-        System.setProperty(Driver.BROWSER_PROPERTY_NAME, "FIREFOX");
         driver = Driver.get(Driver.BROWSER_PROPERTY_NAME,"FIREFOX" );
         assertBrowserTestRuns();
     }
@@ -29,7 +27,6 @@ public class DriverTest {
     @Test
     public void createAChromeDriver(){
 
-        System.setProperty(Driver.BROWSER_PROPERTY_NAME, "CHROME");
         driver = Driver.get(Driver.BROWSER_PROPERTY_NAME,"CHROME" );
         assertBrowserTestRuns();
     }
@@ -37,7 +34,6 @@ public class DriverTest {
     @Test
     public void createAEdgeDriver(){
 
-        System.setProperty(Driver.BROWSER_PROPERTY_NAME, "EDGE");
         driver = Driver.get(Driver.BROWSER_PROPERTY_NAME,"EDGE" );
         assertBrowserTestRuns();
     }
@@ -45,7 +41,6 @@ public class DriverTest {
     @Test
     public void createAIEDriver(){
 
-        System.setProperty(Driver.BROWSER_PROPERTY_NAME, "IE");
         driver = Driver.get(Driver.BROWSER_PROPERTY_NAME,"IE" );
         assertBrowserTestRuns();
     }
@@ -53,7 +48,6 @@ public class DriverTest {
     @Test
     public void createAOperaDriver(){
 
-        System.setProperty(Driver.BROWSER_PROPERTY_NAME, "OPERA");
         driver = Driver.get(Driver.BROWSER_PROPERTY_NAME,"OPERA" );
         assertBrowserTestRuns();
     }
