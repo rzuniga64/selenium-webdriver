@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.net.Socket;
 
 /**
- * Added code to check if proxy is running - this is to help skip proxy tests if not
+ *  Added code to check if proxy is running - this is to help skip proxy tests if not.
+ *
+ *  http://stackoverflow.com/questions/434718/sockets-discover-port-availability-using-java
  */
 public class ProxyPort {
 
@@ -12,7 +14,6 @@ public class ProxyPort {
         return inUse(host, Integer.valueOf(port));
     }
 
-    // http://stackoverflow.com/questions/434718/sockets-discover-port-availability-using-java
     public static boolean inUse(String host, int port) {
         Socket s = null;
         System.out.println("Checking for port on " + host + ":" + port);
