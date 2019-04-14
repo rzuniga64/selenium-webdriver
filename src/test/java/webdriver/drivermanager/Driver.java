@@ -11,6 +11,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -43,7 +44,7 @@ import java.util.Set;
 public class Driver extends Thread{
 
     public enum BrowserName{HTMLUNIT, FIREFOX, CHROME, GOOGLECHROME, EDGE, IE, FIREFOXPORTABLE, FIREFOXMARIONETTE, SAUCELABS, GRID,
-        APPIUM}
+        APPIUM, OPERA}
 
     public static final String BROWSER_PROPERTY_NAME = "selenium2basics.webdriver";
     private static final String DEFAULT_BROWSER = "CHROME";
@@ -110,6 +111,9 @@ public class Driver extends Thread{
                     break;
                 case "APPIUM":
                     useThisDriver = BrowserName.APPIUM;
+                    break;
+                case "OPERA":
+                    useThisDriver = BrowserName.OPERA;
                     break;
                 default:
                     throw new RuntimeException("Unknown Browser in " + BROWSER_PROPERTY_NAME + ": " + defaultBrowser);
@@ -186,11 +190,20 @@ public class Driver extends Thread{
 
                 case EDGE:
 
-                    RESOURCE_DIR = System.getProperty("user.dir") + "\\src\\tools\\";
+                    RESOURCE_DIR = System.getProperty("user.dir") + "\\src\\test\\resources\\";
                     System.setProperty("webdriver.edge.driver", RESOURCE_DIR + "MicrosoftWebDriver.exe");
 
                     aDriver = new EdgeDriver();
                     currentDriver = BrowserName.EDGE;
+                    break;
+
+                case OPERA:
+
+                    RESOURCE_DIR = System.getProperty("user.dir") + "\\src\\test\\resources\\";
+                    System.setProperty("webdriver.edge.driver", RESOURCE_DIR + "operadriver.exe");
+
+                    aDriver = new OperaDriver();
+                    currentDriver = BrowserName.OPERA;
                     break;
 
                 case IE:
