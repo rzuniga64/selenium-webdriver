@@ -15,64 +15,92 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
 
-public class CanWeTakeScreenshotsTest {
+/**
+ *  ScreenshotsExerciseTest class.
+ *
+ *  Can we take a screenshot?
+ *  - Create a firefox driver
+ *    - Use getCapabilities to check that it can create a screenshot
+ *    - Cast directly to snapper and catch an ClassCastException
+ *  Create an HtmlUnitDriver
+ *    - Use getCapabilities to check that it can not create a screenshot
+ *    - Cast directly to snapper and catch an ClassCastException.
+ */
+public class ScreenshotsExerciseTest {
 
-    @Before
-    public void configureBrowser(){
-        // early versions of these examples used to set the browser to Firefox
-        // 20180611 I don't really see the point in that now that most browsers can take screenshots
-        // and the tests have a guard to check if the capability is present
+    private static WebDriver driver;
 
-        // uncomment this line if you want to use firefox
-        //Driver.set(Driver.BrowserName.FIREFOX);
-    }
-
+    /**
+     *  canWeTakeAScreenshotCapabilitiesStyle method.
+     *  Create a firefox driver and use getCapabilities to check that it can create a screenshot.
+     */
     @Test
     public void canWeTakeAScreenshotCapabilitiesStyle(){
 
-        WebDriver driver = Driver.get("http://seleniumsimplified.com");
+        driver = Driver.get("webdriver.chrome.driver", "CHROME");
+        driver.navigate().to("http://seleniumsimplified.com");
 
         if(((HasCapabilities)driver).getCapabilities().is(CapabilityType.TAKES_SCREENSHOT)){
+            // You must cast a driver to TakesScreenshot.
             TakesScreenshot snapper = (TakesScreenshot)driver;
+            // Save the screenshot to a file.
             File tempImageFile = snapper.getScreenshotAs(OutputType.FILE);
 
+            // Assert the file is not empty.
             assertThat(tempImageFile.length(), is(greaterThan(0L)));
 
-            // use these lines in debug mode
+            // Use these lines in debug mode.
             System.out.println("Temp file written to " + tempImageFile.getAbsolutePath());
+            // Open the file in the browser.
             Driver.get("File://"+ tempImageFile.getAbsolutePath());
-        }else{
+        } else {
             fail("Driver did not support screenshots");
         }
     }
 
+    /**
+     *  canWeTakeAScreenshotExceptionStyle method.
+     *  Create a firefox driver and cast directly to snapper and catch an ClassCastException. Check that it can take a
+     *  screenshot.
+     */
     @Test
     public void canWeTakeAScreenshotExceptionStyle(){
 
-        WebDriver driver = Driver.get("http://seleniumsimplified.com");
+        driver = Driver.get("webdriver.chrome.driver", "CHROME");
+        driver.navigate().to("http://seleniumsimplified.com");
 
-        try{
+        try {
+            // You must cast a driver to TakesScreenshot.
             TakesScreenshot snapper = (TakesScreenshot)driver;
+            // Save the screenshot to a file.
             File tempImageFile = snapper.getScreenshotAs(OutputType.FILE);
 
+            // Assert the file is not empty.
             assertThat(tempImageFile.length(), is(greaterThan(0L)));
 
             // use these lines in debug mode
             System.out.println("Temp file written to " + tempImageFile.getAbsolutePath());
+            // Open the file in the browser.
             Driver.get("File://"+ tempImageFile.getAbsolutePath());
 
-        }catch(ClassCastException e){
+        } catch(ClassCastException e) {
             // if we cannot cast it to TakesScreenshot we will get a ClassCastException
-            System.out.println(e);
+            e.printStackTrace();
             fail("Driver did not support screenshots");
         }
     }
 
+    /**
+     *  htmlUnitDoesNotDoScreenshotsViaCapabilities method.
+     *  Create an HtmlUnitDriver and use getCapabilities to check that it can not create a screenshot.
+     */
     @Test
     public void htmlUnitDoesNotDoScreenshotsViaCapabilities(){
-        Driver.set(Driver.BrowserName.HTMLUNIT);
+
+        driver = Driver.get("webdriver.htmlunit.driver", "HTMLUNIT");
+        //Driver.set(Driver.BrowserName.HTMLUNIT);
         // using a different page because sometimes HTMLUnit driver doesn't like the javascript
-        WebDriver driver = Driver.get("http://compendiumdev.co.uk/selenium/testpages/find_by_playground.php");
+        driver = Driver.get("http://compendiumdev.co.uk/selenium/testpages/find_by_playground.php");
 
         HasCapabilities capabilityDriver = (HasCapabilities)driver;
 
@@ -81,19 +109,27 @@ public class CanWeTakeScreenshotsTest {
         }
     }
 
+    /**
+     *  htmlUnitDoesNotDoScreenshotsViaException method.
+     *  Create an HtmlUnitDriver and cast directly to TakesScreenshot and catch an ClassCastException. Check that it can
+     *  not create a screenshot.
+     */
     @Test
     public void htmlUnitDoesNotDoScreenshotsViaException(){
-        Driver.set(Driver.BrowserName.HTMLUNIT);
-        // using a different page because sometimes HTMLUnit driver doesn't like the javascript
-        WebDriver driver = Driver.get("http://compendiumdev.co.uk/selenium/testpages/find_by_playground.php");
 
-        try{
+        driver = Driver.get("webdriver.htmlunit.driver", "HTMLUNIT");
+        //Driver.set(Driver.BrowserName.HTMLUNIT);
+        // using a different page because sometimes HTMLUnit driver doesn't like the javascript
+        driver = Driver.get("http://compendiumdev.co.uk/selenium/testpages/find_by_playground.php");
+
+        try {
+            // You must cast a driver to TakesScreenshot.
             TakesScreenshot snapper = (TakesScreenshot)driver;
             fail("Expected htmlunit to not cast to takes_screenshot");
 
-        }catch(ClassCastException e){
+        } catch (ClassCastException e){
             // if we cannot cast it to TakesScreenshot we will get a ClassCastException
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -102,10 +138,10 @@ public class CanWeTakeScreenshotsTest {
         Driver.quit();
     }
 
-    /*
-    Because these tests change the driver, when run from IDE
-    We want to remember the current driver and restore after all tests are run
- */
+    /**
+     *  Because these tests change the driver, when run from IDE.
+     *  We want to remember the current driver and restore after all tests are run.
+     */
     private static Driver.BrowserName rememberDriver;
 
     @BeforeClass
