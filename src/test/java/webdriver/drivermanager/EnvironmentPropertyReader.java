@@ -11,7 +11,7 @@ public class EnvironmentPropertyReader {
      */
     public static String getPropertyOrEnv(String browserPropertyName, String browser){
 
-        String browserName = System.getProperty(browserPropertyName);
+        String browserName = System.getProperty(browserPropertyName).toUpperCase();
         if(browserName == null){
 
             browserName = System.getenv(browserPropertyName);
