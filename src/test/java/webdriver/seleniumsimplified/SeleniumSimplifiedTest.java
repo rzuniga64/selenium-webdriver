@@ -7,8 +7,8 @@ import org.junit.Rule;
 import org.junit.rules.MethodRule;
 import org.junit.rules.TestWatchman;
 import org.junit.runners.model.FrameworkMethod;
-import seleniumutils.seleniumManager.SeleniumManager;
-import seleniumutils.seleniumManager.TheSeleniumManager;
+import seleniumSimplified.seleniumManager.SeleniumManager;
+import seleniumSimplified.seleniumManager.TheSeleniumManager;
 import com.thoughtworks.selenium.Selenium;
 
 public class SeleniumSimplifiedTest {
