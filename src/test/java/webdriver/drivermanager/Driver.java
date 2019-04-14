@@ -74,6 +74,17 @@ public class Driver extends Thread{
         }
     }
 
+    /**
+     *  get method.
+     *  We can put this into continuous integration and call it from system property and we can control it within tests.
+     *  Grow the abstraction layers on the needs that we have.
+     *  Currently we don't have any capabilities. All the browsers are eventually going to start using capabilities as
+     *  our default control mechanism. We can't support that in here. We will have to find a way of doing that.
+     *
+     *  @param browserPropertyName Driver.BROWSER_PROPERTY_NAME
+     *  @param browser the browser we want to test on
+     *  @return a WebDriver
+     */
     public static WebDriver get(String browserPropertyName, String browser  ) {
 
         if(useThisDriver == null){
@@ -83,6 +94,8 @@ public class Driver extends Thread{
             // to allow setting the browser as a property or an environment variable
             String defaultBrowser = EnvironmentPropertyReader.getPropertyOrEnv(browserPropertyName, browser);
 
+            // We could move this out so we don't have a switch statement.
+            // Instead, we instantiate a browser supplier object and call it a single time.
             switch (defaultBrowser){
                 case "HTMLUNIT":
                     useThisDriver = BrowserName.HTMLUNIT;
