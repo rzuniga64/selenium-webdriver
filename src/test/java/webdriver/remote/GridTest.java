@@ -30,6 +30,9 @@ import static org.junit.Assert.assertTrue;
  *  If you want to run on Chrome we have to tell the node about the Chrome driver. You can set it up in your tests.
  *  You can either set up the properties on the machine that the node is running on or we can pass it in through the
  *  command line. So you have to configure the node and tell it where the chrome driver is.
+ *
+ *  We can configure the browsers in the node.json file but the location of the driver itself is in a property which
+ *  means we associate it with the JVM or set it up as a system property.
  */
 public class GridTest {
 
