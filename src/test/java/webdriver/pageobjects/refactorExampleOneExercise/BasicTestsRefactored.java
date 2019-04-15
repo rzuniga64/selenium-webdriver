@@ -45,7 +45,6 @@ public class BasicTestsRefactored {
         processedForm.waitUntilPageIsLoaded();
 
         assertEquals("Expected Java code", Language.JAVA.value() + "", processedForm.getValueFor("language_id"));
-
     }
 
     /**
@@ -75,7 +74,6 @@ public class BasicTestsRefactored {
     public void chooseToCodeInCppOnDesktop(){
 
         basicAjaxPage.selectCategory(Category.DESKTOP);
-
         basicAjaxPage.selectLanguage(Language.DESKTOP_Cpp);
         basicAjaxPage.clickSubmitButton();
 
