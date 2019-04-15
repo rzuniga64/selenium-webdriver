@@ -25,6 +25,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  *  place so that later on when I do a language select it will lazily load this WebElement. So I don't have to do a
  *  findElement anymore because I annotated the WebElement. This makes the test class a little bit neater. If the
  *  WebElement is not loaded then a NoSuchElementException will be thrown by the proxy object.
+ *
+ *  - Annotate WebElements with @FindBy
+ *    - @FindBy(how = How.ID, using=”combo1”)
+ *  - Initialize the annotated WebElementI(s) using a PageFactory
+ *
+ * 	public BasicAjaxPageObject(WebDriver webDriver) {
+ * 		Driver = webDriver;
+ * 		PageFactory.initElements(driver, this);
+ *  }
  */
 public class BasicAjaxPageObject extends LoadableComponent<BasicAjaxPageObject> {
 
