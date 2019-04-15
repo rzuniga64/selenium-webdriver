@@ -117,7 +117,7 @@ public class Driver extends Thread{
             System.setProperty(BROWSER_PROPERTY_NAME, BROWSER);
 
             // to allow setting the browser as a property or an environment variable
-            String defaultBrowser = getPropertyOrEnv(browserPropertyName, browser);
+            String defaultBrowser = getPropertyOrEnv(BROWSER_PROPERTY_NAME, BROWSER);
 
             // We could move this out so we don't have a switch statement.
             // Instead, we instantiate a browser supplier object and call it a single time.
