@@ -9,9 +9,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BasicAjaxPageObject {
 
-    WebDriver driver;
+    private WebDriver driver;
+    private static WebDriverWait wait;
 
     public enum Category{
+
         WEB(1), DESKTOP(2), SERVER(3);
 
         private int dropDownValue;
@@ -26,6 +28,7 @@ public class BasicAjaxPageObject {
     }
 
     public enum Language {
+
         JAVASCRIPT(0), VBSCRIPT(1), FLASH(2),
         COBOL(20), FORTRAN(21), SERVER_Cpp(22), JAVA(23),
         DESKTOP_Cpp(10), ASSEMBLER(11), C(12), VISUAL_BASIC(13);
@@ -41,54 +44,63 @@ public class BasicAjaxPageObject {
         }
     }
 
+    /**
+     *  Constructor
+     *  @param webDriver the WebDriver for the browser under test.
+     */
     public BasicAjaxPageObject(WebDriver webDriver) {
+
         driver = webDriver;
+        wait = new WebDriverWait(driver, 10);
     }
 
+    /**
+     *  Navigate to the URL.
+     */
     public void get() {
+
         driver.get("http://compendiumdev.co.uk/selenium/basic_ajax.html");
     }
 
+    /**
+     *  Select category from dropdown.
+     *  @param category the category.
+     */
     public void selectCategory(Category category) {
+
         WebElement categorySelect = driver.findElement(By.id("combo1"));
         categorySelect.findElement(By.cssSelector("option[value='" + category.value() + "']")).click();
 
-        // wait until the option I want to click is present
-        // we could also wait for the contents of the drop down to fill
-        /*new WebDriverWait(driver,10).until(
-                ExpectedConditions.presenceOfElementLocated(
-                        By.cssSelector("option[value='23']")));*/
-
-        // instead wait for the ajax symbol
-
-        // wait until the ajax symbol has gone
-        // because then the drop down has populated
-
-        new WebDriverWait(driver,10).until(ajaxActionIsComplete());
+        // Wait until the option I want to click is present. We could also wait for the contents of the drop down to fill.
+        // wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("option[value='23']")));
+        wait.until(ajaxActionIsComplete());
     }
 
+    /**
+     *  Wait until the ajax symbol has gone because then the drop down has populated.
+     *  @return an ExpectedCondition.
+     */
     public ExpectedCondition<Boolean> ajaxActionIsComplete() {
-        return ExpectedConditions.invisibilityOfElementLocated(
-                By.id("ajaxBusy"));
+
+        return ExpectedConditions.invisibilityOfElementLocated(By.id("ajaxBusy"));
     }
 
+    /**
+     *  Select the programming language.
+     *  @param language the programming language.
+     */
     public void selectLanguage(Language language) {
-
-        // wait until the option I want to click is present
-        /* added this as historical code just in case
-        new WebDriverWait(driver,10).until(
-                ExpectedConditions.presenceOfElementLocated(
-                        By.cssSelector("option[value='23']")));
-        */
 
         WebElement languageSelect = driver.findElement(By.id("combo2"));
         languageSelect.findElement(By.cssSelector("option[value='" + language.value() + "']")).click();
     }
 
-    public void clickCodeInIt() {
-        // Submit the form
-        WebElement codeInIt = driver.findElement(By.name("submitbutton"));
-        codeInIt.click();
+    /**
+     *  Click the Submit button on the form.
+     */
+    public void clickSubmitButton() {
+
+        driver.findElement(By.name("submitbutton")).click();
     }
 
 }

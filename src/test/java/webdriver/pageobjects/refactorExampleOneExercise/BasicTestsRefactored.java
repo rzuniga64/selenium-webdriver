@@ -1,19 +1,17 @@
 package webdriver.pageobjects.refactorExampleOneExercise;
 
-import com.seleniumsimplified.webdriver.manager.Driver;
-import com.seleniumsimplified.webdriver.pageobjects.refactorExampleOneExercise.pages.BasicAjaxPageObject;
-import com.seleniumsimplified.webdriver.pageobjects.refactorExampleOneExercise.pages.ProcessedFormPage;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-
-import java.net.MalformedURLException;
+import webdriver.drivermanager.Driver;
+import webdriver.pageobjects.refactorExampleOneExercise.pages.BasicAjaxPageObject;
+import webdriver.pageobjects.refactorExampleOneExercise.pages.ProcessedFormPage;
 
 import static org.junit.Assert.assertEquals;
-import static com.seleniumsimplified.webdriver.pageobjects.refactorExampleOneExercise.pages.BasicAjaxPageObject.Category;
-import static com.seleniumsimplified.webdriver.pageobjects.refactorExampleOneExercise.pages.BasicAjaxPageObject.Language;
+import static webdriver.pageobjects.refactorExampleOneExercise.pages.BasicAjaxPageObject.Category;
+import static webdriver.pageobjects.refactorExampleOneExercise.pages.BasicAjaxPageObject.Language;
 
 public class BasicTestsRefactored {
 
@@ -21,20 +19,16 @@ public class BasicTestsRefactored {
     private BasicAjaxPageObject basicAjaxPage;
 
     @BeforeClass
-    public static void setupTestClass() throws MalformedURLException {
-        driver = Driver.get();
-		// added when doing demo of the AndroidDriver
+    public static void setupTestClass() {
+
+        driver = Driver.get("webdriver.chrome.driver", "CHROME");
+
+        // added when doing demo of the AndroidDriver
         //driver = new AndroidDriver("http://192.168.1.165:8080/wd/hub");
     }
 
-    @AfterClass
-    public static void tearDown(){
-		// only if using android driver above
-        //driver.quit();
-    }
-
     @Before
-    public void setupTest() throws MalformedURLException {
+    public void setupTest() {
 
         basicAjaxPage = new BasicAjaxPageObject(driver);
         basicAjaxPage.get();
@@ -45,7 +39,7 @@ public class BasicTestsRefactored {
 
         basicAjaxPage.selectCategory(Category.SERVER);
         basicAjaxPage.selectLanguage(Language.JAVA);
-        basicAjaxPage.clickCodeInIt();
+        basicAjaxPage.clickSubmitButton();
 
         ProcessedFormPage processedForm = new ProcessedFormPage(driver);
         processedForm.waitUntilPageIsLoaded();
@@ -54,6 +48,9 @@ public class BasicTestsRefactored {
 
     }
 
+    /**
+     *  Select the Web category and JavaScript language in the form and submit and assert language is correct.
+     */
     @Test
     public void chooseToCodeInJavascriptOnTheWeb(){
 
@@ -62,7 +59,7 @@ public class BasicTestsRefactored {
         basicAjaxPage.selectCategory(Category.WEB);
 
         basicAjaxPage.selectLanguage(Language.JAVASCRIPT);
-        basicAjaxPage.clickCodeInIt();
+        basicAjaxPage.clickSubmitButton();
 
         ProcessedFormPage processedForm = new ProcessedFormPage(driver);
         processedForm.waitUntilPageIsLoaded();
@@ -71,17 +68,26 @@ public class BasicTestsRefactored {
         assertEquals("Expected JavaScript code", String.valueOf(Language.JAVASCRIPT.value()), processedForm.getValueFor("language_id"));
     }
 
+    /**
+     *  Select the Desktop category and C++ language in the form and submit and assert language is correct.
+     */
     @Test
     public void chooseToCodeInCppOnDesktop(){
 
         basicAjaxPage.selectCategory(Category.DESKTOP);
 
         basicAjaxPage.selectLanguage(Language.DESKTOP_Cpp);
-        basicAjaxPage.clickCodeInIt();
+        basicAjaxPage.clickSubmitButton();
 
         ProcessedFormPage processedForm = new ProcessedFormPage(driver);
         processedForm.waitUntilPageIsLoaded();
 
         assertEquals("Expected Desktop CPP code", String.valueOf(Language.DESKTOP_Cpp.value()), processedForm.getValueFor("language_id"));
+    }
+
+    @AfterClass
+    public static void tearDown(){
+        // only if using android driver above
+        //driver.quit();
     }
 }
