@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class BasicAjaxPageObject {
 
     private WebDriver driver;
-    private static WebDriverWait wait;
+    private WebDriverWait wait;
 
     public enum Category{
 
@@ -59,7 +59,7 @@ public class BasicAjaxPageObject {
      */
     public void get() {
 
-        driver.get("http://compendiumdev.co.uk/selenium/basic_ajax.html");
+        driver.navigate().to("http://compendiumdev.co.uk/selenium/basic_ajax.html");
     }
 
     /**
