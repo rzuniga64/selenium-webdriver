@@ -37,7 +37,7 @@ public class BasicTestsRefactored {
 
         basicAjaxPage.selectCategory(Category.SERVER);
         basicAjaxPage.selectLanguage(Language.JAVA);
-        basicAjaxPage.clickCodeInIt();
+        basicAjaxPage.clickSubmitButton();
 
         ProcessedFormPage processedForm = new ProcessedFormPage(driver);
         processedForm.waitUntilPageIsLoaded();
@@ -54,7 +54,7 @@ public class BasicTestsRefactored {
         basicAjaxPage.selectCategory(Category.WEB);
 
         basicAjaxPage.selectLanguage(Language.JAVASCRIPT);
-        basicAjaxPage.clickCodeInIt();
+        basicAjaxPage.clickSubmitButton();
 
         ProcessedFormPage processedForm = new ProcessedFormPage(driver);
         processedForm.waitUntilPageIsLoaded();
@@ -69,7 +69,7 @@ public class BasicTestsRefactored {
         basicAjaxPage.selectCategory(Category.DESKTOP);
 
         basicAjaxPage.selectLanguage(Language.DESKTOP_Cpp);
-        basicAjaxPage.clickCodeInIt();
+        basicAjaxPage.clickSubmitButton();
 
         ProcessedFormPage processedForm = new ProcessedFormPage(driver);
         processedForm.waitUntilPageIsLoaded();
