@@ -13,7 +13,7 @@ public class ProcessedFormPage {
     private WebDriverWait wait;
 
     /**
-     *  Construction
+     *  Constructor.
      *  @param aDriver the WebDriver for the browser under test.
      */
     public ProcessedFormPage(WebDriver aDriver) {
