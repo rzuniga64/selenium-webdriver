@@ -89,6 +89,7 @@ public class BasicAjaxPageObject extends LoadableComponent<BasicAjaxPageObject> 
 
         driver = webDriver;
         wait = new WebDriverWait(driver, 10);
+        //PageFactory.initElements(new AjaxElementLocatorFactory(driver, 10), this);
         PageFactory.initElements(driver, this);
     }
 
