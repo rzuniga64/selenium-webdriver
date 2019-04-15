@@ -120,7 +120,8 @@ public class BasicAjaxPageObject extends LoadableComponent<BasicAjaxPageObject> 
         languageSelect.findElement(By.cssSelector("option[value='" + language.value() + "']")).click();
     }
 
-    public void clickCodeInIt() {
+    public void clickSubmitButton() {
+
         submitButton.click();
     }
 
