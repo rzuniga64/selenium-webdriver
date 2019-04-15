@@ -1,14 +1,14 @@
 package webdriver.pageobjects.loadablecomponent;
 
-import com.seleniumsimplified.webdriver.manager.Driver;
-import com.seleniumsimplified.webdriver.pageobjects.loadablecomponent.pages.BasicAjaxPageObject;
-import com.seleniumsimplified.webdriver.pageobjects.loadablecomponent.pages.ProcessedFormPage;
+import webdriver.drivermanager.Driver;
+import webdriver.pageobjects.loadablecomponent.pages.BasicAjaxPageObject;
+import webdriver.pageobjects.loadablecomponent.pages.ProcessedFormPage;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
-import static com.seleniumsimplified.webdriver.pageobjects.loadablecomponent.pages.BasicAjaxPageObject.Category;
-import static com.seleniumsimplified.webdriver.pageobjects.loadablecomponent.pages.BasicAjaxPageObject.Language;
+import static webdriver.pageobjects.loadablecomponent.pages.BasicAjaxPageObject.Category;
+import static webdriver.pageobjects.loadablecomponent.pages.BasicAjaxPageObject.Language;
 import static org.junit.Assert.assertEquals;
 
 public class BasicTestsRefactored {
@@ -19,7 +19,7 @@ public class BasicTestsRefactored {
     @Before
     public void setupTest(){
 
-        driver = Driver.get();
+        driver = Driver.get("webdriver.chrome.driver", "CHROME");
         basicAjaxPage = new BasicAjaxPageObject(driver);
         basicAjaxPage.get();
     }
@@ -29,13 +29,13 @@ public class BasicTestsRefactored {
 
         basicAjaxPage.selectCategory(Category.SERVER);
         basicAjaxPage.selectLanguage(Language.JAVA);
-        basicAjaxPage.clickCodeInIt();
+        basicAjaxPage.clickSubmitButton();
 
         ProcessedFormPage processedForm = new ProcessedFormPage(driver);
         processedForm.waitUntilPageIsLoaded();
 
-        assertEquals("Expected Java code", Language.JAVA.value() + "", processedForm.getValueFor("language_id"));
-
+        assertEquals("Expected Java code",
+                     Language.JAVA.value() + "", processedForm.getValueFor("language_id"));
     }
 
     @Test
@@ -46,13 +46,15 @@ public class BasicTestsRefactored {
         basicAjaxPage.selectCategory(Category.WEB);
 
         basicAjaxPage.selectLanguage(Language.JAVASCRIPT);
-        basicAjaxPage.clickCodeInIt();
+        basicAjaxPage.clickSubmitButton();
 
         ProcessedFormPage processedForm = new ProcessedFormPage(driver);
         processedForm.waitUntilPageIsLoaded();
 
         //TODO: this is a known bug, when the page is first created it has JavaScript 1, but server call is JavaScript 0
-        assertEquals("Expected JavaScript code", String.valueOf(Language.JAVASCRIPT.value()), processedForm.getValueFor("language_id"));
+        assertEquals("Expected JavaScript code",
+                String.valueOf(Language.JAVASCRIPT.value()),
+                processedForm.getValueFor("language_id"));
     }
 
     @Test
@@ -61,12 +63,13 @@ public class BasicTestsRefactored {
         basicAjaxPage.selectCategory(Category.DESKTOP);
 
         basicAjaxPage.selectLanguage(Language.DESKTOP_Cpp);
-        basicAjaxPage.clickCodeInIt();
+        basicAjaxPage.clickSubmitButton();
 
         ProcessedFormPage processedForm = new ProcessedFormPage(driver);
         processedForm.waitUntilPageIsLoaded();
 
-        assertEquals("Expected Desktop CPP code", String.valueOf(Language.DESKTOP_Cpp.value()), processedForm.getValueFor("language_id"));
+        assertEquals("Expected Desktop CPP code",
+                String.valueOf(Language.DESKTOP_Cpp.value()),
+                processedForm.getValueFor("language_id"));
     }
-
 }
