@@ -4,9 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.SlowLoadableComponent;
 import org.openqa.selenium.support.ui.SystemClock;
+import webdriver.drivermanager.Driver;
 
 public class QueNessSlowLoadingExamplePage extends SlowLoadableComponent<QueNessSlowLoadingExamplePage>{
-    private final WebDriver driver;
+    private WebDriver driver;
 
     By SEND_BUTTON = By.cssSelector("div#content > form > input[type='button']");
     By NAME_FIELD = By.cssSelector("div#content > form > input[type='text']:nth-of-type(1)");
@@ -19,7 +20,9 @@ public class QueNessSlowLoadingExamplePage extends SlowLoadableComponent<QueNess
     }
 
     @Override
-    protected void load() {
+    protected void load()
+    {
+        driver = Driver.get("webdriver.chrome.driver", "CHROME");
         driver.get("http://www.queness.com/resources/html/ajax/simple.php#page4");
     }
 
@@ -34,21 +37,25 @@ public class QueNessSlowLoadingExamplePage extends SlowLoadableComponent<QueNess
     }
 
     public QueNessSlowLoadingExamplePage setName(String name) {
+
         driver.findElement(NAME_FIELD).sendKeys(name);
         return this;
     }
 
     public QueNessSlowLoadingExamplePage setEmail(String email) {
+
         driver.findElement(EMAIL_FIELD).sendKeys(email);
         return this;
     }
 
     public QueNessSlowLoadingExamplePage setMessage(String message) {
+
         driver.findElement(MESSAGE).sendKeys(message);
         return this;
     }
 
     public QueNessSlowLoadingExamplePage sendMessage() {
+
         driver.findElement(SEND_BUTTON).click();
         return this;
     }
