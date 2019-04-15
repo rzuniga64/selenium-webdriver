@@ -1,16 +1,30 @@
 package webdriver.pageobjects.slowloadablecomponent;
 
-import com.seleniumsimplified.webdriver.manager.Driver;
-import com.seleniumsimplified.webdriver.pageobjects.slowloadablecomponent.pages.BasicAjaxPageObject;
-import com.seleniumsimplified.webdriver.pageobjects.slowloadablecomponent.pages.ProcessedFormPage;
+import webdriver.drivermanager.Driver;
+import webdriver.pageobjects.slowloadablecomponent.pages.BasicAjaxPageObject;
+import webdriver.pageobjects.slowloadablecomponent.pages.ProcessedFormPage;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
-import static com.seleniumsimplified.webdriver.pageobjects.slowloadablecomponent.pages.BasicAjaxPageObject.Category;
-import static com.seleniumsimplified.webdriver.pageobjects.slowloadablecomponent.pages.BasicAjaxPageObject.Language;
+import static webdriver.pageobjects.slowloadablecomponent.pages.BasicAjaxPageObject.Category;
+import static webdriver.pageobjects.slowloadablecomponent.pages.BasicAjaxPageObject.Language;
 import static org.junit.Assert.assertEquals;
 
+/**
+ *  BasicTestsRefactored class
+ *
+ *  LoadableComponent
+ *  - Extend to create page objects
+ *    - Extends LoadableComponent<PageObject>
+ *      - E.g. LoadableComponent<BasicAjaxPageObject>
+ *    - Implement
+ *      - Load
+ *        - Do the work to load the page
+ *      - IsLoaded
+ *        - Throw an error if component/page is not loaded
+ *      - Receive ‘get’ for free
+ */
 public class BasicTestsRefactored {
 
     private WebDriver driver;
@@ -19,7 +33,7 @@ public class BasicTestsRefactored {
     @Before
     public void setupTest(){
 
-        driver = Driver.get();
+        driver = Driver.get("webdriver.chrome.driver", "CHROME");
         basicAjaxPage = new BasicAjaxPageObject(driver);
         basicAjaxPage.get();
     }
@@ -34,8 +48,8 @@ public class BasicTestsRefactored {
         ProcessedFormPage processedForm = new ProcessedFormPage(driver);
         processedForm.get();
 
-        assertEquals("Expected Java code", Language.JAVA.value() + "", processedForm.getValueFor("language_id"));
-
+        assertEquals("Expected Java code",
+                     Language.JAVA.value() + "", processedForm.getValueFor("language_id"));
     }
 
     @Test
@@ -52,7 +66,9 @@ public class BasicTestsRefactored {
         processedForm.get();
 
         //TODO: this is a known bug, when the page is first created it has JavaScript 1, but server call is JavaScript 0
-        assertEquals("Expected JavaScript code", String.valueOf(Language.JAVASCRIPT.value()), processedForm.getValueFor("language_id"));
+        assertEquals("Expected JavaScript code",
+                String.valueOf(Language.JAVASCRIPT.value()),
+                processedForm.getValueFor("language_id"));
     }
 
     @Test
@@ -66,7 +82,9 @@ public class BasicTestsRefactored {
         ProcessedFormPage processedForm = new ProcessedFormPage(driver);
         processedForm.get();
 
-        assertEquals("Expected Desktop CPP code", String.valueOf(Language.DESKTOP_Cpp.value()), processedForm.getValueFor("language_id"));
+        assertEquals("Expected Desktop CPP code",
+                String.valueOf(Language.DESKTOP_Cpp.value()),
+                processedForm.getValueFor("language_id"));
     }
 
 }
