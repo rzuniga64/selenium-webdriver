@@ -30,7 +30,7 @@ public class BasicAjaxPageObject {
         }
 
         public int value(){
-            
+
             return dropDownValue;
         }
     }
