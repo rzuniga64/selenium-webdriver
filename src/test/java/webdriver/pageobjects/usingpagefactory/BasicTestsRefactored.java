@@ -1,16 +1,24 @@
 package webdriver.pageobjects.usingpagefactory;
 
-import com.seleniumsimplified.webdriver.manager.Driver;
-import com.seleniumsimplified.webdriver.pageobjects.usingpagefactory.pages.BasicAjaxPageObject;
-import com.seleniumsimplified.webdriver.pageobjects.usingpagefactory.pages.ProcessedFormPage;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
+import webdriver.pageobjects.usingpagefactory.pages.BasicAjaxPageObject;
+import webdriver.pageobjects.usingpagefactory.pages.ProcessedFormPage;
 
-import static com.seleniumsimplified.webdriver.pageobjects.usingpagefactory.pages.BasicAjaxPageObject.Category;
-import static com.seleniumsimplified.webdriver.pageobjects.usingpagefactory.pages.BasicAjaxPageObject.Language;
 import static org.junit.Assert.assertEquals;
+import static webdriver.pageobjects.usingpagefactory.pages.BasicAjaxPageObject.Category;
+import static webdriver.pageobjects.usingpagefactory.pages.BasicAjaxPageObject.Language;
 
+/**
+ *  BasicTestsRefactored class.
+ *
+ *  Refactor to Page Objects
+ *  - Convert local abstractions to Page Abstractions
+ *  - Replace comments with abstractions
+ *  - Make decisions about the model based on the test readability and method reuse
+ *  - Build only what you need as you need it.
+ */
 public class BasicTestsRefactored {
 
     private WebDriver driver;
@@ -19,7 +27,7 @@ public class BasicTestsRefactored {
     @Before
     public void setupTest(){
 
-        driver = Driver.get();
+        //driver = Driver.get();
         basicAjaxPage = new BasicAjaxPageObject(driver);
         basicAjaxPage.get();
     }
@@ -68,5 +76,4 @@ public class BasicTestsRefactored {
 
         assertEquals("Expected Desktop CPP code", String.valueOf(Language.DESKTOP_Cpp.value()), processedForm.getValueFor("language_id"));
     }
-
 }
