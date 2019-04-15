@@ -11,6 +11,20 @@ import static webdriver.pageobjects.loadablecomponent.pages.BasicAjaxPageObject.
 import static webdriver.pageobjects.loadablecomponent.pages.BasicAjaxPageObject.Language;
 import static org.junit.Assert.assertEquals;
 
+/**
+ *  BasicTestsRefactored class
+ *
+ *  LoadableComponent
+ *  - Extend to create page objects
+ *    - Extends LoadableComponent<PageObject>
+ *      - E.g. LoadableComponent<BasicAjaxPageObject>
+ *    - Implement
+ *      - Load
+ *        - Do the work to load the page
+ *      - IsLoaded
+ *        - Throw an error if component/page is not loaded
+ *      - Receive ‘get’ for free
+ */
 public class BasicTestsRefactored {
 
     private WebDriver driver;
