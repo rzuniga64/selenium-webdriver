@@ -15,8 +15,7 @@ import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
@@ -56,15 +55,16 @@ public class Driver extends Thread{
 
     private static long browserStartTime = 0L;
     private static long savedTimecount = 0L;
-    private static boolean avoidRecursiveCall=false;
+    private static boolean avoidRecursiveCall = false;
     private static ChromeDriverService service = null;
-    private static WebDriver aDriver=null;
+    private static WebDriver aDriver = null;
     private static BrowserName useThisDriver = null;
 
     public static BrowserName currentDriver;
     public static String RESOURCE_DIR = "";
+    public static String BROWSER = DEFAULT_BROWSER;
     public static String PROXYHOST = "localhost";
-    public static String PROXYPORT = "8888";     // default port for browsermob, burpesuite: 8080, fiddler: 8888
+    public static String PROXYPORT = "8888";
     public static String PROXY = PROXYHOST+":"+PROXYPORT;
 
     public static void set(BrowserName aBrowser){
@@ -91,9 +91,30 @@ public class Driver extends Thread{
      */
     public static WebDriver get(String browserPropertyName, String browser  ) {
 
+        // If running on Linux or Mac this will get the appropriate file separator in the string.
+        String s = File.separator;
+        String seleniumPropertiesFileName = System.getProperty("user.dir") +
+                String.format("%ssrc%stest%sresources%sselenium.properties",s,s,s,s);
+
+        try {
+            InputStream input = new FileInputStream(seleniumPropertiesFileName);
+            Properties properties = new Properties();
+            // load a properties file
+            properties.load(input);
+            //get the properties values
+            BROWSER = properties.getProperty("browser").toUpperCase();
+            PROXYHOST = properties.getProperty("host");
+            PROXYPORT = properties.getProperty("port");
+            PROXY = PROXYHOST+":"+PROXYPORT;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         if(useThisDriver == null){
 
-            System.setProperty(browserPropertyName, browser);
+            System.setProperty(BROWSER_PROPERTY_NAME, BROWSER);
 
             // to allow setting the browser as a property or an environment variable
             String defaultBrowser = getPropertyOrEnv(browserPropertyName, browser);
