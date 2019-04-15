@@ -76,6 +76,13 @@ public class ObjectArrayDataDrivenTest {
         this.answer = answer;
     }
 
+    /**
+     *  A collection of Object arrays that will be used in the constructor to initialize the class variables which will
+     *  be used as inputs to the tests. Since the method is static JUnit can call it without instantiating this class.
+     *  JUNit iterates through the Collection to instantiate the class each time. Then once the class is instantiated it
+     *  calls  every test method on the class.
+     * @return
+     */
     @Parameters
     public static Collection data() {
          return Arrays.asList(
