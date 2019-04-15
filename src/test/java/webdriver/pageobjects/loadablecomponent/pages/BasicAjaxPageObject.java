@@ -69,7 +69,7 @@ public class BasicAjaxPageObject extends LoadableComponent<BasicAjaxPageObject> 
     @Override
     protected void load()
     {
-        driver.get("http://compendiumdev.co.uk/selenium/basic_ajax.html");
+        driver.navigate().to("http://compendiumdev.co.uk/selenium/basic_ajax.html");
     }
 
     /**
