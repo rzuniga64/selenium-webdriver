@@ -12,9 +12,23 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.LoadableComponent;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+/**
+ *  BasicAjaxPageObject class.
+ *  Page Object class for "http://compendiumdev.co.uk/selenium/basic_ajax.html".
+ *
+ *  In the Java version of WebDriver we have some helper classes that we can use to code the Page Factory.
+ *  Instead of doing findElement within the code. We define WebElements as fields in our Page Object and annotate them
+ *  with @FindBy and explain how we can find the WebElement. In the constructor use a page factory to initialize the
+ *  WebElements for this driver on this Page Object: PageFactory(initElements(driver.this).
+ *
+ *  What this does it looks through the object and finds any fields that are annotated with @FindBy then puts a proxy in
+ *  place so that later on when I do a language select it will lazily load this WebElement. So I don't have to do a
+ *  findElement anymore because I annotated the WebElement. This makes the test class a little bit neater. If the
+ *  WebElement is not loaded then a NoSuchElementException will be thrown by the proxy object.
+ */
 public class BasicAjaxPageObject extends LoadableComponent<BasicAjaxPageObject> {
 
-    WebDriver driver;
+    private WebDriver driver;
     private WebDriverWait wait;
 
     @FindBy(how = How.ID, using="combo1")
@@ -41,7 +55,7 @@ public class BasicAjaxPageObject extends LoadableComponent<BasicAjaxPageObject> 
         }
     }
 
-    public static enum Language {
+    public enum Language {
 
         JAVASCRIPT(0), VBSCRIPT(1), FLASH(2),
         COBOL(20), FORTRAN(21), SERVER_Cpp(22), JAVA(23),
@@ -106,7 +120,7 @@ public class BasicAjaxPageObject extends LoadableComponent<BasicAjaxPageObject> 
      *  Wait until the ajax symbol has gone because then the drop down has populated.
      *  @return an ExpectedCondition.
      */
-    public ExpectedCondition<Boolean> ajaxActionIsComplete() {
+    private ExpectedCondition<Boolean> ajaxActionIsComplete() {
 
         return ExpectedConditions.invisibilityOfElementLocated(
                 By.id("ajaxBusy"));
