@@ -7,6 +7,20 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.LoadableComponent;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+/**
+ *  ProcessedFormPage class
+ *
+ *  LoadableComponent
+ *  - Extend to create page objects
+ *    - Extends LoadableComponent<PageObject>
+ *      - E.g. LoadableComponent<BasicAjaxPageObject>
+ *    - Implement
+ *      - Load
+ *        - Do the work to load the page
+ *      - IsLoaded
+ *        - Throw an error if component/page is not loaded
+ *      - Receive ‘get’ for free
+ */
 public class ProcessedFormPage extends LoadableComponent<ProcessedFormPage>{
 
     private WebDriver driver;
