@@ -414,13 +414,11 @@ public class Driver extends Thread{
      */
     public static BrowserName currentBrowser(){
 
-        // TODO: handle marionette in grid
-
         if(currentDriver == BrowserName.GRID){
             // Get the current browser from the property or environment. If not set then default to firefox.
             // Make lowercase for consistent comparison.
             String gridBrowser = getPropertyOrEnv("WEBDRIVER_GRID_BROWSER",
-                                                            "firefox").toLowerCase();
+                                                       "firefox").toLowerCase();
 
             if(gridBrowser.contains("firefox")){
                 return BrowserName.FIREFOX;
