@@ -25,9 +25,9 @@ import java.util.Set;
 import static webdriver.drivermanager.EnvironmentPropertyReader.getPropertyOrEnv;
 
 /**
- *  A singleton style drivermanager to maintain Drivers to prevent test slowdown for creating a browser for each class with
- *  tests. Also counts time to start a browser and extrapolates from that how much time you have saved using such hacky
- *  code.
+ *  A singleton style drivermanager to maintain Drivers to prevent test slowdown for creating a browser for each class
+ *  with tests. Also counts time to start a browser and extrapolates from that how much time you have saved using such
+ *  hacky code.
  *
  *   When I started the course, the default browser was Firefox. It was supported without any extra drivers and worked
  *   well. At the point of writing this comment v 3.0.1 the legacyFirefoxDriver still works well, but only on v < 48 of
@@ -37,16 +37,16 @@ import static webdriver.drivermanager.EnvironmentPropertyReader.getPropertyOrEnv
  *   default.
  *
  *   The reason for this class is to limit the time it takes to start the browser. When the tests are run typically all
- *   the tests classes are run. This class allows sharing of the driver between the tests so minimize start up and shutodwn
- *   of the browser.
+ *   the tests classes are run. This class allows sharing of the driver between the tests so minimize start up and
+ *   shutodwn of the browser.
  *
  *   - 19th October 2016
  */
 public class Driver extends Thread{
 
     public enum BrowserName{
-        HTMLUNIT, FIREFOX, CHROME, GOOGLECHROME, EDGE, IE, FIREFOXPORTABLE, FIREFOXMARIONETTE, SAUCELABS, GRID,
-        APPIUM, OPERA
+        HTMLUNIT, FIREFOX, CHROME, GOOGLECHROME, EDGE, IE, FIREFOXPORTABLE, FIREFOXMARIONETTE, SAUCELABS, GRID, APPIUM,
+        OPERA
     }
 
     static final String BROWSER_PROPERTY_NAME = "selenium2basics.webdriver";
@@ -65,7 +65,7 @@ public class Driver extends Thread{
     public static String BROWSER = DEFAULT_BROWSER;
     public static String PROXYHOST = "localhost";
     public static String PROXYPORT = "8888";
-    public static String PROXY = PROXYHOST+":"+PROXYPORT;
+    public static String PROXY = PROXYHOST + ":" + PROXYPORT;
 
     public static void set(BrowserName aBrowser){
 
@@ -398,29 +398,27 @@ public class Driver extends Thread{
     }
 
 
-    /*
-    Initially, the tests didn't really run on Grid, and I have code in the tests,
-    to handle workarounds on different browsers.
-
-    But as I use grid more, my current approach of using currentDriver to code
-    workarounds for specific browsers, doesn't work because I'll just get GRID
-    when I want to know FIREFOX.
-
-    So I added a method called currentBrowser to Driver which returns the Browser
-    in use.
-
-    I can still find out what currentDriver is with `Driver.currentDriver`.
-    But if I want to know the browser, I should use `Driver.currentBrowser()`
-
+    /**
+     *  currentBrowser method.
+     *
+     *  Initially, the tests didn't really run on Grid, and I have code in the tests, to handle workarounds on different
+     *  browsers.
+     *
+     *  But as I use grid more, my current approach of using currentDriver to code workarounds for specific browsers,
+     *  doesn't work because I'll just get GRID when I want to know FIREFOX.
+     *
+     *  So I added a method called currentBrowser to Driver which returns the Browser in use.
+     *
+     *  I can still find out what currentDriver is with `Driver.currentDriver`. But if I want to know the browser, I
+     *  should use `Driver.currentBrowser()`
      */
     public static BrowserName currentBrowser(){
 
         // TODO: handle marionette in grid
 
         if(currentDriver == BrowserName.GRID){
-            // get the current browser from the property or environment
-            // if not set then default to firefox
-            // make lowercase for consistent comparison
+            // Get the current browser from the property or environment. If not set then default to firefox.
+            // Make lowercase for consistent comparison.
             String gridBrowser = getPropertyOrEnv("WEBDRIVER_GRID_BROWSER",
                                                             "firefox").toLowerCase();
 
@@ -464,7 +462,7 @@ public class Driver extends Thread{
 
                 String capabilityValue = getPropertyOrEnv(capabilityName, "");
 
-                if(capabilityValue.length()>0){
+                if(capabilityValue.length() > 0){
                     String capability = capabilityName.replaceFirst(extraCapabilityPrefix,"");
                     System.out.println("To Set Capability " + capability + " with value " + capabilityValue);
                     gridCapabilities.setCapability(capability, capabilityValue);
