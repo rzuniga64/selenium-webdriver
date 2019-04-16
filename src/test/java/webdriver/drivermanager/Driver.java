@@ -49,7 +49,7 @@ public class Driver extends Thread{
         APPIUM, OPERA
     }
 
-    public static final String BROWSER_PROPERTY_NAME = "selenium2basics.webdriver";
+    static final String BROWSER_PROPERTY_NAME = "selenium2basics.webdriver";
     private static final String DEFAULT_BROWSER = "CHROME";
     public static final long DEFAULT_TIMEOUT_SECONDS = 10;
 
@@ -89,7 +89,7 @@ public class Driver extends Thread{
      *  @param browser the browser we want to test on
      *  @return a WebDriver
      */
-    public static WebDriver get(String browserPropertyName, String browser  ) {
+    public static WebDriver get(String browserPropertyName, String browser  ) throws IOException {
 
         // If running on Linux or Mac this will get the appropriate file separator in the string.
         String s = File.separator;
@@ -107,8 +107,6 @@ public class Driver extends Thread{
             PROXYPORT = properties.getProperty("port");
             PROXY = PROXYHOST+":"+PROXYPORT;
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -296,24 +294,26 @@ public class Driver extends Thread{
                 case GRID:
 
                     String gridBrowser = getPropertyOrEnv("WEBDRIVER_GRID_BROWSER",
-                                                                    "firefox");
+                                                               "firefox");
                     String gridBrowserVersion = getPropertyOrEnv("WEBDRIVER_GRID_BROWSER_VERSION",
-                                                                           "");
+                                                                      "");
                     String gridBrowserPlatform = getPropertyOrEnv("WEBDRIVER_GRID_BROWSER_PLATFORM",
-                                                                            "");
+                                                                       "");
 
                     DesiredCapabilities gridCapabilities = new DesiredCapabilities();
+                    // The only capability that needs to be present is the browser name.
+                    // Everything else has defaults in Grid.
                     gridCapabilities.setBrowserName(gridBrowser);
-                    if(gridBrowserVersion.length()>0)
+                    if(gridBrowserVersion.length() > 0)
                         gridCapabilities.setVersion(gridBrowserVersion);
-                    if(gridBrowserPlatform.length()>0)
+                    if(gridBrowserPlatform.length() > 0)
                         gridCapabilities.setPlatform(Platform.fromString(gridBrowserPlatform));
 
                     // Allow adding any capability defined as an environment variable
                     // extra environment capabilities start with "WEBDRIVER_GRID_CAP_X_"
-
                     // e.g. WEBDRIVER_GRID_CAP_X_os_version XP
                     // e.g. WEBDRIVER_GRID_CAP_X_browserstack.debug true
+
                     Map<String, String> anyExtraCapabilities = System.getenv();
                     addAnyValidExtraCapabilityTo(gridCapabilities, anyExtraCapabilities.keySet());
 
@@ -321,11 +321,10 @@ public class Driver extends Thread{
                     Properties anyExtraCapabilityProperties = System.getProperties();
                     addAnyValidExtraCapabilityTo(gridCapabilities, anyExtraCapabilityProperties.stringPropertyNames());
 
-
                     try {
                         // add url to environment variables to avoid releasing with source
                         String gridURL = getPropertyOrEnv("WEBDRIVER_GRID_URL",
-                                                                    "http://localhost:4444/wd/hub");
+                                                               "http://localhost:4444/wd/hub");
                         aDriver = new RemoteWebDriver(new URL(gridURL), gridCapabilities);
                     } catch (MalformedURLException e) {
                         e.printStackTrace();
@@ -369,7 +368,7 @@ public class Driver extends Thread{
             // call the quit method in this particular class. We want to shutdown the shared browser when the tests
             // finish
             Runtime.getRuntime().addShutdownHook(
-                    new Thread(() -> Driver.quit())
+                    new Thread(Driver::quit)
             );
 
         } else {
@@ -379,7 +378,7 @@ public class Driver extends Thread{
                 if(aDriver.getWindowHandle()!=null){
                     // assume it is still alive
                 }
-            }catch(Exception e){
+            } catch(Exception e){
                 if(avoidRecursiveCall){
                     throw new RuntimeException("something has gone wrong as we have been in Driver.get already");
                 }
@@ -505,9 +504,9 @@ public class Driver extends Thread{
 
     /**
      *  get method.
-     * @param aURL the URL to navigate to.
-     * @param maximize true if you want to maximize the window; false otherwise.
-     * @return a WebDriver.
+     *  @param aURL the URL to navigate to.
+     *  @param maximize true if you want to maximize the window; false otherwise.
+     *  @return a WebDriver.
      */
     public static WebDriver get(String aURL, boolean maximize){
 
