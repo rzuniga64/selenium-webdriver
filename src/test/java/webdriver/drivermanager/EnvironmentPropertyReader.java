@@ -1,25 +1,47 @@
 package webdriver.drivermanager;
 
 /**
- * Created by Alan on 25/07/2016.
+ *  EnvironmentPropertyReader class.
+ *
+ *  We want to make our test configuration as flexible as we can.
+ *
+ *  PROPERTY VARIABLES
+ *  We can also use property files to define variables. We can define variables as System properties. System properties
+ *  are local to the JVM that is running and can set those in code. We can set them via them command line using
+ *  -D, mv test -DskipTests=true. It's also convenient to use in continuous integration.
+ *
+ *  ENVIRONMENT VARIABLES
+ *  Sometimes we want the configuration to span our entire environment so we use the environment variables. They are
+ *  system based and can be slow to amend because we have to restart the IDE or command line to pick up changes
+ *
+ *  DEFAULT VARIABLES
+ *  Default variables are good for in code debugging and experiments.
+ *
+ *  This class will prioritize how System properties, environment variables and defaults are used:
+ *  1. Properties
+ *  2. Environment variables
+ *  3. Defaults.
  */
 public class EnvironmentPropertyReader {
 
     /**
-     *  Allow setting the controls via property or environment variable
-     *  property takes precedence, then environment variable, then default
+     *  Allow setting the controls via property or environment variable.
+     *  Property takes precedence, then environment variable, then default.
      */
-    public static String getPropertyOrEnv(String browserPropertyName, String browser){
+    public static String getPropertyOrEnv(String browserPropertyName, String defaultBrowser){
 
+        // Check for System property first.
         String browserName = System.getProperty(browserPropertyName).toUpperCase();
-        if(browserName == null){
+        if(browserName.isEmpty() || browserName == null){
 
+            // If System property is not set check environment variables
             browserName = System.getenv(browserPropertyName);
 
-            if(browserName==null){
+            if(browserName == null){
 
-                System.out.println("No Environment Variable or Property named [" + browserPropertyName + "] using default value [" + browser + "]");
-                browserName = browser;
+                System.out.println("No Environment Variable or Property named [" + browserPropertyName + "] using default value [" + defaultBrowser + "]");
+                // If System property or environment variable is not set use the default that is passed in.
+                browserName = defaultBrowser;
 
             } else {
                 System.out.println("Using Environment Variable " + browserPropertyName + " with value " + browserName);
