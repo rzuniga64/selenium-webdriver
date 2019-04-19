@@ -16,8 +16,8 @@ public class FundamentalWhatHappensIfTest {
 
     @Test
     public void whatHappensIfIQuitThenClose(){
-        WebDriver driver = new FirefoxDriver();
 
+        WebDriver driver = new FirefoxDriver();
         driver.get("http://www.compendiumdev.co.uk/selenium");
         assertTrue(driver.getTitle().startsWith("Selenium Simplified"));
 
@@ -25,7 +25,7 @@ public class FundamentalWhatHappensIfTest {
         try{
             driver.close();
             fail("expected an Exception - UnreachableBrowserException");
-        }catch(Exception e){
+        } catch(Exception e){
             // we used to get an UnreachableBrowserException,
             // at July 2016 we get a SessionNotFoundException - but that is deprecated so I'm not going to assert on that
             assertTrue("We should get an Exception if we close after quiting", true);
@@ -35,6 +35,7 @@ public class FundamentalWhatHappensIfTest {
 
     @Test
     public void whatHappensIfICloseWithNothingOpen(){
+
         WebDriver driver = new FirefoxDriver();
 
         driver.get("http://www.compendiumdev.co.uk/selenium");
@@ -59,13 +60,12 @@ public class FundamentalWhatHappensIfTest {
 
     @Test
     public void whatHappensIfIForgetToNavigate(){
-        WebDriver driver = new FirefoxDriver();
 
+        WebDriver driver = new FirefoxDriver();
         //Firefox used to have an empty title
         //assertTrue("Empty Title", driver.getTitle().isEmpty());
         Assert.assertEquals("Problem loading page", driver.getTitle());
 
         driver.quit();
-
     }
 }
