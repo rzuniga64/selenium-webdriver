@@ -67,7 +67,7 @@ public class ScreenshotsExerciseTest {
     @Test
     public void canWeTakeAScreenshotExceptionStyle() throws IOException {
 
-        driver = Driver.get("webdriver.chrome.driver", "CHROME");
+        driver = Driver.get();
         driver.navigate().to("http://seleniumsimplified.com");
 
         try {
@@ -98,7 +98,7 @@ public class ScreenshotsExerciseTest {
     @Test
     public void htmlUnitDoesNotDoScreenshotsViaCapabilities() throws IOException {
 
-        driver = Driver.get("webdriver.htmlunit.driver", "HTMLUNIT");
+        driver = Driver.get();
         //Driver.set(Driver.BrowserName.HTMLUNIT);
         // using a different page because sometimes HTMLUnit driver doesn't like the javascript
         driver = Driver.get("http://compendiumdev.co.uk/selenium/testpages/find_by_playground.php");
@@ -118,7 +118,7 @@ public class ScreenshotsExerciseTest {
     @Test
     public void htmlUnitDoesNotDoScreenshotsViaException() throws IOException {
 
-        driver = Driver.get("webdriver.htmlunit.driver", "HTMLUNIT");
+        driver = Driver.get();
         //Driver.set(Driver.BrowserName.HTMLUNIT);
         // using a different page because sometimes HTMLUnit driver doesn't like the javascript
         driver = Driver.get("http://compendiumdev.co.uk/selenium/testpages/find_by_playground.php");
