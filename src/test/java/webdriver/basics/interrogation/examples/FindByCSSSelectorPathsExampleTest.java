@@ -30,7 +30,7 @@ public class FindByCSSSelectorPathsExampleTest {
     @BeforeClass
     public static void createDriverAndVisitTestPage() throws IOException {
 
-        driver = Driver.get("selenium2basics.webdriver","HTMLUNIT" );
+        driver = Driver.get();
         driver = Driver.get("http://www.compendiumdev.co.uk/selenium/find_by_playground.php");
     }
 

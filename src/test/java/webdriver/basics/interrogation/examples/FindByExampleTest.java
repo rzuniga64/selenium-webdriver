@@ -24,7 +24,7 @@ public class FindByExampleTest {
     @BeforeClass
     public static void createDriverAndVisitTestPage() throws IOException {
 
-        driver = Driver.get("webdriver.chrome.webdriver","CHROME" );
+        driver = Driver.get();
         driver.navigate().to("http://www.compendiumdev.co.uk/selenium/find_by_playground.php");
     }
 

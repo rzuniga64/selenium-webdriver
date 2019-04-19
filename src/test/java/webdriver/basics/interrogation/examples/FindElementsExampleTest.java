@@ -23,7 +23,7 @@ public class FindElementsExampleTest {
     @BeforeClass
     public static void createDriverAndVisitTestPage() throws IOException {
 
-        driver = Driver.get("webdriver.chrome.driver", "CHROME");
+        driver = Driver.get();
         driver.navigate().to("http://www.compendiumdev.co.uk/selenium/find_by_playground.php");
     }
 

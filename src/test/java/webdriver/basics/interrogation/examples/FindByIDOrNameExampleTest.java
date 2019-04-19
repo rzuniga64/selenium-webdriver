@@ -20,7 +20,7 @@ public class FindByIDOrNameExampleTest {
     @BeforeClass
     public static void createDriverAndVisitTestPage() throws IOException {
 
-        driver = Driver.get("webdriver.chrome.driver", "CHROME");
+        driver = Driver.get();
         driver.navigate().to("http://www.compendiumdev.co.uk/selenium/find_by_playground.php");
         driver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
     }
@@ -31,24 +31,18 @@ public class FindByIDOrNameExampleTest {
     public void findByIdOrNameMatchOnName(){
 
         WebElement element;
-        element = driver.findElement(
-                             new ByIdOrName("pName2"));
+        element = driver.findElement(new ByIdOrName("pName2"));
 
-        assertEquals("expected a match on name",
-                "This is b paragraph text",
-                element.getText());
+        assertEquals("expected a match on name", "This is b paragraph text", element.getText());
     }
 
     @Test
     public void findByIdOrNameMatchOnId(){
 
         WebElement element;
-        element = driver.findElement(
-                new ByIdOrName("p3"));
+        element = driver.findElement(new ByIdOrName("p3"));
 
-        assertEquals("expected a match on id",
-                "This is c paragraph text",
-                element.getText());
+        assertEquals("expected a match on id", "This is c paragraph text", element.getText());
     }
 
     @AfterClass
