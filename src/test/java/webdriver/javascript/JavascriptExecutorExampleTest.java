@@ -19,7 +19,7 @@ public class JavascriptExecutorExampleTest {
     @Before
     public void setup() throws IOException {
 
-        driver = Driver.get("webdriver.chrome.driver","CHROME" );
+        driver = Driver.get();
         WebDriver driver = Driver.get("http://www.compendiumdev.co.uk/selenium/canvas_basic.html");
     }
 
