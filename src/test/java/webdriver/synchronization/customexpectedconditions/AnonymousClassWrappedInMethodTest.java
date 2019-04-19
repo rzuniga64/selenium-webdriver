@@ -31,7 +31,7 @@ public class AnonymousClassWrappedInMethodTest {
     @BeforeClass
     public static void setup() throws IOException {
 
-        driver = Driver.get("selenium2basics.webdriver", "CHROME");
+        driver = Driver.get();
         driver.navigate().to("http://compendiumdev.co.uk/selenium/basic_ajax.html");
         wait = new WebDriverWait(driver,10);
     }

@@ -33,7 +33,7 @@ public class SeparateNamedClassExampleTest {
     @BeforeClass
     public static void createDriverAndVisitTestPage() throws IOException {
 
-        driver = Driver.get("selenium2basics.webdriver", "CHROME");
+        driver = Driver.get();
         driver.navigate().to("http://compendiumdev.co.uk/selenium/basic_ajax.html");
         wait = new WebDriverWait(driver,10);
     }
