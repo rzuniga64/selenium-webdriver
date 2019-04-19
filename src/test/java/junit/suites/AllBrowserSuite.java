@@ -99,10 +99,6 @@ import webdriver.userinteractions.UserInteractionsExercisesTest;
         GetTitleReplacementExerciseTest.class,
         WebElementInterrogationTest.class,
 
-        // manipulate alerts
-        AlertHandlingExampleTest.class,
-        AlertHandlingExercisesTest.class,
-
         // Manipulate Alerts
         AlertHandlingExampleTest.class,
         AlertHandlingExercisesTest.class,
