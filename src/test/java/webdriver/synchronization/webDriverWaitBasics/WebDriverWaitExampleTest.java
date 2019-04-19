@@ -24,7 +24,7 @@ public class WebDriverWaitExampleTest {
     @BeforeClass
     public static void setup() throws IOException {
 
-        driver = Driver.get("webdriver.chrome.driver", "CHROME");
+        driver = Driver.get();
         driver.navigate().to("http://www.compendiumdev.co.uk/selenium/basic_ajax.html");
         wait =  new WebDriverWait(driver,10);
     }
