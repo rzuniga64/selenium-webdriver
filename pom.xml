@@ -59,11 +59,14 @@
                     <parallel>methods</parallel>
                     <threadCount>10</threadCount>
                     <includes>
-                        <include>**/ManipulateOnlySuite.java, **/InterrogateOnlySuite.java</include>
+                        <include>${runSuite}</include>
                     </includes>
                 </configuration>
             </plugin>
         </plugins>
     </build>
 
+    <properties>
+        <runSuite>**/ManipulateOnlySuite.java, **/InterrogateOnlySuite.java</runSuite>
+    </properties>
 </project>
