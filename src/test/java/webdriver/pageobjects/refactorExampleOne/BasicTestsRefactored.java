@@ -20,7 +20,7 @@ public class BasicTestsRefactored {
     @Before
     public void setup() throws IOException {
 
-        driver = Driver.get("webdriver.chrome.driver", "CHROME");
+        driver = Driver.get();
         basicAjaxPage = new BasicAjaxPageObject(driver);
         basicAjaxPage.get();
     }

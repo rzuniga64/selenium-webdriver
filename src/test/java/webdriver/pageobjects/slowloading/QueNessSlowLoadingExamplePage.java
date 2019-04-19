@@ -24,7 +24,7 @@ public class QueNessSlowLoadingExamplePage extends SlowLoadableComponent<QueNess
     @Override
     protected void load() {
         try {
-            driver = Driver.get("webdriver.chrome.driver", "CHROME");
+            driver = Driver.get();
         } catch (IOException e) {
             e.printStackTrace();
         }

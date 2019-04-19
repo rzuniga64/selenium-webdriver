@@ -23,7 +23,7 @@ public class BasicTestsRefactored {
     @BeforeClass
     public static void setupTestClass() throws IOException {
 
-        driver = Driver.get("webdriver.chrome.driver", "CHROME");
+        driver = Driver.get();
 
         // added when doing demo of the AndroidDriver
         //driver = new AndroidDriver("http://192.168.1.165:8080/wd/hub");

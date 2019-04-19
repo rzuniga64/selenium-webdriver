@@ -28,7 +28,7 @@ public class WithoutPageObjectsTest {
     @BeforeClass
     public static void setup() throws IOException {
 
-        driver = Driver.get("webdriver.chrome.driver", "CHROME");
+        driver = Driver.get();
         wait = new WebDriverWait(driver,10);
     }
 
