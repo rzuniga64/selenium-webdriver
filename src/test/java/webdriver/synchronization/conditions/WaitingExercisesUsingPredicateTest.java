@@ -44,7 +44,7 @@ public class WaitingExercisesUsingPredicateTest {
     @Test
     public void customExpectedConditionForTitleDoesNotContainUsingClass() throws IOException {
 
-        driver = Driver.get("webdriver.chrome.driver", "CHROME");
+        driver = Driver.get();
         driver.navigate().to("http://compendiumdev.co.uk/selenium/basic_redirect.html");
 
         driver.findElement((By.id("delaygotobasic"))).click();
@@ -75,7 +75,7 @@ public class WaitingExercisesUsingPredicateTest {
     @Test
     public void customExpectedConditionForTitleDoesNotContainUsingMethod() throws IOException {
 
-        driver = Driver.get("webdriver.chrome.driver", "CHROME");
+        driver = Driver.get();
         driver = Driver.get("http://compendiumdev.co.uk/selenium/basic_redirect.html");
 
         driver.findElement((By.id("delaygotobasic"))).click();

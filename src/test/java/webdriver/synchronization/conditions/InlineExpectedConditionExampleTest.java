@@ -20,7 +20,7 @@ public class InlineExpectedConditionExampleTest {
     @Test
     public void inlineCustomExpectedCondition() throws IOException {
 
-        driver = Driver.get("webdriver.chrome.driver", "CHROME");
+        driver = Driver.get();
         driver = Driver.get("http://compendiumdev.co.uk/selenium/basic_ajax.html");
 
         // select Server

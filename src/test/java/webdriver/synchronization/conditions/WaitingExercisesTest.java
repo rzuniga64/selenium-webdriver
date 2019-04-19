@@ -20,7 +20,7 @@ public class WaitingExercisesTest {
     @Test
     public void canReturnAWebElementInsteadOfABooleanUsingAnonymousClass() throws IOException {
 
-        driver = Driver.get("webdriver.chrome.driver", "CHROME");
+        driver = Driver.get();
         driver.navigate().to("http://compendiumdev.co.uk/selenium/basic_ajax.html");
 
         // select Server
