@@ -37,7 +37,7 @@ public class CookiesExercisesTest {
     @Before
     public void setup() throws IOException {
 
-        driver = Driver.get("webdriver.chrome.driver", "CHROME");
+        driver = Driver.get();
         driver.navigate().to("http://compendiumdev.co.uk/selenium/search.php");
 
         //clear any cookies so it is always the first time we have been here
