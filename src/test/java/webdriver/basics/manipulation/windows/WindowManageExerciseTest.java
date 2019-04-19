@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import webdriver.drivermanager.Driver;
 
 import java.awt.*;
+import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -27,7 +28,7 @@ public class WindowManageExerciseTest {
     private static WebDriver driver;
 
     @Before
-    public void setup(){
+    public void setup() throws IOException {
 
         driver = Driver.get("selenium2basics.webdriver", "CHROME");
         driver.navigate().to("http://www.compendiumdev.co.uk/selenium/bounce.html");

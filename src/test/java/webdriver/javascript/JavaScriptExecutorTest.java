@@ -8,6 +8,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import webdriver.drivermanager.Driver;
 
+import java.io.IOException;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
@@ -28,7 +30,7 @@ public class JavaScriptExecutorTest {
     private static WebDriver driver;
 
     @BeforeClass
-    public static void setup(){
+    public static void setup() throws IOException {
 
         driver = Driver.get("webdriver.chrome.driver", "CHROME");
         driver.navigate().to("http://www.compendiumdev.co.uk/selenium/canvas_basic.html");

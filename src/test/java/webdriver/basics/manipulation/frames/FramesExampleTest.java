@@ -9,6 +9,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import webdriver.drivermanager.Driver;
 
+import java.io.IOException;
+
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -28,7 +30,7 @@ public class FramesExampleTest {
 
 
     @Before
-    public void setup(){
+    public void setup() throws IOException {
 
         driver = Driver.get("webdriver.chrome.driver", "CHROME");
         driver.navigate().to("http://www.compendiumdev.co.uk/selenium/frames");

@@ -9,6 +9,8 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import webdriver.drivermanager.Driver;
 
+import java.io.IOException;
+
 import static org.junit.Assert.assertEquals;
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 
@@ -27,7 +29,7 @@ public class AnonymousClassWrappedInMethodTest {
     private static WebDriverWait wait;
 
     @BeforeClass
-    public static void setup(){
+    public static void setup() throws IOException {
 
         driver = Driver.get("selenium2basics.webdriver", "CHROME");
         driver.navigate().to("http://compendiumdev.co.uk/selenium/basic_ajax.html");

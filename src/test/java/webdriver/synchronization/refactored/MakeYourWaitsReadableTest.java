@@ -10,6 +10,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.IOException;
+
 import static org.junit.Assert.assertEquals;
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 
@@ -32,7 +34,7 @@ public class MakeYourWaitsReadableTest {
     private static WebDriverWait wait;
 
     @Before
-    public void setupForTest(){
+    public void setupForTest() throws IOException {
 
         driver = Driver.get("webdriver.chrome.driver", "CHROME");
         driver.navigate().to("http://compendiumdev.co.uk/selenium/basic_ajax.html");

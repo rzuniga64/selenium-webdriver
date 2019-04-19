@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import webdriver.drivermanager.Driver;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -37,7 +38,7 @@ public class NavigationBasicsTest {
     final private String ROOT_URL = PROTOCOL + "://" + DOMAIN;
 
     @BeforeClass
-    public static void createDriver(){
+    public static void createDriver() throws IOException {
         driver = Driver.get("webdriver.chrome.driver","CHROME" );
     }
 

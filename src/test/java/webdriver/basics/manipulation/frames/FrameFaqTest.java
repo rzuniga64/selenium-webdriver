@@ -8,6 +8,8 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import webdriver.drivermanager.Driver;
 
+import java.io.IOException;
+
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -18,7 +20,7 @@ public class FrameFaqTest {
     private static WebDriver driver;
 
     @Before
-    public void setup(){
+    public void setup() throws IOException {
 
         driver = Driver.get("webdriver.chrome.driver", "CHROME");
         driver.navigate().to("http://www.compendiumdev.co.uk/selenium/frames");

@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
@@ -38,7 +39,7 @@ public class ImplicitWaitTest {
     private static WebDriverWait wait;
 
     @Before
-    public void setup(){
+    public void setup() throws IOException {
 
         driver = Driver.get("webdriver.chrome.driver", "CHROME");
         driver.navigate().to("http://compendiumdev.co.uk/selenium/basic_html_form.html");

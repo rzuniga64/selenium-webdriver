@@ -6,13 +6,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.IOException;
 import java.util.function.Function;
 
 import static org.junit.Assert.assertEquals;
 
 public class WaitingExercisesUsingPredicateTest {
 
-    static WebDriver driver;
+    private static WebDriver driver;
 
 
     /*****************************
@@ -39,13 +40,12 @@ public class WaitingExercisesUsingPredicateTest {
 
      `Function<WebDriver, Boolean>` to match the declaration of the class `TitleDoesNotContain`
 
-
     */
     @Test
-    public void customExpectedConditionForTitleDoesNotContainUsingClass(){
+    public void customExpectedConditionForTitleDoesNotContainUsingClass() throws IOException {
 
-        driver = Driver.get("http://compendiumdev.co.uk/selenium/" +
-                "basic_redirect.html");
+        driver = Driver.get("webdriver.chrome.driver", "CHROME");
+        driver.navigate().to("http://compendiumdev.co.uk/selenium/basic_redirect.html");
 
         driver.findElement((By.id("delaygotobasic"))).click();
 
@@ -58,6 +58,7 @@ public class WaitingExercisesUsingPredicateTest {
 
 
     private class TitleDoesNotContain implements Function<WebDriver, Boolean> {
+
         private String titleExcludes;
 
         public TitleDoesNotContain(String notContainThisString) {
@@ -72,10 +73,10 @@ public class WaitingExercisesUsingPredicateTest {
 
 
     @Test
-    public void customExpectedConditionForTitleDoesNotContainUsingMethod(){
+    public void customExpectedConditionForTitleDoesNotContainUsingMethod() throws IOException {
 
-        driver = Driver.get("http://compendiumdev.co.uk/selenium/" +
-                "basic_redirect.html");
+        driver = Driver.get("webdriver.chrome.driver", "CHROME");
+        driver = Driver.get("http://compendiumdev.co.uk/selenium/basic_redirect.html");
 
         driver.findElement((By.id("delaygotobasic"))).click();
 

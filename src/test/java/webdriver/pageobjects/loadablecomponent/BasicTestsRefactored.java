@@ -7,6 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
+import java.io.IOException;
+
 import static webdriver.pageobjects.loadablecomponent.pages.BasicAjaxPageObject.Category;
 import static webdriver.pageobjects.loadablecomponent.pages.BasicAjaxPageObject.Language;
 import static org.junit.Assert.assertEquals;
@@ -31,7 +33,7 @@ public class BasicTestsRefactored {
     private BasicAjaxPageObject basicAjaxPage;
 
     @Before
-    public void setupTest(){
+    public void setupTest() throws IOException {
 
         driver = Driver.get("webdriver.chrome.driver", "CHROME");
         basicAjaxPage = new BasicAjaxPageObject(driver);

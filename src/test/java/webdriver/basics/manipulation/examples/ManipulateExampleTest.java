@@ -8,6 +8,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.io.IOException;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -19,7 +21,7 @@ public class ManipulateExampleTest {
     private static WebDriver driver;
 
     @BeforeClass
-    public static void createDriverAndVisitTestPage(){
+    public static void createDriverAndVisitTestPage() throws IOException {
         driver = Driver.get("webdriver.chrome.driver", "CHROME");
         driver = Driver.get("http://www.compendiumdev.co.uk/selenium/basic_html_form.html");
     }

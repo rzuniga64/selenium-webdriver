@@ -138,7 +138,7 @@ public class CsvDataDrivenTest {
      */
 
     @BeforeClass
-    static public void startServer(){
+    static public void startServer() throws IOException {
 
         driver = Driver.get("webdriver.chrome.driver", "CHROME");
         driver.navigate().to(url);

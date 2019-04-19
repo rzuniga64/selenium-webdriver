@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import webdriver.drivermanager.Driver;
 
+import java.io.IOException;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
@@ -34,7 +35,7 @@ public class CookiesExercisesTest {
     private static WebElement submitButton;
 
     @Before
-    public void setup(){
+    public void setup() throws IOException {
 
         driver = Driver.get("webdriver.chrome.driver", "CHROME");
         driver.navigate().to("http://compendiumdev.co.uk/selenium/search.php");

@@ -8,6 +8,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import webdriver.drivermanager.Driver;
 
+import java.io.IOException;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
@@ -26,7 +28,7 @@ public class SynchronisationWithWebDriverWaitTest {
     private static WebDriverWait wait;
 
     @Before
-    public void setup(){
+    public void setup() throws IOException {
 
         driver = Driver.get("webdriver.chrome.driver", "CHROME");
         driver.navigate().to("http://compendiumdev.co.uk/selenium/basic_ajax.html");

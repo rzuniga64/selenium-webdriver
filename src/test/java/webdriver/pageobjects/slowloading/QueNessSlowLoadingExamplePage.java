@@ -6,6 +6,8 @@ import org.openqa.selenium.support.ui.SlowLoadableComponent;
 import org.openqa.selenium.support.ui.SystemClock;
 import webdriver.drivermanager.Driver;
 
+import java.io.IOException;
+
 public class QueNessSlowLoadingExamplePage extends SlowLoadableComponent<QueNessSlowLoadingExamplePage>{
     private WebDriver driver;
 
@@ -20,9 +22,12 @@ public class QueNessSlowLoadingExamplePage extends SlowLoadableComponent<QueNess
     }
 
     @Override
-    protected void load()
-    {
-        driver = Driver.get("webdriver.chrome.driver", "CHROME");
+    protected void load() {
+        try {
+            driver = Driver.get("webdriver.chrome.driver", "CHROME");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         driver.get("http://www.queness.com/resources/html/ajax/simple.php#page4");
     }
 

@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import webdriver.drivermanager.Driver;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
@@ -32,7 +33,7 @@ public class FluentWaitExampleTest {
     private static WebDriver driver;
 
     @BeforeClass
-    public static void setup() {
+    public static void setup() throws IOException {
 
         driver = Driver.get("webdriver.chrome.driver", "CHROME");
         driver.navigate().to("http://compendiumdev.co.uk/selenium/basic_html_form.html");

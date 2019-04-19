@@ -6,6 +6,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
+import java.io.IOException;
+
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -19,7 +21,7 @@ public class NavigationExampleTest {
     private static WebDriver driver;
 
     @BeforeClass
-    public static void createDriver(){
+    public static void createDriver() throws IOException {
 
         driver = Driver.get("webdriver.chrome.driver","CHROME" );
     }

@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import webdriver.drivermanager.Driver;
 
+import java.io.IOException;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -43,7 +44,7 @@ public class UserInteractionsExamplesClickDONOTUSETest {
     private static WebDriver driver;
 
     @Before
-    public void setup(){
+    public void setup() throws IOException {
 
         driver = Driver.get("webdriver.chrome.driver","CHROME" );
         driver = Driver.get("http://compendiumdev.co.uk/selenium/basic_html_form.html");

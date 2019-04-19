@@ -12,6 +12,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import webdriver.drivermanager.Driver;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -95,7 +96,7 @@ public class ObjectArrayDataDrivenTest {
     }
 
     @BeforeClass
-    static public void startServer(){
+    static public void startServer() throws IOException {
 
         driver = Driver.get("webdriver.chrome.driver", "CHROME");
         driver.navigate().to(url);

@@ -3,6 +3,8 @@ package webdriver.drivermanager;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
+import java.io.IOException;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -11,42 +13,42 @@ public class DriverTest {
     WebDriver driver;
 
     @Test
-    public void createAnHtmlUnitDriver(){
+    public void createAnHtmlUnitDriver() throws IOException {
 
         driver = Driver.get(Driver.BROWSER_PROPERTY_NAME,"HTMLUNIT" );
         assertBrowserTestRuns();
     }
 
     @Test
-    public void createAFirefoxDriver(){
+    public void createAFirefoxDriver() throws IOException {
 
         driver = Driver.get(Driver.BROWSER_PROPERTY_NAME,"FIREFOX" );
         assertBrowserTestRuns();
     }
 
     @Test
-    public void createAChromeDriver(){
+    public void createAChromeDriver() throws IOException {
 
         driver = Driver.get(Driver.BROWSER_PROPERTY_NAME,"CHROME" );
         assertBrowserTestRuns();
     }
 
     @Test
-    public void createAEdgeDriver(){
+    public void createAEdgeDriver() throws IOException {
 
         driver = Driver.get(Driver.BROWSER_PROPERTY_NAME,"EDGE" );
         assertBrowserTestRuns();
     }
 
     @Test
-    public void createAIEDriver(){
+    public void createAIEDriver() throws IOException {
 
         driver = Driver.get(Driver.BROWSER_PROPERTY_NAME,"IE" );
         assertBrowserTestRuns();
     }
 
     @Test
-    public void createAOperaDriver(){
+    public void createAOperaDriver() throws IOException {
 
         driver = Driver.get(Driver.BROWSER_PROPERTY_NAME,"OPERA" );
         assertBrowserTestRuns();

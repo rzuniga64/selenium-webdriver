@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public class FluentWaitForWebElementExampleTest {
@@ -25,7 +26,9 @@ public class FluentWaitForWebElementExampleTest {
     WebElement countdown;
 
     @BeforeClass
-    public static void setup(){
+    public static void setup() throws IOException {
+
+        driver = Driver.get("webdriver.chrome.driver", "CHROME");
         driver = Driver.get("http://compendiumdev.co.uk/selenium/javascript_countdown.html");
     }
 

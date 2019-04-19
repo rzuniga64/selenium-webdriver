@@ -7,6 +7,8 @@ import webdriver.drivermanager.Driver;
 import webdriver.pageobjects.refactorExampleOne.pages.BasicAjaxPageObject;
 import webdriver.pageobjects.refactorExampleOne.pages.ProcessedFormPage;
 
+import java.io.IOException;
+
 import static org.junit.Assert.assertEquals;
 import static webdriver.pageobjects.refactorExampleOne.pages.BasicAjaxPageObject.Category;
 
@@ -16,7 +18,7 @@ public class BasicTestsRefactored {
     private BasicAjaxPageObject basicAjaxPage;
 
     @Before
-    public void setup(){
+    public void setup() throws IOException {
 
         driver = Driver.get("webdriver.chrome.driver", "CHROME");
         basicAjaxPage = new BasicAjaxPageObject(driver);

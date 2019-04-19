@@ -9,6 +9,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import webdriver.drivermanager.Driver;
 
+import java.io.IOException;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
@@ -33,7 +35,7 @@ public class FramesExercisesRefactoredTest {
     private WebDriverWait wait;
 
     @Before
-    public void setup(){
+    public void setup() throws IOException {
 
         driver = Driver.get("selenium2basics.webdriver", "CHROME");
         driver.navigate().to("http://www.compendiumdev.co.uk/selenium/frames");

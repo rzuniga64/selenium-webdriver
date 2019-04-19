@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import webdriver.drivermanager.Driver;
 
+import java.io.IOException;
 import java.util.Iterator;
 
 import static org.junit.Assert.assertEquals;
@@ -31,7 +32,7 @@ public class WindowsExercisesTest {
     private WebDriverWait wait;
 
     @Before
-    public void setup() {
+    public void setup() throws IOException {
 
         driver = Driver.get("selenium2basics.webdriver", "CHROME");
         //Driver.quit(); // dodgy in a suite - close everything down and start again

@@ -30,8 +30,7 @@ public class CookiesExercisesTestWorkWithExtraSync {
     @Before
     public void setup(){
 
-        driver = Driver.get("http://compendiumdev.co.uk/selenium/" +
-                        "search.php");
+        driver = Driver.get("http://compendiumdev.co.uk/selenium/search.php");
 
         //seleniumSimplifiedSearchLastVisit
         //seleniumSimplifiedSearchNumVisits

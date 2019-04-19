@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.CapabilityType;
 
 import java.io.File;
+import java.io.IOException;
 
 import static org.junit.Assert.fail;
 import static org.hamcrest.CoreMatchers.is;
@@ -35,7 +36,7 @@ public class ScreenshotsExerciseTest {
      *  Create a firefox driver and use getCapabilities to check that it can create a screenshot.
      */
     @Test
-    public void canWeTakeAScreenshotCapabilitiesStyle(){
+    public void canWeTakeAScreenshotCapabilitiesStyle() throws IOException {
 
         driver = Driver.get("webdriver.chrome.driver", "CHROME");
         driver.navigate().to("http://seleniumsimplified.com");
@@ -64,7 +65,7 @@ public class ScreenshotsExerciseTest {
      *  screenshot.
      */
     @Test
-    public void canWeTakeAScreenshotExceptionStyle(){
+    public void canWeTakeAScreenshotExceptionStyle() throws IOException {
 
         driver = Driver.get("webdriver.chrome.driver", "CHROME");
         driver.navigate().to("http://seleniumsimplified.com");
@@ -95,7 +96,7 @@ public class ScreenshotsExerciseTest {
      *  Create an HtmlUnitDriver and use getCapabilities to check that it can not create a screenshot.
      */
     @Test
-    public void htmlUnitDoesNotDoScreenshotsViaCapabilities(){
+    public void htmlUnitDoesNotDoScreenshotsViaCapabilities() throws IOException {
 
         driver = Driver.get("webdriver.htmlunit.driver", "HTMLUNIT");
         //Driver.set(Driver.BrowserName.HTMLUNIT);
@@ -115,7 +116,7 @@ public class ScreenshotsExerciseTest {
      *  not create a screenshot.
      */
     @Test
-    public void htmlUnitDoesNotDoScreenshotsViaException(){
+    public void htmlUnitDoesNotDoScreenshotsViaException() throws IOException {
 
         driver = Driver.get("webdriver.htmlunit.driver", "HTMLUNIT");
         //Driver.set(Driver.BrowserName.HTMLUNIT);

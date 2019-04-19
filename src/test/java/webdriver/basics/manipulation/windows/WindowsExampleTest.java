@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import java.io.IOException;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
@@ -28,7 +29,7 @@ public class WindowsExampleTest {
     private static WebDriver driver;
 
     @Before
-    public void quitToRestart(){
+    public void quitToRestart() throws IOException {
 
         driver = Driver.get("webdriver.chrome.driver", "CHROME");
     }

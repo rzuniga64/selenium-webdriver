@@ -7,6 +7,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import webdriver.drivermanager.Driver;
 
+import java.io.IOException;
+
 import static junit.framework.TestCase.assertEquals;
 
 /**
@@ -19,7 +21,7 @@ public class WebDriverWaitExampleTest {
     private static WebDriver driver;
 
     @BeforeClass
-    public static void createDriverAndVisitTestPage() {
+    public static void createDriverAndVisitTestPage() throws IOException {
 
         driver = Driver.get("webdriver.chrome.driver", "CHROME");
         driver.get("http://compendiumdev.co.uk/selenium/basic_html_form.html");

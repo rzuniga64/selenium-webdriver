@@ -41,7 +41,7 @@ public class ScreenshotsExampleTest {
     private static WebDriver driver;
 
     @BeforeClass
-    public static void configureBrowser(){
+    public static void configureBrowser() throws IOException {
 
         driver = Driver.get("webdriver.chrome.driver", "CHROME");
         driver.navigate().to("http://seleniumsimplified.com");

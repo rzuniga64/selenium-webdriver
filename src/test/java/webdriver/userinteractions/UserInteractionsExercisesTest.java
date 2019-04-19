@@ -13,6 +13,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.IOException;
+
 import static org.junit.Assert.*;
 
 /**
@@ -32,7 +34,7 @@ public class UserInteractionsExercisesTest {
     private static WebDriver driver;
 
     @BeforeClass
-    public static void setup(){
+    public static void setup() throws IOException {
         driver = Driver.get("webdriver.chrome.driver", "CHROME");
         driver = Driver.get("http://compendiumdev.co.uk/selenium/gui_user_interactions.html");
     }

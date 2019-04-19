@@ -9,6 +9,8 @@ import webdriver.drivermanager.Driver;
 import webdriver.pageobjects.refactorExampleOneExercise.pages.BasicAjaxPageObject;
 import webdriver.pageobjects.refactorExampleOneExercise.pages.ProcessedFormPage;
 
+import java.io.IOException;
+
 import static org.junit.Assert.assertEquals;
 import static webdriver.pageobjects.refactorExampleOneExercise.pages.BasicAjaxPageObject.Category;
 import static webdriver.pageobjects.refactorExampleOneExercise.pages.BasicAjaxPageObject.Language;
@@ -19,7 +21,7 @@ public class BasicTestsRefactored {
     private BasicAjaxPageObject basicAjaxPage;
 
     @BeforeClass
-    public static void setupTestClass() {
+    public static void setupTestClass() throws IOException {
 
         driver = Driver.get("webdriver.chrome.driver", "CHROME");
 

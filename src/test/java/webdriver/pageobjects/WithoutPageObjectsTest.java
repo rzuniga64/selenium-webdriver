@@ -9,6 +9,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.IOException;
+
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -24,7 +26,7 @@ public class WithoutPageObjectsTest {
     private static WebDriverWait wait;
 
     @BeforeClass
-    public static void setup() {
+    public static void setup() throws IOException {
 
         driver = Driver.get("webdriver.chrome.driver", "CHROME");
         wait = new WebDriverWait(driver,10);
