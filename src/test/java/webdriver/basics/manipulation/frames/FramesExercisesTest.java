@@ -31,7 +31,7 @@ public class FramesExercisesTest {
     @Before
     public void setup() throws IOException {
 
-        driver = Driver.get("selenium2basics.webdriver", "CHROME");
+        driver = Driver.get();
         driver = Driver.get("http://www.compendiumdev.co.uk/selenium/frames");
     }
 
