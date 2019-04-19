@@ -23,7 +23,7 @@ public class WebDriverWaitExampleTest {
     @BeforeClass
     public static void createDriverAndVisitTestPage() throws IOException {
 
-        driver = Driver.get("webdriver.chrome.driver", "CHROME");
+        driver = Driver.get();
         driver.get("http://compendiumdev.co.uk/selenium/basic_html_form.html");
     }
 
