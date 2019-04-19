@@ -25,7 +25,7 @@ public class ManipulateExercisesSubmitFileTest {
 
     @Before
     public void setup() throws IOException {
-        driver = Driver.get("selenium2basics.webdriver", "CHROME");
+        driver = Driver.get();
         driver = Driver.get("http://compendiumdev.co.uk/selenium/basic_html_form.html");
     }
 

@@ -33,7 +33,7 @@ public class ManipulateSelectSupportTest {
     @Before
     public void setup() throws IOException {
 
-        driver = Driver.get("webdriver.chrome.driver", "CHROME");
+        driver = Driver.get();
         driver = Driver.get("http://compendiumdev.co.uk/selenium/basic_html_form.html");
     }
 
