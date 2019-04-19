@@ -3,7 +3,7 @@ language: java
 # If v48 or above is used then the marionette driver would have to be installed and I don't think
 # it is installed on Travis so control the version of Firefox that is used
 addons:
-  firefox: "47.0.1"
+  firefox: "66.0.1"
 jdk:
   - oraclejdk8
 before_script:
