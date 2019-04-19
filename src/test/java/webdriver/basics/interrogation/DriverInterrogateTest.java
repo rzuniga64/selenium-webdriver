@@ -28,7 +28,7 @@ public class DriverInterrogateTest {
     @BeforeClass
     public static void createDriver() throws IOException {
 
-        driver = Driver.get("webdriver.htmlunit.driver","HTMLUNIT" );
+        driver = Driver.get();
     }
 
     @Test
