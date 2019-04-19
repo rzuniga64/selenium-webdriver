@@ -36,7 +36,7 @@ public class MakeYourWaitsReadableTest {
     @Before
     public void setupForTest() throws IOException {
 
-        driver = Driver.get("webdriver.chrome.driver", "CHROME");
+        driver = Driver.get();
         driver.navigate().to("http://compendiumdev.co.uk/selenium/basic_ajax.html");
         // instantiate your waits at the highest level you can, to reuse in the test
         wait = new WebDriverWait(driver,10);
