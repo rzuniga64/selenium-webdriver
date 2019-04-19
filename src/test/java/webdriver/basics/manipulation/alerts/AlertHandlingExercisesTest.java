@@ -5,6 +5,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.*;
 
+import java.io.IOException;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -22,7 +24,7 @@ public class AlertHandlingExercisesTest {
     private static WebDriver driver;
 
     @Before
-    public void setup(){
+    public void setup() throws IOException {
         driver = Driver.get("webdriver.chrome.driver", "CHROME");
         driver.navigate().to("http://compendiumdev.co.uk/selenium/alerts.html");
     }

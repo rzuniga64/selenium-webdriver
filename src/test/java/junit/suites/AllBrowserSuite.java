@@ -1,44 +1,54 @@
 package junit.suites;
 
-import com.seleniumsimplified.junit.JUnitBeforeAndAfterTest;
-import com.seleniumsimplified.junit.JUnitExampleTest;
-import com.seleniumsimplified.junit.JUnitExercisesTest;
-import com.seleniumsimplified.webdriver.basics.interrogate.DriverInterrogateRefactoredTest;
-import com.seleniumsimplified.webdriver.basics.interrogate.DriverInterrogateTest;
-import com.seleniumsimplified.webdriver.basics.interrogate.GetTitleReplacementExerciseTest;
-import com.seleniumsimplified.webdriver.basics.interrogate.WebElementInterrogationTest;
-import com.seleniumsimplified.webdriver.basics.interrogate.findby.*;
-import com.seleniumsimplified.webdriver.basics.manipulate.*;
-import com.seleniumsimplified.webdriver.basics.manipulate.alerts.AlertHandlingExampleTest;
-import com.seleniumsimplified.webdriver.basics.manipulate.alerts.AlertHandlingExercisesTest;
-import com.seleniumsimplified.webdriver.basics.manipulate.frames.*;
-import com.seleniumsimplified.webdriver.basics.manipulate.selectSupport.SelectSupportTest;
-import com.seleniumsimplified.webdriver.basics.manipulate.windows.WindowManageExerciseTest;
-import com.seleniumsimplified.webdriver.basics.manipulate.windows.WindowsExampleTest;
-import com.seleniumsimplified.webdriver.basics.manipulate.windows.WindowsExercisesTest;
-import com.seleniumsimplified.webdriver.basics.manipulate.windows.WindowsManageExampleTest;
-import com.seleniumsimplified.webdriver.basics.navigation.NavigationBasicsTest;
-import com.seleniumsimplified.webdriver.basics.navigation.NavigationExampleTest;
-import com.seleniumsimplified.webdriver.cookies.CookiesExampleTest;
-import com.seleniumsimplified.webdriver.cookies.CookiesExercisesTest;
-import com.seleniumsimplified.webdriver.cookies.CookiesExercisesTestWorkWithExtraSync;
-import com.seleniumsimplified.webdriver.datadriven.BasicDataDrivenTest;
-import com.seleniumsimplified.webdriver.datadriven.CsvDataDrivenTest;
-import com.seleniumsimplified.webdriver.javascript.JavaScriptExecutorTest;
-import com.seleniumsimplified.webdriver.javascript.JavascriptAsyncExecutorTest;
-import com.seleniumsimplified.webdriver.javascript.JavascriptExecuteAsyncExerciseTest;
-import com.seleniumsimplified.webdriver.javascript.JavascriptExecutorExampleTest;
-import com.seleniumsimplified.webdriver.synchronisation.conditions.*;
-import com.seleniumsimplified.webdriver.synchronisation.fluentWait.FluentWaitExampleTest;
-import com.seleniumsimplified.webdriver.synchronisation.fluentWait.FluentWaitExercisesTest;
-import com.seleniumsimplified.webdriver.synchronisation.fluentWait.FluentWaitForWebElementExampleTest;
-import com.seleniumsimplified.webdriver.synchronisation.fluently.UseWebDriverWaitFluentlyTest;
-import com.seleniumsimplified.webdriver.synchronisation.implicitWait.ImplicitWaitTest;
-import com.seleniumsimplified.webdriver.synchronisation.refactored.MakeYourWaitsReadableTest;
-import com.seleniumsimplified.webdriver.synchronisation.webDriverWaitBasics.*;
-import com.seleniumsimplified.webdriver.userinteractions.UserInteractionsExercisesTest;
+import junit.JUnitBeforeAndAfterTest;
+import junit.JUnitExercisesTest;
+import junit.MyClassTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
+import webdriver.basics.interrogation.DriverInterrogateRefactoredTest;
+import webdriver.basics.interrogation.DriverInterrogateTest;
+import webdriver.basics.interrogation.GetTitleReplacementExerciseTest;
+import webdriver.basics.interrogation.WebElementInterrogationTest;
+import webdriver.basics.interrogation.examples.*;
+import webdriver.basics.interrogation.exercises.*;
+import webdriver.basics.manipulation.alerts.AlertHandlingExampleTest;
+import webdriver.basics.manipulation.alerts.AlertHandlingExercisesTest;
+import webdriver.basics.manipulation.examples.ManipulateExampleTest;
+import webdriver.basics.manipulation.examples.ManipulateExampleTest2;
+import webdriver.basics.manipulation.exercises.*;
+import webdriver.basics.manipulation.frames.FrameFaqTest;
+import webdriver.basics.manipulation.frames.FramesExampleTest;
+import webdriver.basics.manipulation.frames.FramesExercisesRefactoredTest;
+import webdriver.basics.manipulation.frames.FramesExercisesTest;
+import webdriver.basics.manipulation.selectSupport.SelectSupportTest;
+import webdriver.basics.manipulation.windows.WindowManageExerciseTest;
+import webdriver.basics.manipulation.windows.WindowsExampleTest;
+import webdriver.basics.manipulation.windows.WindowsExercisesTest;
+import webdriver.basics.manipulation.windows.WindowsManageExampleTest;
+import webdriver.basics.navigation.NavigationBasicsTest;
+import webdriver.basics.navigation.NavigationExampleTest;
+import webdriver.cookies.CookiesExampleTest;
+import webdriver.cookies.CookiesExercisesTest;
+import webdriver.cookies.CookiesExercisesTestWorkWithExtraSync;
+import webdriver.datadriven.CsvDataDrivenTest;
+import webdriver.datadriven.ObjectArrayDataDrivenTest;
+import webdriver.javascript.JavaScriptExecutorTest;
+import webdriver.javascript.JavascriptAsyncExecutorTest;
+import webdriver.javascript.JavascriptExecuteAsyncExerciseTest;
+import webdriver.javascript.JavascriptExecutorExampleTest;
+import webdriver.screenshots.PersistScreenshotsTest;
+import webdriver.screenshots.ScreenshotsExampleTest;
+import webdriver.screenshots.ScreenshotsExerciseTest;
+import webdriver.synchronization.conditions.*;
+import webdriver.synchronization.fluentWait.FluentWaitExampleTest;
+import webdriver.synchronization.fluentWait.FluentWaitExercisesTest;
+import webdriver.synchronization.fluentWait.FluentWaitForWebElementExampleTest;
+import webdriver.synchronization.fluently.UseWebDriverWaitFluentlyTest;
+import webdriver.synchronization.implicitWait.ImplicitWaitTest;
+import webdriver.synchronization.refactored.MakeYourWaitsReadableTest;
+import webdriver.synchronization.webDriverWaitBasics.SynchronisationWithWebDriverWaitTest;
+import webdriver.synchronization.webDriverWaitBasics.WebDriverWaitExampleTest;
+import webdriver.userinteractions.UserInteractionsExercisesTest;
 
 /**
  * Tests which should run, and pass, across any of the non-headless browsers without amendment
@@ -62,25 +72,26 @@ import org.junit.runners.Suite;
 
         //junit
         JUnitBeforeAndAfterTest.class,
-        JUnitExampleTest.class,
+        MyClassTest.class,
         JUnitExercisesTest.class,
 
         // Basics Driver all use Firefox - see DriverSanityCoursePackSuite
 
-        // Interrogate FindBy
-        AFirstFindByExampleTest.class,
-        ChainingFindByExampleTest.class,
-        FindByCSSSelectorBasicExercisesFullAnswersTest.class,
-        FindByCSSSelectorBasicExercisesTest.class,
+        // Interrogate Examples
+        FindByExampleTest.class,
+        FindByChainingExampleTest.class,
         FindByCssSelectorExampleTest.class,
         FindByCSSSelectorPathsExampleTest.class,
-        FindByIDOrNameExampleTest.class,
         FindByXpathExampleTest.class,
-        FindByXPathSelectorBasicExercisesFullAnswersTest.class,
+        FindByIDOrNameExampleTest.class,
         FindElementsExampleTest.class,
+
+        // Interrogate Exercises
+        FindByCSSSelectorBasicExercisesTest.class,
+        FindByCSSSelectorBasicExercises2Test.class,
+        FindByXPathSelectorBasicExerciseTest.class,
         FindElementsExercisesTest.class,
         FirstFindByExercisesTest.class,
-
 
         // Interrogate
         DriverInterrogateRefactoredTest.class,
@@ -92,10 +103,18 @@ import org.junit.runners.Suite;
         AlertHandlingExampleTest.class,
         AlertHandlingExercisesTest.class,
 
+        // Manipulate Alerts
+        AlertHandlingExampleTest.class,
+        AlertHandlingExercisesTest.class,
+
+        // Manipulate Examples
+        ManipulateExampleTest.class,
+        ManipulateExampleTest2.class,
+        webdriver.basics.manipulation.examples.WebDriverWaitExampleTest.class,
+
         // Manipulate Frames
         FrameFaqTest.class,
         FramesExampleTest.class,
-        FramesExercisesRefactoredDeleteTest.class,
         FramesExercisesRefactoredTest.class,
         FramesExercisesTest.class,
 
@@ -108,17 +127,16 @@ import org.junit.runners.Suite;
         WindowsExercisesTest.class,
         WindowsManageExampleTest.class,
 
-        // Manipulate
-        ManipulateExampleSelectDropDownFiveTest.class,
-        ManipulateExampleTest.class,
+        // Manipulate Exercises
+        ManipulateClearTest.class,
+        ManipulateExerciseDropDownTest.class,
         ManipulateExercisesCheckboxTest.class,
         ManipulateExercisesCommentsTest.class,
-        ManipulateExercisesSelectRadio2Test.class,
+        ManipulateExercisesSelectRadioTest.class,
         ManipulateExercisesSubmitFileTest.class,
         ManipulateExercisesSubmitFormTest.class,
-        ManipulatetExampleMultiSelectTest.class,
-        ManipulateWhatHappensIfTest.class,
-        ManipulationFirstTryExampleTest.class,
+        ManipulateSelectSupportTest.class,
+        ManipulatetExerciseMultiSelectTest.class,
         SendKeysExamplesTest.class,
 
         // Navigation
@@ -131,11 +149,10 @@ import org.junit.runners.Suite;
         CookiesExercisesTestWorkWithExtraSync.class,
 
         // data driven tests
-        BasicDataDrivenTest.class,
+        ObjectArrayDataDrivenTest.class,
         CsvDataDrivenTest.class,
 
         // drivermanger in DriverSanityCoursePack
-
         // Javascript
 
         JavascriptAsyncExecutorTest.class,
@@ -144,18 +161,20 @@ import org.junit.runners.Suite;
         JavaScriptExecutorTest.class,
 
         // mobile in its own suite
-
         // Page Objects
-        com.seleniumsimplified.webdriver.pageobjects.loadablecomponent.BasicTestsRefactored.class,
-        com.seleniumsimplified.webdriver.pageobjects.refactorExampleOne.BasicTestsRefactored.class,
-        com.seleniumsimplified.webdriver.pageobjects.refactorExampleOneExercise.BasicTestsRefactored.class,
-        com.seleniumsimplified.webdriver.pageobjects.slowloadablecomponent.BasicTestsRefactored.class,
-        com.seleniumsimplified.webdriver.pageobjects.usingpagefactory.BasicTestsRefactored.class,
-        com.seleniumsimplified.webdriver.pageobjects.WithoutPageObjectsTest.class,
+        webdriver.pageobjects.loadablecomponent.BasicTestsRefactored.class,
+        webdriver.pageobjects.refactorExampleOne.BasicTestsRefactored.class,
+        webdriver.pageobjects.refactorExampleOneExercise.BasicTestsRefactored.class,
+        webdriver.pageobjects.slowloadablecomponent.BasicTestsRefactored.class,
+        webdriver.pageobjects.slowloading.SlowLoadingPageExampleTest.class,
+        webdriver.pageobjects.usingpagefactory.BasicTestsRefactored.class,
+        webdriver.pageobjects.WithoutPageObjectsTest.class,
 
         // remote in its own suite
-
         // screenshots in DriverSanityCoursePack
+        PersistScreenshotsTest.class,
+        ScreenshotsExampleTest.class,
+        ScreenshotsExerciseTest.class,
 
         //Synchronisation  conditions
         CustomExpectedConditionsExampleTest.class,
@@ -179,11 +198,8 @@ import org.junit.runners.Suite;
         MakeYourWaitsReadableTest.class,
 
         //Synchronisation  webDriverWaitBasics
-        MyFailingWebDriverWaitTest.class,
         SynchronisationWithWebDriverWaitTest.class,
         WebDriverWaitExampleTest.class,
-        WebDriverWaitExampleTestRefactored.class,
-        WebDriverWaitFaqTest.class,
 
         //userinteractions
         UserInteractionsExercisesTest.class,
