@@ -85,11 +85,9 @@ public class Driver extends Thread{
      *  Currently we don't have any capabilities. All the browsers are eventually going to start using capabilities as
      *  our default control mechanism. We can't support that in here. We will have to find a way of doing that.
      *
-     *  @param browserPropertyName Driver.BROWSER_PROPERTY_NAME
-     *  @param browser the browser we want to test on
      *  @return a WebDriver
      */
-    public static WebDriver get(String browserPropertyName, String browser  ) throws IOException {
+    public static WebDriver get() throws IOException {
 
         // If running on Linux or Mac this will get the appropriate file separator in the string.
         String s = File.separator;
@@ -386,7 +384,7 @@ public class Driver extends Thread{
                 quit();
                 aDriver=null;
                 avoidRecursiveCall = true;
-                return get(browserPropertyName, browser);
+                return get();
             }
 
             savedTimecount += browserStartTime;

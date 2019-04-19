@@ -12,45 +12,11 @@ public class DriverTest {
 
     WebDriver driver;
 
-    @Test
-    public void createAnHtmlUnitDriver() throws IOException {
-
-        driver = Driver.get(Driver.BROWSER_PROPERTY_NAME,"HTMLUNIT" );
-        assertBrowserTestRuns();
-    }
 
     @Test
-    public void createAFirefoxDriver() throws IOException {
+    public void createADriver() throws IOException {
 
-        driver = Driver.get(Driver.BROWSER_PROPERTY_NAME,"FIREFOX" );
-        assertBrowserTestRuns();
-    }
-
-    @Test
-    public void createAChromeDriver() throws IOException {
-
-        driver = Driver.get(Driver.BROWSER_PROPERTY_NAME,"CHROME" );
-        assertBrowserTestRuns();
-    }
-
-    @Test
-    public void createAEdgeDriver() throws IOException {
-
-        driver = Driver.get(Driver.BROWSER_PROPERTY_NAME,"EDGE" );
-        assertBrowserTestRuns();
-    }
-
-    @Test
-    public void createAIEDriver() throws IOException {
-
-        driver = Driver.get(Driver.BROWSER_PROPERTY_NAME,"IE" );
-        assertBrowserTestRuns();
-    }
-
-    @Test
-    public void createAOperaDriver() throws IOException {
-
-        driver = Driver.get(Driver.BROWSER_PROPERTY_NAME,"OPERA" );
+        driver = Driver.get();
         assertBrowserTestRuns();
     }
 
