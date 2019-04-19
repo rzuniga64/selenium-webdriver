@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import webdriver.drivermanager.Driver;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class FindByXPathSelectorBasicExerciseTest {
     static WebDriver driver;
 
     @BeforeClass
-    public static void createDriverAndVisitTestPage(){
+    public static void createDriverAndVisitTestPage() throws IOException {
 
         driver = Driver.get("webdriver.chrome.driver","CHROME" );
         driver = Driver.get("http://www.compendiumdev.co.uk/selenium/find_by_playground.php");

@@ -7,6 +7,8 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import java.io.IOException;
+
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -26,7 +28,7 @@ public class FindByCSSSelectorPathsExampleTest {
     private static WebDriver driver;
 
     @BeforeClass
-    public static void createDriverAndVisitTestPage(){
+    public static void createDriverAndVisitTestPage() throws IOException {
 
         driver = Driver.get("selenium2basics.webdriver","HTMLUNIT" );
         driver = Driver.get("http://www.compendiumdev.co.uk/selenium/find_by_playground.php");

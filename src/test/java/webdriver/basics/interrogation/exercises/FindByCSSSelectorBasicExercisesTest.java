@@ -8,6 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import webdriver.drivermanager.Driver;
 
+import java.io.IOException;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -29,7 +31,7 @@ public class FindByCSSSelectorBasicExercisesTest {
     private static WebDriver driver;
 
     @BeforeClass
-    public static void createDriverAndVisitTestPage(){
+    public static void createDriverAndVisitTestPage() throws IOException {
 
         driver = Driver.get("webdriver.chrome.driver","CHROME" );
         driver = Driver.get("http://www.compendiumdev.co.uk/selenium/find_by_playground.php");

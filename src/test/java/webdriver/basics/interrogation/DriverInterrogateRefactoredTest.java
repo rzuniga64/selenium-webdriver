@@ -6,6 +6,8 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import webdriver.drivermanager.Driver;
 
+import java.io.IOException;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.endsWith;
@@ -21,7 +23,7 @@ public class DriverInterrogateRefactoredTest {
     public static WebDriver driver;
 
     @BeforeClass
-    public static void startDriver(){
+    public static void startDriver()  throws IOException {
 
         driver = Driver.get("webdriver.htmlunit.driver","HTMLUNIT" );
     }
