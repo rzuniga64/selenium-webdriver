@@ -37,7 +37,7 @@ public class PersistScreenshotsTest {
     @Before
     public void configureBrowser() throws IOException {
 
-        driver = Driver.get("webdriver.chrome.driver", "CHROME");
+        driver = Driver.get();
         driver.navigate().to("http://seleniumsimplified.com");
     }
 

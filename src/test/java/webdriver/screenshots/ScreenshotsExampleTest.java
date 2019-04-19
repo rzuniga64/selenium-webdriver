@@ -43,7 +43,7 @@ public class ScreenshotsExampleTest {
     @BeforeClass
     public static void configureBrowser() throws IOException {
 
-        driver = Driver.get("webdriver.chrome.driver", "CHROME");
+        driver = Driver.get();
         driver.navigate().to("http://seleniumsimplified.com");
     }
 

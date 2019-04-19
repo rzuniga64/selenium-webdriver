@@ -38,7 +38,7 @@ public class ScreenshotsExerciseTest {
     @Test
     public void canWeTakeAScreenshotCapabilitiesStyle() throws IOException {
 
-        driver = Driver.get("webdriver.chrome.driver", "CHROME");
+        driver = Driver.get();
         driver.navigate().to("http://seleniumsimplified.com");
 
         if(((HasCapabilities)driver).getCapabilities().is(CapabilityType.TAKES_SCREENSHOT)){
