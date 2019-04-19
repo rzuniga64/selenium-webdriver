@@ -39,7 +39,7 @@ public class NavigationBasicsTest {
 
     @BeforeClass
     public static void createDriver() throws IOException {
-        driver = Driver.get("webdriver.chrome.driver","CHROME" );
+        driver = Driver.get();
     }
 
     @Test
