@@ -93,21 +93,22 @@ public class Driver extends Thread{
         String s = File.separator;
         String seleniumPropertiesFileName = System.getProperty("user.dir") +
                 String.format("%ssrc%stest%sresources%sselenium.properties",s,s,s,s);
-
-        try {
-            InputStream input = new FileInputStream(seleniumPropertiesFileName);
-            Properties properties = new Properties();
-            // load a properties file
-            properties.load(input);
-            //get the properties values
-            BROWSER = properties.getProperty("browser").toUpperCase();
-            PROXYHOST = properties.getProperty("host");
-            PROXYPORT = properties.getProperty("port");
-            PROXY = PROXYHOST+":"+PROXYPORT;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        File seleniumProperties = new File(seleniumPropertiesFileName);
+        if (seleniumProperties.exists()) {
+            try {
+                InputStream input = new FileInputStream(seleniumPropertiesFileName);
+                Properties properties = new Properties();
+                // load a properties file
+                properties.load(input);
+                //get the properties values
+                BROWSER = properties.getProperty("browser").toUpperCase();
+                PROXYHOST = properties.getProperty("host");
+                PROXYPORT = properties.getProperty("port");
+                PROXY = PROXYHOST + ":" + PROXYPORT;
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
         }
-
         if(useThisDriver == null){
 
             System.setProperty(BROWSER_PROPERTY_NAME, BROWSER);
