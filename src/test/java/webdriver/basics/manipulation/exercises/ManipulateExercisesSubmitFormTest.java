@@ -11,6 +11,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import webdriver.drivermanager.Driver;
 
+import java.io.IOException;
+
 /**
  *  using http://compendiumdev.co.uk/selenium/basic_html_form.html
  *
@@ -26,7 +28,7 @@ public class ManipulateExercisesSubmitFormTest {
     private static WebDriver driver;
 
     @BeforeClass
-    public void setup(){
+    public void setup() throws IOException {
 
         driver = Driver.get("webdriver.chrome.driver", "CHROME");
         driver = Driver.get("http://compendiumdev.co.uk/selenium/basic_html_form.html");
