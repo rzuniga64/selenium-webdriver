@@ -1,0 +1,16 @@
+language: java
+# project is using Selenium WebDriver where the legacy Firefox driver only works up to v 47.1
+# If v48 or above is used then the marionette driver would have to be installed and I don't think
+# it is installed on Travis so control the version of Firefox that is used
+addons:
+  firefox: "47.0.1"
+jdk:
+  - oraclejdk8
+before_script:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - sleep 3 # give xvfb some time to start
+script:
+# added HTMLUnit back ito the build for 3.0.1
+- mvn -f code/pom.xml test -Dselenium2basics.webdriver=HTMLUNIT
+- mvn -f code/pom.xml test -Dselenium2basics.webdriver=FIREFOXLEGACY
