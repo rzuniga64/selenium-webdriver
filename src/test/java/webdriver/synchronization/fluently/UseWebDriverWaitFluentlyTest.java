@@ -32,7 +32,7 @@ public class UseWebDriverWaitFluentlyTest {
     @BeforeClass
     public static void setup() throws IOException {
 
-        driver = Driver.get("webdriver.chrome.driver", "CHROME");
+        driver = Driver.get();
         driver.navigate().to("http://compendiumdev.co.uk");
     }
 
