@@ -31,7 +31,7 @@ public class WindowsExampleTest {
     @Before
     public void quitToRestart() throws IOException {
 
-        driver = Driver.get("webdriver.chrome.driver", "CHROME");
+        driver = Driver.get();
     }
 
     @Test

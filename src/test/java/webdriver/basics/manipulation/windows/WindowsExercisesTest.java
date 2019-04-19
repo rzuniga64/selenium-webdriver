@@ -34,7 +34,7 @@ public class WindowsExercisesTest {
     @Before
     public void setup() throws IOException {
 
-        driver = Driver.get("selenium2basics.webdriver", "CHROME");
+        driver = Driver.get();
         //Driver.quit(); // dodgy in a suite - close everything down and start again
         driver.navigate().to("http://www.compendiumdev.co.uk/selenium/frames");
         wait = new WebDriverWait(driver, Driver.DEFAULT_TIMEOUT_SECONDS);
