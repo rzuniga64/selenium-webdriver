@@ -38,33 +38,83 @@
 
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
+    <!--examples of how to use the profiles from the command line-->
+    <!-- mvn test
+                will run the anyBrowserTests profile -->
+    <!-- mvn test -PanyBrowserTests
+                will run the anyBrowserTests profile -->
+    <!-- mvn test -PfirefoxTests
+                will run the firefoxTests profile -->
+    <!-- mvn test -Dselenium2basics.webdriver=OPERA
+                will run the anyBrowserTests using OPERA -->
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M2</version>
-                <configuration>
-                    <parallel>methods</parallel>
-                    <threadCount>10</threadCount>
-                    <includes>
-                        <include>**/ManipulateOnlySuite.java</include>
-                        <include>**/InterrogateOnlySuite.java</include>
-                    </includes>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+    <profiles>
+        <profile>
+            <id>anyBrowserTests</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <version>3.8.0</version>
+                        <configuration>
+                            <source>1.8</source>
+                            <target>1.8</target>
+                            <encoding>UTF-8</encoding>
+                        </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>3.0.0-M2</version>
+                        <configuration>
+                            <parallel>methods</parallel>
+                            <threadCount>10</threadCount>
+                            <includes>
+                                <include>**/ManipulateOnlySuite.java</include>
+                                <include>**/InterrogateOnlySuite.java</include>
+                            </includes>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>firefoxTests</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <version>3.8.0</version>
+                        <configuration>
+                            <source>1.8</source>
+                            <target>1.8</target>
+                            <encoding>UTF-8</encoding>
+                        </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>3.0.0-M2</version>
+                        <configuration>
+                            <parallel>methods</parallel>
+                            <threadCount>10</threadCount>
+                            <includes>
+                                <include>**/FirefoxOnlySuite.java</include>
+                            </includes>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+    </profiles>
 
 </project>
