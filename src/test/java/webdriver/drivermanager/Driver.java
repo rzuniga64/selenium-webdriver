@@ -55,7 +55,7 @@ public class Driver extends Thread{
 
     private static long browserStartTime = 0L;
     private static long savedTimecount = 0L;
-    private static boolean gitavoidRecursiveCall = false;
+    private static boolean avoidRecursiveCall = false;
     private static ChromeDriverService service = null;
     private static WebDriver aDriver = null;
     private static BrowserName useThisDriver = null;
