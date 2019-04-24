@@ -58,6 +58,7 @@ public class DriverManagerFactory {
                     driverManager = new HtmlUnitDriverManager();
                     break;
                 case EDGE:
+                    driverManager = new EdgeDriverManager();
                     break;
                 case IE:
                     break;
