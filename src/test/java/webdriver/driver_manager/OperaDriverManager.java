@@ -12,7 +12,7 @@ public class OperaDriverManager extends DriverManager {
     protected WebDriver createDriver() {
 
         RESOURCE_DIR = System.getProperty("user.dir") + "\\src\\test\\resources\\";
-        System.setProperty("webdriver.edge.driver", RESOURCE_DIR + "operadriver.exe");
+        System.setProperty("webdriver.opera.driver", RESOURCE_DIR + "operadriver.exe");
         return new OperaDriver();
     }
 
