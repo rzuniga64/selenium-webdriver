@@ -76,6 +76,7 @@ public class DriverManagerFactory {
                     driverManager = new GridDriverManager();
                     break;
                 case APPIUM:
+                    driverManager = new AppiumDriverManager();
                     break;
                 default:
                     throw new RuntimeException("Unknown Browser in " + BROWSER_PROPERTY_NAME + ":" + defaultBrowser);
