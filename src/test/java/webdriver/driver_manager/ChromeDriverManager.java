@@ -17,6 +17,8 @@ public class ChromeDriverManager extends DriverManager {
 
         DesiredCapabilities capabilities = DesiredCapabilities.chrome();
         ChromeOptions options = new ChromeOptions();
+        options.addArguments("disable-plugins");
+        options.addArguments("disable-extensions");
         options.addArguments("test-type");
         capabilities.setCapability(ChromeOptions.CAPABILITY, options);
         return new RemoteWebDriver(service.getUrl(), capabilities);
