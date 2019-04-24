@@ -233,7 +233,7 @@ public class Driver extends Thread{
                 case OPERA:
 
                     RESOURCE_DIR = System.getProperty("user.dir") + "\\src\\test\\resources\\";
-                    System.setProperty("webdriver.edge.driver", RESOURCE_DIR + "operadriver.exe");
+                    System.setProperty("webdriver.opera.driver", RESOURCE_DIR + "operadriver.exe");
 
                     aDriver = new OperaDriver();
                     currentDriver = BrowserName.OPERA;
