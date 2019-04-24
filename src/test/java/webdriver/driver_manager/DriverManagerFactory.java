@@ -55,6 +55,7 @@ public class DriverManagerFactory {
                     driverManager = new FireFoxDriverManager();
                     break;
                 case HTMLUNIT:
+                    driverManager = new HtmlUnitDriverManager();
                     break;
                 case GOOGLECHROME:
                     break;
