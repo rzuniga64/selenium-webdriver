@@ -70,6 +70,7 @@ public class DriverManagerFactory {
                     driverManager = new FirefoxPortableDriverManager();
                     break;
                 case SAUCELABS:
+                    driverManager = new SauceLabsDriver();
                     break;
                 case GRID:
                     break;
