@@ -48,7 +48,16 @@ public abstract class DriverManager extends Thread {
     /**
      *  If there is a driver, quit it.
      */
-    public void quitDriver() {
+    public static void quitDriver() {
+
+        // Java has a thing called shut down hook that when the JVM stops that code will run. All that it does is call
+        // the quit method in this particular class. We want to shutdown the shared browser when the tests finish.
+        Runtime.getRuntime().addShutdownHook(
+                new Thread(DriverManager::quit)
+        );
+    }
+
+    public static void quit() {
 
         if (driver != null) {
             try {

@@ -8,15 +8,16 @@ import org.openqa.selenium.WebDriver;
 
 import java.io.IOException;
 
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
 
 public class FactoryMethodTest {
 
-    DriverManager driverManager;
-    WebDriver driver;
+    private static DriverManager driverManager;
+    private WebDriver driver;
 
     @BeforeClass
-    public void beforeClass() {
+    public static void beforeClass() {
 
         try {
             driverManager = DriverManagerFactory.getManager();
@@ -35,13 +36,12 @@ public class FactoryMethodTest {
     public void navigateWithNavigateTo(){
 
         driver.navigate().to("http://www.compendiumdev.co.uk/selenium/search.php");
-        assertTrue(driver.getTitle().startsWith("Selenium Simplified Search Engine"));
+        assertThat(driver.getTitle(), is("Selenium Simplified Search Engine"));
     }
 
     @AfterClass
-    public void afterClass() {
+    public static void afterClass() {
 
-        driverManager.stopService();
         driverManager.quitDriver();
     }
 }

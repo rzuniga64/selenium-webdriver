@@ -10,10 +10,10 @@ public class DriverManagerFactory {
     private static final String BROWSER_PROPERTY_NAME = "selenium2basics.webdriver";
     private static final String DEFAULT_BROWSER = "CHROME";
 
-    protected static String BROWSER = DEFAULT_BROWSER;
-    protected static String PROXYHOST = "localhost";
-    protected static String PROXYPORT = "8888";
-    protected static String PROXY = PROXYHOST + ":" + PROXYPORT;
+    private static String BROWSER = DEFAULT_BROWSER;
+    private static String PROXYHOST = "localhost";
+    private static String PROXYPORT = "8888";
+    private static String PROXY = PROXYHOST + ":" + PROXYPORT;
 
     public static DriverManager getManager() throws IOException {
 

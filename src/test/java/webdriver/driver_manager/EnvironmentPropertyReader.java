@@ -48,43 +48,43 @@ public class EnvironmentPropertyReader {
             } else {
                 System.out.println("Using Environment Variable " + browserPropertyName + " with value " + browserName);
             }
-
-            switch (defaultBrowser){
-                case "HTMLUNIT":
-                    currentBrowser = DriverType.HTMLUNIT;
-                    break;
-                case "FIREFOX":
-                    currentBrowser = DriverType.FIREFOX;
-                    break;
-                case "CHROME":
-                    currentBrowser = DriverType.CHROME;
-                    break;
-                case "EDGE":
-                    currentBrowser = DriverType.EDGE;
-                    break;
-                case "IE":
-                    currentBrowser = DriverType.IE;
-                    break;
-                case "FIREFOXPORTABLE":
-                    currentBrowser = DriverType.FIREFOXPORTABLE;
-                    break;
-                case "SAUCELABS":
-                    currentBrowser = DriverType.SAUCELABS;
-                    break;
-                case "GRID":
-                    currentBrowser = DriverType.GRID;
-                    break;
-                case "APPIUM":
-                    currentBrowser = DriverType.APPIUM;
-                    break;
-                case "OPERA":
-                    currentBrowser = DriverType.OPERA;
-                    break;
-                default:
-                    throw new RuntimeException("Unknown Browser in " + browserPropertyName + ": " + defaultBrowser);
-            }
         } else {
             System.out.println("Using Property " + browserPropertyName + " with value " + browserName);
+        }
+
+        switch (browserName){
+            case "HTMLUNIT":
+                currentBrowser = DriverType.HTMLUNIT;
+                break;
+            case "FIREFOX":
+                currentBrowser = DriverType.FIREFOX;
+                break;
+            case "CHROME":
+                currentBrowser = DriverType.CHROME;
+                break;
+            case "EDGE":
+                currentBrowser = DriverType.EDGE;
+                break;
+            case "IE":
+                currentBrowser = DriverType.IE;
+                break;
+            case "FIREFOXPORTABLE":
+                currentBrowser = DriverType.FIREFOXPORTABLE;
+                break;
+            case "SAUCELABS":
+                currentBrowser = DriverType.SAUCELABS;
+                break;
+            case "GRID":
+                currentBrowser = DriverType.GRID;
+                break;
+            case "APPIUM":
+                currentBrowser = DriverType.APPIUM;
+                break;
+            case "OPERA":
+                currentBrowser = DriverType.OPERA;
+                break;
+            default:
+                throw new RuntimeException("Unknown Browser in " + browserPropertyName + ": " + defaultBrowser);
         }
 
         return currentBrowser;
