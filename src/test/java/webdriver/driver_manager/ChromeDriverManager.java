@@ -8,6 +8,9 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.File;
 
+/**
+ *  Factory class which returns a Chrome driver.
+ */
 public class ChromeDriverManager extends DriverManager {
 
     private static ChromeDriverService service = null;
