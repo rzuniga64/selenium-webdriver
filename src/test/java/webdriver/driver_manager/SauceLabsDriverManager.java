@@ -11,7 +11,7 @@ import java.net.URL;
 /**
  *  Factory class which returns a SauceLabs driver.
  */
-public class SauceLabsDriver extends DriverManager {
+public class SauceLabsDriverManager extends DriverManager {
     @Override
     protected WebDriver createDriver() {
 
