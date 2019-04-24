@@ -15,7 +15,7 @@ public class SauceLabsDriverManager extends DriverManager {
     @Override
     protected WebDriver createDriver() {
 
-        WebDriver saucelabsDriver = null;
+        WebDriver driver = null;
 
         DesiredCapabilities capabilities = DesiredCapabilities.firefox();
         capabilities.setCapability("version", "5");
@@ -23,11 +23,11 @@ public class SauceLabsDriverManager extends DriverManager {
         try {
             // add URL to environment variables to avoid releasing with source
             String saucelabURL = System.getenv("SAUCELABS_URL");
-            saucelabsDriver = new RemoteWebDriver(new URL(saucelabURL), capabilities);
+            driver = new RemoteWebDriver(new URL(saucelabURL), capabilities);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        return saucelabsDriver;
+        return driver;
     }
 
     @Override
