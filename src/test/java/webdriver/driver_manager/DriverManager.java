@@ -14,25 +14,17 @@ import org.openqa.selenium.WebDriver;
  */
 public abstract class DriverManager extends Thread {
 
-    static final String BROWSER_PROPERTY_NAME = "selenium2basics.webdriver";
-    private static final String DEFAULT_BROWSER = "CHROME";
     public static final long DEFAULT_TIMEOUT_SECONDS = 10;
 
-    public static DriverType currentDriver;
     public static String RESOURCE_DIR = "";
-    public static String BROWSER = DEFAULT_BROWSER;
-    public static String PROXYHOST = "localhost";
-    public static String PROXYPORT = "8888";
-    public static String PROXY = PROXYHOST + ":" + PROXYPORT;
 
     protected static long browserStartTime = 0L;
     protected static long savedTimecount = 0L;
     protected static WebDriver driver = null;
-    protected static DriverType useThisDriver = null;
 
+    protected abstract WebDriver createDriver();
     protected abstract void startService();
     protected abstract void stopService();
-    protected abstract void createDriver();
 
     /**
      *  getDriver method.
@@ -47,7 +39,7 @@ public abstract class DriverManager extends Thread {
 
         if (driver == null) {
             startService();
-            createDriver();
+            driver = createDriver();
         }
 
         return driver;

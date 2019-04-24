@@ -9,7 +9,6 @@ public enum DriverType {
     IE,
     OPERA,
     FIREFOXPORTABLE,
-    FIREFOXMARIONETTE,
     SAUCELABS,
     GRID,
     APPIUM
