@@ -64,6 +64,7 @@ public class DriverManagerFactory {
                     driverManager =  new IEDriverManager();
                     break;
                 case OPERA:
+                    driverManager = new OperaDriverManager();
                     break;
                 case FIREFOXPORTABLE:
                     driverManager = new FirefoxPortableDriverManager();
