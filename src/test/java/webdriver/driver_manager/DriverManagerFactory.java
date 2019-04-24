@@ -61,10 +61,12 @@ public class DriverManagerFactory {
                     driverManager = new EdgeDriverManager();
                     break;
                 case IE:
+                    driverManager =  new IEDriverManager();
                     break;
                 case OPERA:
                     break;
                 case FIREFOXPORTABLE:
+                    driverManager = new FirefoxPortableDriverManager();
                     break;
                 case SAUCELABS:
                     break;
