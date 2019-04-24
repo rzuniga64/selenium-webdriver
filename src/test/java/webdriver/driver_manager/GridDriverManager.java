@@ -20,7 +20,7 @@ public class GridDriverManager extends DriverManager {
     @Override
     protected WebDriver createDriver() {
 
-        WebDriver gridDriver = null;
+        WebDriver driver = null;
 
         String gridBrowser = getPropertyOrEnv(  "WEBDRIVER_GRID_BROWSER", "firefox");
         String gridBrowserVersion = getPropertyOrEnv("WEBDRIVER_GRID_BROWSER_VERSION", "");
@@ -46,12 +46,12 @@ public class GridDriverManager extends DriverManager {
             // add url to environment variables to avoid releasing with source
             String gridURL = getPropertyOrEnv("WEBDRIVER_GRID_URL",
                                                    "http://localhost:4444/wd/hub");
-            gridDriver = new RemoteWebDriver(new URL(gridURL), capabilities);
+            driver = new RemoteWebDriver(new URL(gridURL), capabilities);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
 
-        return gridDriver;
+        return driver;
     }
 
     @Override
