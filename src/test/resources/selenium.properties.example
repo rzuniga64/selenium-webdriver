@@ -2,6 +2,6 @@
 # you can pass these properties to the continuous integration system.
 # if you have a system property called 'selenium.browser' then I can overwrite that setting in the property file.
 # default port for browsermob, burpesuite: 8080, fiddler: 8888
-#browser = opera
-#host = localhost
-#port = 8888
+browser = chrome
+host = localhost
+port = 8888
