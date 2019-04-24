@@ -57,8 +57,6 @@ public class DriverManagerFactory {
                 case HTMLUNIT:
                     driverManager = new HtmlUnitDriverManager();
                     break;
-                case GOOGLECHROME:
-                    break;
                 case EDGE:
                     break;
                 case IE:
