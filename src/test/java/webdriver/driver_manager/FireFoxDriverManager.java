@@ -3,6 +3,9 @@ package webdriver.driver_manager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+/**
+ *  Factory class which returns a Firefox driver.
+ */
 public class FireFoxDriverManager extends DriverManager {
 
     @Override
