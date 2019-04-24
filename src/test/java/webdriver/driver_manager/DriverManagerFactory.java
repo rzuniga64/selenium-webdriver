@@ -15,6 +15,8 @@ public class DriverManagerFactory {
     private static String PROXYPORT = "8888";
     private static String PROXY = PROXYHOST + ":" + PROXYPORT;
 
+    private static long browserStartTime = 0L;
+
     public static DriverManager getManager() throws IOException {
 
         DriverManager driverManager = null;
@@ -43,6 +45,8 @@ public class DriverManagerFactory {
         }
 
         if (driverManager == null) {
+
+            long startBrowserTime = System.currentTimeMillis();
 
             // to allow setting the browser as a property or an environment variable
             DriverType defaultBrowser = getPropertyOrEnv(BROWSER_PROPERTY_NAME, BROWSER);
@@ -81,6 +85,10 @@ public class DriverManagerFactory {
                 default:
                     throw new RuntimeException("Unknown Browser in " + BROWSER_PROPERTY_NAME + ":" + defaultBrowser);
             }
+
+            long browserStartedTime = System.currentTimeMillis();
+            browserStartTime = browserStartedTime - startBrowserTime;
+            System.out.println("Saved " + browserStartTime + "ms not having to restart the browser");
         }
 
         return driverManager;
