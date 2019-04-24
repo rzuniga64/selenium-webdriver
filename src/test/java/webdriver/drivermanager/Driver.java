@@ -189,7 +189,7 @@ public class Driver extends Thread{
                         e.printStackTrace();
                     }
 
-                    aDriver = new RemoteWebDriver(service.getUrl(), DesiredCapabilities.chrome());
+                    aDriver = new RemoteWebDriver(service.getUrl(), new ChromeOptions());
                     currentDriver = BrowserName.CHROME;
                     break;
 
