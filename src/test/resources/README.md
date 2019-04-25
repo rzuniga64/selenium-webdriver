@@ -11,6 +11,11 @@
     <td>4/2/2019</td>
 </tr>
 <tr>
+    <td>MicrosoftWebDriver.exe</td>
+    <td>6.17134.20180630</td>
+    <td>4/2/2019</td>
+</tr>
+<tr>
     <td>geckodriver.exe</td>
     <td>0.24.0</td>
     <td>4/2/2019</td>
