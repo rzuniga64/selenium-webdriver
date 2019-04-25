@@ -8,6 +8,7 @@
 /target
 /.idea
 /tools
+src/test/resources/selenium.properties
 
 # CMake
 cmake-build-debug/
