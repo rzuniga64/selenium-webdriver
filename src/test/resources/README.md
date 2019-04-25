@@ -16,6 +16,11 @@
     <td>4/2/2019</td>
 </tr>
 <tr>
+    <td>IEDriverServer.exe</td>
+    <td>3.14.0</td>
+    <td>4/2/2019</td>
+</tr>
+<tr>
     <td>operadriver.exe</td>
     <td>2.45</td>
     <td>4/2/2019</td>
