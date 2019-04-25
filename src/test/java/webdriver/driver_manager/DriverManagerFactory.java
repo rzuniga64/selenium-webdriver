@@ -7,6 +7,8 @@ import static webdriver.driver_manager.EnvironmentPropertyReader.getPropertyOrEn
 
 public class DriverManagerFactory {
 
+    private static DriverManagerFactory firstInstance = null;
+
     private static final String BROWSER_PROPERTY_NAME = "selenium2basics.webdriver";
     private static final String DEFAULT_BROWSER = "CHROME";
 
@@ -16,6 +18,17 @@ public class DriverManagerFactory {
     private static String PROXY = PROXYHOST + ":" + PROXYPORT;
 
     private static long browserStartTime = 0L;
+
+    private DriverManagerFactory() {}
+
+    public static DriverManagerFactory getInstance() {
+
+        if (firstInstance == null) {
+            firstInstance = new DriverManagerFactory();
+        }
+
+        return firstInstance;
+    }
 
     public static DriverManager getManager() throws IOException {
 

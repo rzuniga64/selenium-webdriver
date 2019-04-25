@@ -20,7 +20,8 @@ public class FactoryMethodTest {
     public static void beforeClass() {
 
         try {
-            driverManager = DriverManagerFactory.getManager();
+            DriverManagerFactory driverManagerFactory = DriverManagerFactory.getInstance();
+            driverManager = driverManagerFactory.getManager();
         } catch (IOException e) {
             e.printStackTrace();
         }
